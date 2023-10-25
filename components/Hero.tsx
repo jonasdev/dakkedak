@@ -27,9 +27,9 @@ export default function Hero() {
               mange interessante produkter her på siden.
             </p>
 
-            <div className="flex justify-center lg:justify-start">
+            {/* <div className="flex justify-center lg:justify-start">
               <Button text="Se Produkter" type="primary" href="/products" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

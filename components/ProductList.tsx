@@ -1,37 +1,21 @@
-import React from "react";
+import ProductCard, { Product } from "./ProductCard";
 
-import { getFeeds } from "@/pages/api/getFeeds";
-import ProductCard, { ProductProps } from "./ProductCard";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+type Props = {
+  productCategory: string;
+  products: Product[] | null;
+};
 
-// export async function generateStaticParams() {
-//   const res = await getFeeds();
-
-//   return {
-//     products: res;
-//   }
-// }
-
-export const getStaticProps = (async (context) => {
-  console.log("Calling");
-
-  const res = await getFeeds();
-  return { props: { res } };
-}) satisfies GetStaticProps<{
-  res: ProductProps[];
-}>;
-
-export default function ProductList({
-  res,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log("res: ", res);
-  if (!res) return null;
-
+export default function ProductList({ productCategory, products }: Props) {
+  if (!products) return null;
   return (
     <div className="flex justify-center w-full items-center">
       <div className="grid lg:grid-cols-4 grid-cols-1 gap-8 p-6 lg:w-5/6">
-        {res.map((feed) => (
-          <ProductCard {...feed} key={feed.productKey} />
+        {products.map((product) => (
+          <ProductCard
+            productCategory={productCategory}
+            product={product}
+            key={product.productKey}
+          />
         ))}
       </div>
     </div>
