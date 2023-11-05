@@ -2,13 +2,21 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const canonical = typeof window !== "undefined" ? window.location.href : "";
+
   return (
-    <div className="flex flex-col items-center justify-between w-full bg-secondary">
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
-    </div>
+    <>
+      <Head>
+        <link rel="canonical" href={canonical} />
+      </Head>
+      <div className="flex flex-col items-center justify-between w-full bg-secondary">
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </div>
+    </>
   );
 }

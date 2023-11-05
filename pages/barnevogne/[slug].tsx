@@ -1,13 +1,16 @@
+import ProductDetails from "@/components/ProductDetails";
 import { getFeeds } from "@/utils/getFeeds";
+import selectRandomObjectsWithKeywords from "@/utils/getRelatedProducts";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
 
 export default function ProductPage({
   product,
+  relatedProducts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className="flex justify-center w-full items-center">
+    <>
       <Head>
         <title>{product.title}</title>
         <meta
@@ -15,14 +18,14 @@ export default function ProductPage({
           content={`Find den helt rigtige slyngevugge til dit barn. Det kunne f.eks. være en ${product.title} fra ${product.shop}.`}
         />
       </Head>
-      <h1>{product.title}</h1>
-      <img src={product.image} alt={`product-${product.productKey}`} />
-    </div>
+
+      <ProductDetails product={product} relatedProducts={relatedProducts} />
+    </>
   );
 }
 
 export const getStaticPaths = async () => {
-  const data = await getFeeds({ category: "Slyngevugger" });
+  const data = await getFeeds({ category: /Barnevogn|Klapvogn/gi });
 
   const paths = data?.map((product) => ({
     params: { slug: product.path },
@@ -35,9 +38,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const data = await getFeeds({ category: "Slyngevugger" });
-  console.log("Data: ", data);
-  console.log("Data: ", data);
+  const data = await getFeeds({ category: /Barnevogn|Klapvogn/gi });
 
   const slug = params.slug;
 
@@ -59,5 +60,15 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  return { props: { product: { ...product } } };
+  const relatedProducts = selectRandomObjectsWithKeywords(
+    data,
+    4,
+    product.keywords,
+    product.id
+  );
+  console.log("Related products: ", relatedProducts);
+
+  return {
+    props: { product: { ...product }, relatedProducts: relatedProducts },
+  };
 };

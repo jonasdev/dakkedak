@@ -1,10 +1,28 @@
 import { getFeeds } from "@/utils/getFeeds";
 import { InferGetStaticPropsType } from "next";
-import Image from "next/image";
+import Head from "next/head";
 import React from "react";
 
+export default function ProductPage({
+  product,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <div className="flex justify-center w-full items-center">
+      <Head>
+        <title>{product.title}</title>
+        <meta
+          name="description"
+          content={`Find den helt rigtige slyngevugge til dit barn. Det kunne f.eks. være en ${product.title} fra ${product.shop}.`}
+        />
+      </Head>
+      <h1>{product.title}</h1>
+      <img src={product.image} alt={`product-${product.productKey}`} />
+    </div>
+  );
+}
+
 export const getStaticPaths = async () => {
-  const data = await getFeeds({ category: "Blanket" });
+  const data = await getFeeds({ category: "Hudpleje" });
 
   const paths = data?.map((product) => ({
     params: { slug: product.path },
@@ -17,7 +35,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const data = await getFeeds({ category: "Blanket" });
+  const data = await getFeeds({ category: "Hudpleje" });
   console.log("Data: ", data);
   console.log("Data: ", data);
 
@@ -33,8 +51,6 @@ export const getStaticProps = async ({ params }) => {
 
   const [product] = data.filter((product) => slug === product.path);
 
-  console.log("Product: ", product);
-
   if (!product) {
     console.log("No Product");
 
@@ -43,18 +59,5 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  console.log("Made it here");
-
   return { props: { product: { ...product } } };
 };
-
-export default function ProductPage({
-  product,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <div className="flex justify-center w-full items-center">
-      <h1>{product.title}</h1>
-      <img src={product.image} alt={`product-${product.productKey}`} />
-    </div>
-  );
-}

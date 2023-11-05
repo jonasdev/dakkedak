@@ -1,23 +1,23 @@
 import React from "react";
-import { IconHeart } from "@tabler/icons-react";
 import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
+import FavoriteButton from "./FavoriteButton";
 
 export type Product = {
-  productKey: string;
+  productKey: number | string;
   shop?: string | null;
   category?: string | null;
   title: string | null;
-  price: number | null;
-  oldPrice?: number | null;
+  price: string | null;
+  oldPrice?: string | null;
   discount?: number | null;
   url: string | null;
   description?: string | null;
   image: string;
   brand?: string | null;
   id?: string | null;
-  inStock?: number | null;
+  inStock?: string | null;
   keywords?: string[] | null;
   sku?: string | null;
   path?: string | null;
@@ -30,7 +30,9 @@ export type ProductCardProps = {
 
 export default function ProductCard({
   productCategory,
-  product: {
+  product,
+}: ProductCardProps) {
+  const {
     brand,
     title,
     url,
@@ -41,37 +43,48 @@ export default function ProductCard({
     category,
     id,
     path,
-  },
-}: ProductCardProps) {
+  } = product;
+
   return (
     <article className="group relative flex flex-col justify-between overflow-hidden rounded-lg shadow-xl col-span-1 ">
-      <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-        <span className="sr-only">Wishlist</span>
-
-        <IconHeart className="h-4 w-4" />
-      </button>
+      <div className="absolute end-4 top-4 z-30">
+        <FavoriteButton itemId={product.path || ""} size="sm" />
+      </div>
 
       <Link href={`${productCategory}/${path}`}>
         <img
           src={image}
           alt={`product-${productKey}`}
-          className="h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 bg-gray-200"
+          className="h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 bg-white"
         />
       </Link>
 
-      <div className="relative border border-gray-100 bg-white p-6 h-full flex flex-col justify-between">
-        <span className="whitespace-nowrap w-fit bg-primary-dark text-white px-3 py-1.5 text-xs font-medium">
-          {brand}
+      <div className="relative border border-gray-100 bg-gray-100 p-6 h-full flex flex-col justify-between">
+        <span>
+          {brand && (
+            <span className="whitespace-nowrap w-fit bg-primary-dark text-white px-3 py-1.5 text-xs font-medium capitalize">
+              {brand}
+            </span>
+          )}
+          {price && oldPrice && price !== oldPrice && (
+            <span className="ml-2 whitespace-nowrap w-fit bg-white text-primary border-primary border px-3 py-1.5 text-xs font-medium capitalize">
+              På tilbud
+            </span>
+          )}
         </span>
 
         <h3 className="mt-4 text-lg font-medium text-gray-900">{title}</h3>
 
-        <p className="mt-1.5 text-sm text-gray-700">
-          Old Price: {oldPrice} DKK
-        </p>
-        <p className="mt-1.5 text-sm text-gray-700">Price: {price} DKK</p>
+        <div className="mt-1.5 flex flex-col w-fit">
+          {price && oldPrice && price !== oldPrice && (
+            <span className="text-xs line-through">{oldPrice} DKK</span>
+          )}
+          <span className="mt-1.5 text-lg font-semibold">
+            {price || oldPrice} <span className="text-xs">DKK</span>
+          </span>
+        </div>
 
-        <form className="mt-4 grid grid-cols-2 gap-6">
+        <form className="mt-4 grid 2xl:grid-cols-2 gap-6">
           <Button
             text="Gå til forhandler"
             className="flex justify-center"

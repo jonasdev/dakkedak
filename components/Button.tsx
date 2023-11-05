@@ -1,8 +1,7 @@
-// import useSound from "use-sound";
 import classNames from "classnames";
 import Link from "next/link";
 import { Url } from "next/dist/shared/lib/router/router";
-// import useSound from 'use-sound';
+import useSound from "use-sound";
 
 type Props = {
   text: string;
@@ -17,7 +16,7 @@ export default function Button({
   className,
   href,
 }: Props) {
-  // const [play] = useSound("/blob.mp3");
+  const [play] = useSound("/blob.mp3");
 
   return (
     <Link
@@ -27,11 +26,11 @@ export default function Button({
           ? "bg-primary text-white focus:ring-primary active:bg-primary-dark lg:hover:bg-primary-dark"
           : "bg-white text-primary border-primary border-2 active:border-primary-dark lg:hover:border-primary-dark active:text-primary-dark lg:hover:text-primary-dark",
         className,
-        "mt-8 shadow-xl inline-block rounded  px-12 py-3 text-sm font-medium transition active:translate-y-[2px]"
+        "shadow-xl rounded px-8 py-3 text-sm font-medium transition active:translate-y-[2px] flex justify-center items-center text-center"
       )}
-      // onClick={play}
+      onClick={play}
     >
-      {text}
+      <span>{text}</span>
     </Link>
   );
 }

@@ -1,6 +1,5 @@
 import iconv from "iconv-lite";
 import xml2js from "xml2js";
-import { Product } from "@/components/ProductCard";
 
 export const beautifyURL = (title = "") =>
   title
@@ -9,12 +8,17 @@ export const beautifyURL = (title = "") =>
     .replace(/[^a-å0-9-]/gi, "")
     .toLowerCase();
 
+const partnerAds = [
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055",
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716",
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748",
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415",
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269",
+];
+
 export const getFeeds = async (filter = null) => {
   const products = [];
-  const partnerAds = [
-    "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055",
-    "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716",
-  ]; // link til feeds
+
   const promises = partnerAds.map((partner) =>
     fetch(partner)
       .then((response) => response.arrayBuffer())
@@ -58,7 +62,8 @@ export const getFeeds = async (filter = null) => {
         url: product?.vareurl?.[0] || null,
         image: product?.billedurl?.[0] || null,
         brand: product?.brand?.[0] || null,
-        // description: handleEncoding(product?.beskrivelse?.[0]) || null,
+        // description: replaceInvalidCharacters(product?.beskrivelse?.[0]) || null,
+        description: product?.beskrivelse?.[0] || null,
         id: product?.produktid?.[0] || null,
         inStock: product?.lagerantal?.[0] || null,
         keywords: product?.produktnavn?.[0]?.split(" ") || null,

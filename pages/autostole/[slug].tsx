@@ -1,4 +1,4 @@
-import { getFeeds } from "@/utils/getFeeds";
+rimport { getFeeds } from "@/utils/getFeeds";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
@@ -22,7 +22,7 @@ export default function ProductPage({
 }
 
 export const getStaticPaths = async () => {
-  const data = await getFeeds({ category: "Slyngevugger" });
+  const data = await getFeeds({ category: "Autostole" });
 
   const paths = data?.map((product) => ({
     params: { slug: product.path },
@@ -34,8 +34,9 @@ export const getStaticPaths = async () => {
   };
 };
 
+
 export const getStaticProps = async ({ params }) => {
-  const data = await getFeeds({ category: "Slyngevugger" });
+  const data = await getFeeds({ category: "Autostole" });
   console.log("Data: ", data);
   console.log("Data: ", data);
 

@@ -10,10 +10,13 @@ export default function AppLink({ href, text, icon }: Props) {
   return (
     <Link
       href={href}
-      className="w-fit flex justify-center items-center font-semibold transition-all hover:border-b-2 hover:border-b-black border-b-transparent"
+      className="group font-semibold transition duration-300 text-sm lg:text-xs"
     >
-      {icon && <i className="mr-2">{icon}</i>}
-      <span>{text}</span>
+      <div className="flex justify-center items-center pb-1">
+        {icon && <i className="mr-2">{icon}</i>}
+        {text}
+      </div>
+      <span className="block h-0.5 scale-0 bg-black origin-center font-semibold transition-all duration-500 group-hover:scale-100" />
     </Link>
   );
 }

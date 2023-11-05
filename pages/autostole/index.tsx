@@ -4,7 +4,7 @@ import ProductCard, { Product } from "@/components/ProductCard";
 import ProductList from "@/components/ProductList";
 
 export const getStaticProps = (async (context) => {
-  const products = await getFeeds({ category: "Slyngevugger" });
+  const products = await getFeeds({ category: "Autostole" });
 
   return { props: { products } };
 }) satisfies GetStaticProps<{
@@ -14,5 +14,5 @@ export const getStaticProps = (async (context) => {
 export default function Page({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <ProductList products={products} productCategory="slyngevugger" />;
+  return <ProductList products={products} productCategory="autostole" />;
 }

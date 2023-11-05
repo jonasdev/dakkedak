@@ -1,19 +1,15 @@
 import React from "react";
-import Card from "./Card";
 import {
-  IconArrowBigRightLines,
-  IconArrowBigRightLinesFilled,
-  IconBabyBottle,
   IconBasket,
   IconHeartCheck,
   IconHeartHandshake,
   IconListSearch,
   IconMoodBoy,
   IconMoodKid,
-  IconPrompt,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import Button from "./Button";
+import Button from "../../components/Button";
+import Card from "@/components/Card";
 
 export default function About() {
   return (
