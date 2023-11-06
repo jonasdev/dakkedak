@@ -8,5 +8,5 @@ body {
 }
 
 section {
-  @apply min-h-[70vh] w-full;
+  @apply min-h-[60vh] w-full;
 }

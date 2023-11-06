@@ -1,27 +1,15 @@
-import { getFeeds } from "@/utils/getFeeds";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { Product } from "@/components/ProductCard";
-import ProductList from "@/components/ProductList";
+import ProductCard from "@/components/ProductCard";
 import { useEffect, useState } from "react";
 import { IconHeart, IconMoodWink2 } from "@tabler/icons-react";
+import { FavoriteItem } from "@/components/FavoriteButton";
 
-export const getStaticProps = (async (context) => {
-  const products = await getFeeds({ category: /Barnevogn|Klapvogn/gi });
-
-  return { props: { products } };
-}) satisfies GetStaticProps<{
-  products: Product[] | null;
-}>;
-
-export default function FavoritesPage({
-  products,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [favoriteItems, setFavoriteItems] = useState<string[]>([]);
+export default function FavoritesPage() {
+  const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
 
   useEffect(() => {
     const favorites = localStorage.getItem("favorites");
     if (favorites) {
-      const favoriteItemsArray = JSON.parse(favorites) as string[];
+      const favoriteItemsArray = JSON.parse(favorites) as FavoriteItem[];
       setFavoriteItems(favoriteItemsArray);
     }
   }, []);
@@ -32,9 +20,17 @@ export default function FavoritesPage({
       <div className="mt-16">
         {favoriteItems.length ? (
           <ul>
-            {favoriteItems.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
+            {favoriteItems.map((item) => {
+              console.log("item: ", item);
+
+              return (
+                <ProductCard
+                  product={item.product}
+                  productCategory={item.productCategory}
+                  key={item.productKey}
+                />
+              );
+            })}
           </ul>
         ) : (
           <div className="flex flex-col items-center text-center space-y-8 px-3">

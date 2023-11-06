@@ -3,6 +3,7 @@ import ProductCard, { Product } from "./ProductCard";
 import FavoriteButton from "./FavoriteButton";
 import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
+import Carousel from "./Carousel";
 
 type Props = {
   product: Product;
@@ -14,7 +15,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
 
   return (
     <section className="overflow-hidden ">
-      <div className="container px-5 py-24 mx-auto bg-white rounded-2xl shadow-lg z-10">
+      <div className="container px-5 pt-2 pb-16 lg:py-24 mx-auto bg-white rounded-2xl shadow-lg z-10">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img
             alt="product-details-img"
@@ -35,7 +36,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
               )}
             </div>
 
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-2">
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">
               {title}
             </h1>
 
@@ -43,7 +44,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
             <div className="flex justify-center my-4 lg:my-8">
               <div className="w-1/2 h-1 bg-primary bg-opacity-30" />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center lg:items-start">
               <div className="flex flex-col mb-6">
                 {price && oldPrice && price !== oldPrice && (
                   <span className="title-font font-medium text-lg line-through text-gray-900">
@@ -54,20 +55,28 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
                   {price || oldPrice} <span className="text-sm">DKK</span>
                 </span>
               </div>
-              <div className="flex items-center space-x-5">
+              <div className="flex space-x-5">
                 <Button text="Gå til forhandler" href={url as Url} />
-                <FavoriteButton itemId={product.path || ""} size="lg" />
+                <FavoriteButton
+                  product={product}
+                  // TODO: FIX ME
+                  category=""
+                  size="lg"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
       {relatedProducts && (
-        <div className="flex flex-col items-center mt-32 mb-14">
+        <div className="flex flex-col items-center mt-16 lg:mt-24 mb-14">
           <h2 className="text-2xl lg:text-4xl font-semibold mb-6">
             Relaterede produkter
           </h2>
-          <div className="grid grid-cols-4 gap-8 w-5/6">
+          <div className="lg:hidden block">
+            <Carousel products={relatedProducts} />
+          </div>
+          <div className="hidden lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4">
             {relatedProducts?.map((product) => (
               <ProductCard
                 productCategory="barnevogne"

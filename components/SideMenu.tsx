@@ -31,16 +31,16 @@ export default function SideMenu({ links }: Props) {
       <div
         className={classNames(
           isOpen ? "opacity-40" : "opacity-0",
-          "pointer-events-none fixed inset-0 z-30 bg-black duration-700 ease-in-out"
+          "pointer-events-none fixed inset-0 z-50 bg-black duration-700 ease-in-out"
         )}
         onClick={toggleSidebar}
       />
       <div
-        className={`bg-primary fixed right-0 top-0 z-40 h-screen w-4/5 transform shadow-md transition-transform duration-500 ease-in-out ${
+        className={`bg-primary fixed right-0 top-0 z-50 h-screen w-4/5 transform shadow-md transition-transform duration-500 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex h-full flex-col items-center justify-center space-y-12 text-3xl text-white">
+        <div className="flex h-full flex-col items-center justify-center z-50 space-y-12 text-3xl text-white">
           {links.map((link) => link)}
         </div>
       </div>

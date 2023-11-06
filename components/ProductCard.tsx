@@ -46,21 +46,23 @@ export default function ProductCard({
   } = product;
 
   return (
-    <article className="group relative flex flex-col justify-between overflow-hidden rounded-lg shadow-xl col-span-1 ">
-      <div className="absolute end-4 top-4 z-30">
-        <FavoriteButton itemId={product.path || ""} size="sm" />
+    <article className="group relative flex flex-col justify-between overflow-hidden rounded-lg shadow-xl col-span-1">
+      <div className="absolute end-4 top-4 z-20">
+        <FavoriteButton
+          product={product}
+          category={productCategory}
+          size="sm"
+        />
       </div>
 
-      <Link href={`${productCategory}/${path}`}>
-        <img
-          src={image}
-          alt={`product-${productKey}`}
-          className="h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 bg-white"
-        />
-      </Link>
+      <img
+        src={image}
+        alt={`product-${productKey}`}
+        className="h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 bg-white"
+      />
 
       <div className="relative border border-gray-100 bg-gray-100 p-6 h-full flex flex-col justify-between">
-        <span>
+        <span className="h-6">
           {brand && (
             <span className="whitespace-nowrap w-fit bg-primary-dark text-white px-3 py-1.5 text-xs font-medium capitalize">
               {brand}
@@ -73,7 +75,9 @@ export default function ProductCard({
           )}
         </span>
 
-        <h3 className="mt-4 text-lg font-medium text-gray-900">{title}</h3>
+        <h3 className="mt-4 text-lg font-medium text-gray-900 truncate">
+          {title}
+        </h3>
 
         <div className="mt-1.5 flex flex-col w-fit">
           {price && oldPrice && price !== oldPrice && (

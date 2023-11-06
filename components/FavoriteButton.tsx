@@ -3,13 +3,21 @@ import { IconHeart } from "@tabler/icons-react";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import useSound from "use-sound";
+import { Product } from "./ProductCard";
 
 interface Props {
-  itemId: string;
+  product: Product;
+  category: string;
   size: "sm" | "lg";
 }
 
-export default function FavoriteButton({ itemId, size }: Props) {
+export interface FavoriteItem {
+  product: Product;
+  productCategory: string;
+  productKey: string;
+}
+
+export default function FavoriteButton({ product, category, size }: Props) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [play] = useSound("/bubble.mp3");
 
@@ -17,24 +25,44 @@ export default function FavoriteButton({ itemId, size }: Props) {
   useEffect(() => {
     const favorites = localStorage.getItem("favorites");
     if (favorites) {
-      const favoriteItems = JSON.parse(favorites) as string[];
-      setIsFavorite(favoriteItems.includes(itemId));
+      const favoriteItems = JSON.parse(favorites) as FavoriteItem[];
+      if (favoriteItems)
+        setIsFavorite(
+          !!favoriteItems.find((item) => item.productKey === product.path)
+        );
     }
-  }, [itemId]);
+  }, [product]);
 
   const toggleFavorite = () => {
     const favorites = localStorage.getItem("favorites");
     if (favorites) {
-      let favoriteItems = JSON.parse(favorites) as string[];
+      let favoriteItems = JSON.parse(favorites) as FavoriteItem[];
       if (isFavorite) {
-        favoriteItems = favoriteItems.filter((item) => item !== itemId);
+        favoriteItems = favoriteItems.filter(
+          (item) => item.productKey !== product.path
+        );
       } else {
-        favoriteItems.push(itemId);
+        favoriteItems.push({
+          product: product,
+          productCategory: category,
+          productKey: product.path || "",
+        });
       }
       localStorage.setItem("favorites", JSON.stringify(favoriteItems));
       setIsFavorite(!isFavorite);
     } else {
-      const favoriteItems = [itemId];
+      console.log("Went in here");
+      console.log("Product: ", product);
+
+      const favoriteItems: FavoriteItem[] = [
+        {
+          product: product,
+          productCategory: category,
+          productKey: product.path || "",
+        },
+      ];
+      console.log(favoriteItems);
+
       localStorage.setItem("favorites", JSON.stringify(favoriteItems));
       setIsFavorite(true);
     }

@@ -1,7 +1,8 @@
+import Carousel from "@/components/Carousel";
 import ProductCard, { Product } from "@/components/ProductCard";
 import React from "react";
 
-const testProducts: Array<Product> = [
+const highlightedProducts: Array<Product> = [
   {
     productKey: "6233",
     shop: "KÆRE BØRN",
@@ -89,11 +90,15 @@ export default function HighlightedProducts() {
       <h2 className="text-2xl lg:text-4xl font-semibold mb-6">
         Anbefalede produkter
       </h2>
-      <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 w-5/6">
-        {testProducts.map((product) => (
+
+      <div className="lg:hidden block">
+        <Carousel products={highlightedProducts} />
+      </div>
+      <div className="hidden lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4">
+        {highlightedProducts?.map((product) => (
           <ProductCard
-            product={product}
             productCategory="barnevogne"
+            product={product}
             key={product.productKey}
           />
         ))}
