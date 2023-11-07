@@ -1,13 +1,16 @@
+import ProductDetails from "@/components/ProductDetails";
 import { getFeeds } from "@/utils/getFeeds";
+import selectRandomObjectsWithKeywords from "@/utils/getRelatedProducts";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
 
 export default function ProductPage({
   product,
+  relatedProducts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className="flex justify-center w-full items-center">
+    <>
       <Head>
         <title>{product.title}</title>
         <meta
@@ -15,14 +18,14 @@ export default function ProductPage({
           content={`Find den helt rigtige slyngevugge til dit barn. Det kunne f.eks. være en ${product.title} fra ${product.shop}.`}
         />
       </Head>
-      <h1>{product.title}</h1>
-      <img src={product.image} alt={`product-${product.productKey}`} />
-    </div>
+
+      <ProductDetails product={product} relatedProducts={relatedProducts} />
+    </>
   );
 }
 
 export const getStaticPaths = async () => {
-  const data = await getFeeds({ category: "Hudpleje" });
+  const data = await getFeeds({ category: /Solhat|Body/gi });
 
   const paths = data?.map((product) => ({
     params: { slug: product.path },
@@ -35,13 +38,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const data = await getFeeds({ category: "Hudpleje" });
-  console.log("Data: ", data);
-  console.log("Data: ", data);
-
-  const slug = params.slug;
-
-  console.log("Slug: ", slug);
+  const data = await getFeeds({ category: /Solhat|Body/gi });
 
   if (!data) {
     return {
@@ -49,7 +46,7 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const [product] = data.filter((product) => slug === product.path);
+  const [product] = data.filter((product) => params.slug === product.path);
 
   if (!product) {
     console.log("No Product");
@@ -59,5 +56,9 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  return { props: { product: { ...product } } };
+  const relatedProducts = selectRandomObjectsWithKeywords(data, product);
+
+  return {
+    props: { product: { ...product }, relatedProducts: relatedProducts },
+  };
 };

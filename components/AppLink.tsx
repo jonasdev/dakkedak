@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-type Props = {
+export type NavLinkProps = {
   href: string;
   text: string;
   icon?: JSX.Element;
 };
 
-export default function AppLink({ href, text, icon }: Props) {
+export default function AppLink({ href, text, icon }: NavLinkProps) {
   return (
     <Link
       href={href}

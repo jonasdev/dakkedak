@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import SideMenuButton from "./SideMenuButton";
 import classNames from "classnames";
 import { ReactNode } from "react";
-import AppLink from "./AppLink";
+import AppLink, { NavLinkProps } from "./AppLink";
 import { IconHeart } from "@tabler/icons-react";
 
 type Props = {
-  links: Array<ReactNode>;
+  links: Array<NavLinkProps>;
 };
 
 export default function SideMenu({ links }: Props) {
@@ -41,7 +41,11 @@ export default function SideMenu({ links }: Props) {
         }`}
       >
         <div className="flex h-full flex-col items-center justify-center z-50 space-y-12 text-3xl text-white">
-          {links.map((link) => link)}
+          {links.map((link) => (
+            <span key={link.href}>
+              <AppLink {...link} />{" "}
+            </span>
+          ))}
         </div>
       </div>
     </div>

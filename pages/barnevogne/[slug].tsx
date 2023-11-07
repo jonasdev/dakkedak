@@ -40,17 +40,13 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const data = await getFeeds({ category: /Barnevogn|Klapvogn/gi });
 
-  const slug = params.slug;
-
-  console.log("Slug: ", slug);
-
   if (!data) {
     return {
       notFound: true,
     };
   }
 
-  const [product] = data.filter((product) => slug === product.path);
+  const [product] = data.filter((product) => params.slug === product.path);
 
   if (!product) {
     console.log("No Product");
@@ -60,13 +56,7 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const relatedProducts = selectRandomObjectsWithKeywords(
-    data,
-    4,
-    product.keywords,
-    product.id
-  );
-  console.log("Related products: ", relatedProducts);
+  const relatedProducts = selectRandomObjectsWithKeywords(data, product);
 
   return {
     props: { product: { ...product }, relatedProducts: relatedProducts },

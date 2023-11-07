@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  IconAlarm,
   IconBabyBottle,
   IconBabyCarriage,
   IconCar,
@@ -11,45 +10,50 @@ import {
   IconHeart,
   IconHorseToy,
   IconMedicineSyrup,
-  IconPhone,
-  IconSearch,
   IconShirt,
   IconSoup,
   IconZzz,
 } from "@tabler/icons-react";
-import AppLink from "./AppLink";
+import AppLink, { NavLinkProps } from "./AppLink";
 import SideMenu from "./SideMenu";
-import { ReactNode } from "react";
+import { FavoriteItem } from "./FavoriteButton";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  // const links: Array<ReactNode> = [
-  //   <AppLink
-  //     href="/slyngevugger"
-  //     icon={<IconBabyCarriage />}
-  //     text="Slyngevugger"
-  //   />,
-  //   <AppLink href="/hudpleje" icon={<IconBabyCarriage />} text="Hudpleje" />,
-  //   <AppLink href="/autostole" icon={<IconBabyCarriage />} text="Autostole" />,
-  //   <AppLink
-  //     href="/barnevogne"
-  //     icon={<IconBabyCarriage />}
-  //     text="Barnevogne"
-  //   />,
-  // ];
-
-  const links: Array<ReactNode> = [
-    <AppLink href="/barnevogne" icon={<IconBabyCarriage />} text="På tur" />,
-    <AppLink href="#" icon={<IconCar />} text="På farten" />,
-    <AppLink href="#" icon={<IconSoup />} text="Spisetid" />,
-    <AppLink href="#" icon={<IconZzz />} text="Sovetid" />,
-    <AppLink href="#" icon={<IconShirt />} text="Tøj og sko" />,
-    <AppLink href="#" icon={<IconBabyBottle />} text="Amning" />,
-    <AppLink href="#" icon={<IconClock />} text="Ventetid og barsel" />,
-    <AppLink href="#" icon={<IconHorseToy />} text="Legetøj" />,
-    <AppLink href="#" icon={<IconDeviceMobile />} text="Grej" />,
-    <AppLink href="#" icon={<IconMedicineSyrup />} text="Hudpleje" />,
-    <AppLink href="#" icon={<IconDots />} text="Diverse" />,
+  const links: Array<NavLinkProps> = [
+    { href: "/barnevogne", text: "På tur", icon: <IconBabyCarriage /> },
+    { href: "#", text: "På farten", icon: <IconCar /> },
+    { href: "#", text: "Spisetid", icon: <IconSoup /> },
+    { href: "#", text: "Sovetid", icon: <IconZzz /> },
+    { href: "/toej-og-sko", text: "Tøj og sko", icon: <IconShirt /> },
+    { href: "#", text: "Amning", icon: <IconBabyBottle /> },
+    { href: "#", text: "Ventetid og barsel", icon: <IconClock /> },
+    { href: "#", text: "Legetøj", icon: <IconHorseToy /> },
+    { href: "#", text: "Grej", icon: <IconDeviceMobile /> },
+    { href: "#", text: "Pleje", icon: <IconMedicineSyrup /> },
+    { href: "#", text: "Diverse", icon: <IconDots /> },
   ];
+
+  const [favoriteItemsCount, setFavoriteItemsCount] = useState(0);
+
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      console.log("Called");
+
+      if (e.key === "favorites") {
+        const updatedFavorites = JSON.parse(
+          e.newValue || "[]"
+        ) as FavoriteItem[];
+        setFavoriteItemsCount(updatedFavorites.length);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   return (
     <nav className="w-full px-6 py-5 transition-all delay-75 duration-500 ease-out bg-inherit bg-opacity-95 z-30 rounded-b-3xl lg:px-12 lg:py-6">
@@ -59,11 +63,28 @@ export default function Navbar() {
         </Link>
         <div className="flex justify-center">
           <div className="hidden lg:flex items-center space-x-12">
-            {links.flat()}
+            {links.map((link) => (
+              <span key={link.href}>
+                <AppLink {...link} />{" "}
+              </span>
+            ))}
           </div>
         </div>
         <div className="lg:flex items-center space-x-4 hidden">
-          <AppLink href="/favoritter" icon={<IconHeart />} text="Favoritter" />
+          <AppLink
+            href="/favoritter"
+            icon={
+              <span className="relative inline-block">
+                <IconHeart />
+                {favoriteItemsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-primary-dark rounded-full">
+                    {favoriteItemsCount}
+                  </span>
+                )}
+              </span>
+            }
+            text="Favoritter"
+          />
         </div>
         <SideMenu links={links} />
       </div>

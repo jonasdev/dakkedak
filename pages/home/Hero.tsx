@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../../components/Button";
 import Image from "next/image";
 import { IconChartBubble, IconRipple } from "@tabler/icons-react";
 import { IconFish } from "@tabler/icons-react";
@@ -20,13 +19,13 @@ export default function Hero() {
           </div>
 
           <div className="lg:py-24">
-            <h2 className="text-3xl font-bold z-10 sm:text-6xl">
-              Velkommen til <span className="text-primary">Babyhaj</span>.
-            </h2>
+            <h1 className="text-3xl font-bold z-10 sm:text-6xl">
+              Haj med dig!
+            </h1>
 
-            <p className="mt-4 z-10 text-gray-600">
-              Find alt det du skal bruge til dit barn og lad inspirere af de
-              mange interessante produkter her på siden.
+            <p className="mt-6 z-10 text-gray-500 font-medium text-lg">
+              Dyk ned og find det du skal bruge til dit barn og lad inspirere af
+              de mange interessante produkter her på siden.
             </p>
           </div>
         </div>

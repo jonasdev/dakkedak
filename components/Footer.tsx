@@ -1,4 +1,4 @@
-import { IconBabyBottle, IconFish } from "@tabler/icons-react";
+import { IconBabyBottle, IconFish, IconHeart } from "@tabler/icons-react";
 import React from "react";
 import AppLink from "./AppLink";
 import Image from "next/image";
@@ -10,9 +10,10 @@ export default function Footer() {
         <div className="sm:flex sm:items-center sm:justify-between">
           <Image alt="hdr-logo" src="/logo.svg" height={125} width={250} />
 
-          <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
-            Other stuff
-          </ul>
+          {/* <span className="flex items-center">
+            Alt til dit barn{" "}
+            <IconHeart className="ml-1 fill-primary stroke-primary" size={16} />
+          </span> */}
         </div>
 
         <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
@@ -96,7 +97,8 @@ export default function Footer() {
         </div>
 
         <p className="text-xs text-gray-500">
-          &copy; 2022. Babyhaj. All rights reserved.
+          Vi samarbejder med en række firmaer, og henviser til disse gennem
+          affiliate links.
         </p>
       </div>
     </footer>

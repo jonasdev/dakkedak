@@ -28,6 +28,15 @@ export type ProductCardProps = {
   product: Product;
 };
 
+function decodeHTMLEntities(input: string): string {
+  const decodedInput = input.replace(/&#(\d+);/g, function (match, capture) {
+    const code = parseInt(capture, 10);
+    return String.fromCharCode(code);
+  });
+
+  return decodedInput;
+}
+
 export default function ProductCard({
   productCategory,
   product,
@@ -65,7 +74,7 @@ export default function ProductCard({
         <span className="h-6">
           {brand && (
             <span className="whitespace-nowrap w-fit bg-primary-dark text-white px-3 py-1.5 text-xs font-medium capitalize">
-              {brand}
+              {decodeHTMLEntities(brand)}
             </span>
           )}
           {price && oldPrice && price !== oldPrice && (

@@ -1,4 +1,4 @@
-rimport { getFeeds } from "@/utils/getFeeds";
+import { getFeeds } from "@/utils/getFeeds";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
@@ -34,15 +34,8 @@ export const getStaticPaths = async () => {
   };
 };
 
-
 export const getStaticProps = async ({ params }) => {
   const data = await getFeeds({ category: "Autostole" });
-  console.log("Data: ", data);
-  console.log("Data: ", data);
-
-  const slug = params.slug;
-
-  console.log("Slug: ", slug);
 
   if (!data) {
     return {
@@ -50,7 +43,7 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const [product] = data.filter((product) => slug === product.path);
+  const [product] = data.filter((product) => params.slug === product.path);
 
   if (!product) {
     console.log("No Product");

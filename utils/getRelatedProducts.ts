@@ -1,5 +1,4 @@
 import { Product } from "@/components/ProductCard";
-import { log } from "console";
 
 function selectRandomObjects<T>(array: Product[], count: number): Product[] {
   if (count >= array.length) {
@@ -19,17 +18,20 @@ function selectRandomObjects<T>(array: Product[], count: number): Product[] {
   return selectedObjects;
 }
 
+const count = 4;
+
 export default function selectRandomObjectsWithKeywords<T>(
   array: Product[],
-  count: number,
-  keywords: string[],
-  currentProductId: string
+  currentProduct: Product
 ): Product[] {
+  const { id, keywords = [] } = currentProduct;
+
   // Filter objects that have at least one matching keyword
   const matchingObjects = array.filter(
     (object) =>
-      keywords.some((keyword) => (object as any).keywords?.includes(keyword)) &&
-      object.id !== currentProductId
+      keywords?.some(
+        (keyword) => (object as any).keywords?.includes(keyword)
+      ) && object.id !== id
   );
 
   // Shuffle the matchingObjects array
