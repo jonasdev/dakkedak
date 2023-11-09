@@ -18,6 +18,7 @@ import AppLink, { NavLinkProps } from "./AppLink";
 import SideMenu from "./SideMenu";
 import { FavoriteItem } from "./FavoriteButton";
 import { useState, useEffect } from "react";
+import Searchbar from "./Searchbar";
 
 export default function Navbar() {
   const links: Array<NavLinkProps> = [
@@ -62,13 +63,7 @@ export default function Navbar() {
           <Image alt="hdr-logo" src="/logo.svg" height={100} width={250} />
         </Link>
         <div className="flex justify-center">
-          <div className="hidden lg:flex items-center space-x-12">
-            {links.map((link) => (
-              <span key={link.href}>
-                <AppLink {...link} />{" "}
-              </span>
-            ))}
-          </div>
+          <Searchbar />
         </div>
         <div className="lg:flex items-center space-x-4 hidden">
           <AppLink
@@ -87,6 +82,15 @@ export default function Navbar() {
           />
         </div>
         <SideMenu links={links} />
+      </div>
+      <div className="flex justify-center">
+        <div className="hidden lg:flex items-center space-x-12 lg:border-t-2 border-black border-opacity-30 pt-4 px-6">
+          {links.map((link) => (
+            <span key={link.href}>
+              <AppLink {...link} />{" "}
+            </span>
+          ))}
+        </div>
       </div>
     </nav>
   );
