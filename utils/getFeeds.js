@@ -1,5 +1,6 @@
 import iconv from "iconv-lite";
 import xml2js from "xml2js";
+import { handleCategory } from "./handleCategory";
 
 export const beautifyURL = (title = "") =>
   title
@@ -9,17 +10,21 @@ export const beautifyURL = (title = "") =>
     .toLowerCase();
 
 const partnerAds = [
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055", // BIBS
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055", // BIBS
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", // Zleepii
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
 ];
 
-export const products = [];
+const products = [];
 
-export const getFeeds = async (filter = null) => {
+export const getFeeds = async (filter = null, api = false) => {
+  if (api && products.length) {
+    return products;
+  }
+
   const promises = partnerAds.map((partner) =>
     fetch(partner)
       .then((response) => response.arrayBuffer())
@@ -54,7 +59,8 @@ export const getFeeds = async (filter = null) => {
       products.push({
         productKey: key,
         shop: product?.forhandler?.[0] || null,
-        category: product?.kategorinavn?.[0] || null,
+        // category: product?.kategorinavn?.[0] || null,
+        category: handleCategory(product?.kategorinavn?.[0]) || null,
         title: product?.produktnavn?.[0] || null,
         price: product?.nypris?.[0] || null,
         oldPrice: product?.glpris?.[0] || null,

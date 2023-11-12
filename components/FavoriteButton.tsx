@@ -2,7 +2,7 @@
 import { IconHeart } from "@tabler/icons-react";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import useSound from "use-sound";
+// import useSound from "use-sound";
 import { Product } from "./ProductCard";
 
 interface Props {
@@ -19,7 +19,7 @@ export interface FavoriteItem {
 
 export default function FavoriteButton({ product, category, size }: Props) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  const [play] = useSound("/bubble.mp3");
+  // const [play] = useSound("/bubble.mp3");
 
   // Check if the item is in localStorage on initial render
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function FavoriteButton({ product, category, size }: Props) {
   return (
     <button
       onClick={() => {
-        play();
+        // play();
         toggleFavorite();
       }}
       className={classNames(

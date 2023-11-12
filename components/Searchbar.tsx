@@ -1,18 +1,19 @@
-import { IconSearch } from "@tabler/icons-react";
+import {
+  IconClearAll,
+  IconCross,
+  IconSearch,
+  IconX,
+} from "@tabler/icons-react";
 import { Product } from "./ProductCard";
 import { useEffect, useState } from "react";
-import { products } from "@/utils/getFeeds";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import Button from "./Button";
+import { Url } from "next/dist/shared/lib/router/router";
+import { handleCategory } from "@/utils/handleCategory";
+import Link from "next/link";
 
 export default function Searchbar() {
-  console.log("products: ", products);
   const [searchResults, setSearchResults] = useState<Product[]>([]);
-  const [prods, setProds] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-
-  useEffect(() => {
-    setProds(products);
-  }, [products]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("Called handleInputChange");
@@ -21,23 +22,11 @@ export default function Searchbar() {
   };
 
   useEffect(() => {
-    console.log("useEffect!");
-    console.log("searchQuery: ", searchQuery);
-
-    if (products) {
-      const filteredProducts = (products as Product[]).filter((product) => {
-        console.log("product.title: ", product.title);
-        console.log(
-          "product.title?.includes(searchQuery): ",
-          product.title?.includes(searchQuery)
-        );
-
-        return product.title?.includes(searchQuery);
+    fetch(`/api/feed?query=${searchQuery}`)
+      .then((res) => res.json())
+      .then((dav) => {
+        setSearchResults(dav.feed);
       });
-      console.log(filteredProducts);
-
-      return setSearchResults(filteredProducts);
-    }
   }, [searchQuery]);
 
   return (
@@ -54,14 +43,48 @@ export default function Searchbar() {
           onChange={(e) => handleInputChange(e)}
           className="w-full rounded-md border-gray-200 py-2.5 pe-60 px-3 shadow-sm sm:text-sm"
         />
-        <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
-          <IconSearch className="text-gray-600" />
+        <span className="absolute inset-y-0 end-6 w-10 grid grid-cols-2 gap-x-8 place-content-center">
+          <span className="col-span-1">
+            {searchQuery.length > 0 && (
+              <span
+                className="col-span-1 cursor-pointer"
+                onClick={() => setSearchQuery("")}
+              >
+                <IconX />
+              </span>
+            )}
+          </span>
+          <IconSearch className="text-gray-600 col-span-1" />
         </span>
       </div>
-      <div>
-        <div className="">Search Results: {searchResults.length}</div>
-        <div className="">Prods: {prods.length}</div>
+      <div className="relative">
+        {/* <div className="">Search Query: {searchQuery}</div>
+        <div className="">Search Results: {searchResults.length}</div> */}
+        <div className="bg-white rounded-md absolute max-h-80 overflow-y-scroll">
+          {searchResults.map((product) => (
+            <SearchResultItem {...product} />
+          ))}
+        </div>
       </div>
     </div>
+  );
+}
+
+function SearchResultItem(product: Product) {
+  if (!product) return null;
+  console.log(product.category);
+
+  const { image, price, title, url } = product;
+
+  return (
+    <Link
+      className="bg-white p-2 grid grid-cols-7 gap-x-8 rounded-md"
+      href={`/${product.category}/${product.path}`}
+    >
+      <img src={image} className="w-10 h-auto col-span-1" />
+      <span className="line-clamp-2 col-span-4 flex-wrap">{title}</span>
+      <span className="col-span-1">{price}</span>
+      <Button className="col-span-1" href={url as Url} text="Køb" />
+    </Link>
   );
 }

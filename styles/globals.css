@@ -10,3 +10,7 @@ body {
 section {
   @apply min-h-[60vh] w-full;
 }
+
+::selection {
+  @apply bg-primary-dark text-white;
+}

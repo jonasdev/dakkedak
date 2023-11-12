@@ -86,7 +86,7 @@ export default function Navbar() {
       <div className="flex justify-center">
         <div className="hidden lg:flex items-center space-x-12 lg:border-t-2 border-black border-opacity-30 pt-4 px-6">
           {links.map((link) => (
-            <span key={link.href}>
+            <span key={`${link.href}+${link.text}`}>
               <AppLink {...link} />{" "}
             </span>
           ))}
