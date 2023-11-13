@@ -19,6 +19,7 @@ import SideMenu from "./SideMenu";
 import { FavoriteItem } from "./FavoriteButton";
 import { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
+import Searchbar2 from "./Searchbar2";
 
 export default function Navbar() {
   const links: Array<NavLinkProps> = [
@@ -57,12 +58,12 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full px-6 py-5 transition-all delay-75 duration-500 ease-out bg-inherit bg-opacity-95 z-30 rounded-b-3xl lg:px-12 lg:py-6">
-      <div className="flex w-full items-center justify-between mb-4">
+    <nav className="w-full px-6 py-5 transition-all delay-75 duration-500 ease-out bg-inherit bg-opacity-95 z-30 rounded-b-3xl lg:px-12 lg:py-8">
+      <div className="flex w-full items-center justify-between mb-6">
         <Link href="/">
           <Image alt="hdr-logo" src="/logo.svg" height={100} width={250} />
         </Link>
-        <div className="flex justify-center">
+        <div className="lg:flex items-center hidden">
           <Searchbar />
         </div>
         <div className="lg:flex items-center space-x-4 hidden">
@@ -83,13 +84,18 @@ export default function Navbar() {
         </div>
         <SideMenu links={links} />
       </div>
-      <div className="flex justify-center">
-        <div className="hidden lg:flex items-center space-x-12 lg:border-t-2 border-black border-opacity-30 pt-4 px-6">
-          {links.map((link) => (
-            <span key={`${link.href}+${link.text}`}>
-              <AppLink {...link} />{" "}
-            </span>
-          ))}
+      <div className="flex justify-center border-t-2 border-gray-300">
+        <div className="hidden lg:block">
+          <div className="flex flex-wrap space-y-2 justify-center items-center space-x-12 mt-4">
+            {links.map((link) => (
+              <span key={`${link.href}+${link.text}`}>
+                <AppLink {...link} />{" "}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="lg:hidden mt-4">
+          <Searchbar />
         </div>
       </div>
     </nav>

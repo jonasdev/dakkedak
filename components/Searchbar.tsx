@@ -1,4 +1,5 @@
 import {
+  IconArrowRight,
   IconClearAll,
   IconCross,
   IconSearch,
@@ -30,18 +31,18 @@ export default function Searchbar() {
   }, [searchQuery]);
 
   return (
-    <div>
-      <div className="relative">
+    <div className="lg:w-[550px]">
+      <div className="relative border border-black rounded-lg min-w-full">
         <label htmlFor="Search" className="sr-only">
           Search
         </label>
         <input
           type="text"
           id="Search"
-          placeholder="Søg efter produkter..."
+          placeholder="Søg..."
           value={searchQuery}
           onChange={(e) => handleInputChange(e)}
-          className="w-full rounded-md border-gray-200 py-2.5 pe-60 px-3 shadow-sm sm:text-sm"
+          className="w-full rounded-lg border-gray-200 py-2.5 pe-60 px-3 shadow-sm sm:text-sm"
         />
         <span className="absolute inset-y-0 end-6 w-10 grid grid-cols-2 gap-x-8 place-content-center">
           <span className="col-span-1">
@@ -60,9 +61,11 @@ export default function Searchbar() {
       <div className="relative">
         {/* <div className="">Search Query: {searchQuery}</div>
         <div className="">Search Results: {searchResults.length}</div> */}
-        <div className="bg-white rounded-md absolute max-h-80 overflow-y-scroll">
+        <div className="bg-white rounded-md absolute max-h-72 overflow-y-scroll overflow-x-hidden">
           {searchResults.map((product) => (
-            <SearchResultItem {...product} />
+            <div onClick={() => setSearchQuery("")}>
+              <SearchResultItem {...product} />
+            </div>
           ))}
         </div>
       </div>
@@ -78,13 +81,21 @@ function SearchResultItem(product: Product) {
 
   return (
     <Link
-      className="bg-white p-2 grid grid-cols-7 gap-x-8 rounded-md"
+      className="bg-white py-2 pl-1 pr-3 grid grid-cols-7 gap-x-2 border-b max-w-full group"
       href={`/${product.category}/${product.path}`}
     >
-      <img src={image} className="w-10 h-auto col-span-1" />
-      <span className="line-clamp-2 col-span-4 flex-wrap">{title}</span>
-      <span className="col-span-1">{price}</span>
-      <Button className="col-span-1" href={url as Url} text="Køb" />
+      <div className="flex items-center col-span-1">
+        <img src={image} className="h-auto" />
+      </div>
+
+      <div className="col-span-5 flex items-center">
+        <span className="truncate w-full font-semibold lg:group-hover:text-primary group-active:text-primary">
+          {title}
+        </span>
+      </div>
+      <div className="flex items-center justify-end col-span-1 lg:group-hover:text-primary group-active:text-primary">
+        <IconArrowRight />
+      </div>
     </Link>
   );
 }
