@@ -14,16 +14,15 @@ import {
   IconSoup,
   IconZzz,
 } from "@tabler/icons-react";
-import AppLink, { NavLinkProps } from "./AppLink";
+import AppLink, { AppLinkProps } from "./AppLink";
 import SideMenu from "./SideMenu";
 import { FavoriteItem } from "./FavoriteButton";
 import { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
-import Searchbar2 from "./Searchbar2";
+import CategoryList from "./CategoryList";
 
 export default function Navbar() {
-  const links: Array<NavLinkProps> = [
-    { href: "/barnevogne", text: "På tur", icon: <IconBabyCarriage /> },
+  const links: Array<AppLinkProps> = [
     { href: "#", text: "På farten", icon: <IconCar /> },
     { href: "#", text: "Spisetid", icon: <IconSoup /> },
     { href: "#", text: "Sovetid", icon: <IconZzz /> },
@@ -63,6 +62,7 @@ export default function Navbar() {
         <Link href="/">
           <Image alt="hdr-logo" src="/logo.svg" height={100} width={250} />
         </Link>
+
         <div className="lg:flex items-center hidden">
           <Searchbar />
         </div>
@@ -87,6 +87,82 @@ export default function Navbar() {
       <div className="flex justify-center border-t-2 border-gray-300">
         <div className="hidden lg:block">
           <div className="flex flex-wrap space-y-2 justify-center items-center space-x-12 mt-4">
+            <CategoryList
+              title="På tur"
+              icon={<IconBabyCarriage />}
+              categoryList={[
+                {
+                  subtitle: "Vogntyper",
+                  categories: [
+                    {
+                      href: "/barnevogne",
+                      text: "Barnevogne",
+                    },
+                    {
+                      href: "/klapvogne",
+                      text: "Klapvogne",
+                    },
+                    {
+                      href: "/joggere",
+                      text: "Joggere",
+                    },
+                    {
+                      href: "/lifte",
+                      text: "Lifte",
+                    },
+                    {
+                      href: "/tvillingevogne",
+                      text: "Tvillingevogne",
+                    },
+                    {
+                      href: "/kombivogne",
+                      text: "Kombivogne",
+                    },
+                    {
+                      href: "/rejseklapvogne",
+                      text: "Rejseklapvogne",
+                    },
+                    {
+                      href: "/multivogne",
+                      text: "Multivogne",
+                    },
+                  ],
+                },
+                {
+                  subtitle: "Tilbehør",
+                  categories: [
+                    {
+                      href: "/barnevognspuder",
+                      text: "Barnevognspuder",
+                    },
+                    {
+                      href: "/holdere",
+                      text: "Holdere",
+                    },
+                    {
+                      href: "/madrasser-og-lagner",
+                      text: "Madrasser og lagner",
+                    },
+                    {
+                      href: "/regnslag-og-insektnet",
+                      text: "Regnslag og insektnet",
+                    },
+                    {
+                      href: "/seler",
+                      text: "Seler",
+                    },
+                    {
+                      href: "/solskaerme",
+                      text: "Solskærme",
+                    },
+                    {
+                      href: "/vedligeholdese",
+                      text: "Vedligholdelse",
+                    },
+                  ],
+                },
+              ]}
+            />
             {links.map((link) => (
               <span key={`${link.href}+${link.text}`}>
                 <AppLink {...link} />{" "}

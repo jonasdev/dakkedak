@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import Link from "next/link";
 
-export type NavLinkProps = {
+export type AppLinkProps = {
   href: string;
   text: string;
   icon?: JSX.Element;
@@ -15,7 +15,7 @@ export default function AppLink({
   icon,
   mode = "dark",
   onClickAction,
-}: NavLinkProps) {
+}: AppLinkProps) {
   return (
     <Link
       href={href}
