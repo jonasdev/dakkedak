@@ -37,10 +37,7 @@ function decodeHTMLEntities(input: string): string {
   return decodedInput;
 }
 
-export default function ProductCard({
-  productCategory,
-  product,
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const {
     brand,
     title,
@@ -59,7 +56,7 @@ export default function ProductCard({
       <div className="absolute end-4 top-4 z-20">
         <FavoriteButton
           product={product}
-          category={productCategory}
+          category={product.category || ""}
           size="sm"
         />
       </div>
@@ -107,7 +104,7 @@ export default function ProductCard({
             text="Læs mere"
             className="flex justify-center"
             type="secondary"
-            href={`${productCategory}/${path}`}
+            href={`${product.category}/${path}`}
           />
         </form>
       </div>
