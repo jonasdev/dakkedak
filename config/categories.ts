@@ -3,7 +3,7 @@ export type CategoryLinkProps = {
   text: string;
 };
 
-type MainCategory =
+type CategoryCollection =
   | "vogne"
   | "koersel"
   | "spisetid"
@@ -33,204 +33,73 @@ export type CategoryName =
   | "solskaerme"
   | "vedligeholdese";
 
-  export type Category = Record<CategoryName, SubCategoryData[]>;
+export type CategoryData = { href: string; text: string };
 
-export type SubCategoryData = { href: string; text: string };
+export type CategorySet = Record<CategoryName, CategoryData>;
 
-type SubCategoryTuple = Record<
-  Partial<SubCategory>,
-  Record<string, SubCategoryData>
->;
-
-type TestCategory = {
-  section: string;
-  subCategories: Record<string, SubCategoryData[]>;
+export const vogneCategories: CategorySet = {
+  barnevogne: {
+    href: "/barnevogne",
+    text: "Barnevogne",
+  },
+  klapvogne: {
+    href: "/klapvogne",
+    text: "Klapvogne",
+  },
+  joggere: {
+    href: "/joggere",
+    text: "Joggere",
+  },
+  lifte: {
+    href: "/lifte",
+    text: "Lifte",
+  },
+  tvillingevogne: {
+    href: "/tvillingevogne",
+    text: "Tvillingevogne",
+  },
+  kombivogne: {
+    href: "/kombivogne",
+    text: "Kombivogne",
+  },
+  rejseklapvogne: {
+    href: "/rejseklapvogne",
+    text: "Rejseklapvogne",
+  },
+  multivogne: {
+    href: "/multivogne",
+    text: "Multivogne",
+  },
+  barnevognspuder: {
+    href: "/barnevognspuder",
+    text: "Barnevognspuder",
+  },
+  holdere: {
+    href: "/holdere",
+    text: "Holdere",
+  },
+  "madrasser-og-lagner": {
+    href: "/madrasser-og-lagner",
+    text: "Madrasser og lagner",
+  },
+  "regnslag-og-insektnet": {
+    href: "/regnslag-og-insektnet",
+    text: "Regnslag og insektnet",
+  },
+  seler: {
+    href: "/seler",
+    text: "Seler",
+  },
+  solskaerme: {
+    href: "/solskaerme",
+    text: "Solskærme",
+  },
+  vedligeholdese: {
+    href: "/vedligeholdese",
+    text: "Vedligholdelse",
+  },
 };
 
-// type Category = Record<Partial<MainCategory>, Partial<SubCategoryTuple[]>>;
-type Category = Record<Partial<MainCategory>, TestCategory[]>;
-
-export const categories: Category = {
-    vogne: [
-      {
-        section: "Vogntyper",
-        subCategories: [
-          "barnevogne":{
-            href: "/barnevogne",
-            text: "Barnevogne",
-          },
-          {
-            href: "/klapvogne",
-            text: "Klapvogne",
-          },
-          {
-            href: "/joggere",
-            text: "Joggere",
-          },
-          {
-            href: "/lifte",
-            text: "Lifte",
-          },
-          {
-            href: "/tvillingevogne",
-            text: "Tvillingevogne",
-          },
-          {
-            href: "/kombivogne",
-            text: "Kombivogne",
-          },
-          {
-            href: "/rejseklapvogne",
-            text: "Rejseklapvogne",
-          },
-          {
-            href: "/multivogne",
-            text: "Multivogne",
-          },
-        ],
-      },
-      {
-        section: "Tilbehør",
-        subCategories: [
-          {
-            href: "/barnevognspuder",
-            text: "Barnevognspuder",
-          },
-          {
-            href: "/holdere",
-            text: "Holdere",
-          },
-          {
-            href: "/madrasser-og-lagner",
-            text: "Madrasser og lagner",
-          },
-          {
-            href: "/regnslag-og-insektnet",
-            text: "Regnslag og insektnet",
-          },
-          {
-            href: "/seler",
-            text: "Seler",
-          },
-          {
-            href: "/solskaerme",
-            text: "Solskærme",
-          },
-          {
-            href: "/vedligeholdese",
-            text: "Vedligholdelse",
-          },
-        ],
-      },
-    ],
-  };
-
-// export const categories: Category = {
-//   vogne: [
-//     {
-//       section: "Vogntyper",
-//       subCategories: [
-//         {
-//           href: "/barnevogne",
-//           text: "Barnevogne",
-//         },
-//         {
-//           href: "/klapvogne",
-//           text: "Klapvogne",
-//         },
-//         {
-//           href: "/joggere",
-//           text: "Joggere",
-//         },
-//         {
-//           href: "/lifte",
-//           text: "Lifte",
-//         },
-//         {
-//           href: "/tvillingevogne",
-//           text: "Tvillingevogne",
-//         },
-//         {
-//           href: "/kombivogne",
-//           text: "Kombivogne",
-//         },
-//         {
-//           href: "/rejseklapvogne",
-//           text: "Rejseklapvogne",
-//         },
-//         {
-//           href: "/multivogne",
-//           text: "Multivogne",
-//         },
-//       ],
-//     },
-//     {
-//       section: "Tilbehør",
-//       subCategories: [
-//         {
-//           href: "/barnevognspuder",
-//           text: "Barnevognspuder",
-//         },
-//         {
-//           href: "/holdere",
-//           text: "Holdere",
-//         },
-//         {
-//           href: "/madrasser-og-lagner",
-//           text: "Madrasser og lagner",
-//         },
-//         {
-//           href: "/regnslag-og-insektnet",
-//           text: "Regnslag og insektnet",
-//         },
-//         {
-//           href: "/seler",
-//           text: "Seler",
-//         },
-//         {
-//           href: "/solskaerme",
-//           text: "Solskærme",
-//         },
-//         {
-//           href: "/vedligeholdese",
-//           text: "Vedligholdelse",
-//         },
-//       ],
-//     },
-//   ],
-// };
-
-// export const categories: Category = {
-//   vogne: [
-//         "vogne": {
-//             barnevogne: {
-//                 href: "/barnevogne",
-//                 title: "Barnevogne",
-//               }
-//         },
-//     // "klapvogne",
-//     // "joggere",
-//     // "lifte",
-//     // "tvillingevogne",
-//     // "kombivogne",
-//     // "rejseklapvogne",
-//     // "multivogne",
-//     // "barnevognspuder",
-//     // "holdere",
-//     // "madrasser-og-lagner",
-//     // "regnslag-og-insektnet",
-//     // "seler",
-//     // "solskaerme",
-//     // "vedligeholdese",
-//   ],
-//   "toej-og-sko": [],
-//   amning: [],
-//   barsel: [],
-//   diverse: [],
-//   grej: [],
-//   koersel: [],
-//   legetoej: [],
-//   pleje: [],
-//   sovetid: [],
-//   spisetid: [],
-// };
+export const categories: CategorySet = {
+  ...vogneCategories,
+};

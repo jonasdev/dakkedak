@@ -14,7 +14,5 @@ export const getStaticProps = (async (context) => {
 export default function Page({
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(products);
-
   return <ProductList products={products} />;
 }
