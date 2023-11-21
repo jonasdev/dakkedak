@@ -9,6 +9,8 @@ export default function ProductPage({
   product,
   relatedProducts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log(product);
+
   return (
     <>
       <Head>
@@ -25,20 +27,36 @@ export default function ProductPage({
 }
 
 export const getStaticPaths = async () => {
-  const data = await getFeeds({ category: /Klapvogn/gi });
+  const data = await getFeeds();
 
   const paths = data?.map((product) => ({
-    params: { slug: product.path },
+    params: {
+      category: product.category || "",
+      product: product.path || "",
+    },
   }));
 
   return {
     paths,
-    fallback: false, // false or "blocking"
+    fallback: false,
   };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const data = await getFeeds({ category: /Klapvogn/gi });
+  if (!params) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { category, product } = params;
+
+  const data = await getFeeds({
+    category: new RegExp(
+      `${currentCategory?.regex || currentCategory.slug}`,
+      "gi"
+    ),
+  });
 
   if (!data) {
     return {
@@ -46,19 +64,17 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const [product] = data.filter((product) => params.slug === product.path);
+  const [currentProduct] = data.filter((pro) => product === pro.path);
 
-  if (!product) {
-    console.log("No Product");
-
+  if (!currentProduct) {
     return {
       notFound: true,
     };
   }
 
-  const relatedProducts = selectRandomObjectsWithKeywords(data, product);
+  const relatedProducts = selectRandomObjectsWithKeywords(data, currentProduct);
 
   return {
-    props: { product: { ...product }, relatedProducts: relatedProducts },
+    props: { product: { ...currentProduct }, relatedProducts: relatedProducts },
   };
 };

@@ -1,6 +1,6 @@
 import iconv from "iconv-lite";
 import xml2js from "xml2js";
-import { handleCategory } from "./handleCategory";
+import { handleCategory, handleCategory2 } from "./handleCategory";
 
 export const beautifyURL = (title = "") =>
   title
@@ -18,9 +18,8 @@ const partnerAds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
 ];
 
-const products = [];
-
 export const getFeeds = async (filter = null, api = false) => {
+  let products = [];
   if (api && products.length) {
     return products;
   }
@@ -55,12 +54,14 @@ export const getFeeds = async (filter = null, api = false) => {
     if (!result || !result.length) return [];
 
     result.forEach((product, key) => {
+      if (product?.ean?.[0] === "7332650604097") console.log(product);
       // Push all products into one array
       products.push({
         productKey: key,
         shop: product?.forhandler?.[0] || null,
         // category: product?.kategorinavn?.[0] || null,
-        category: handleCategory(product?.kategorinavn?.[0]) || null,
+        // category: handleCategory(product?.kategorinavn?.[0]) || null,
+        category: handleCategory2(product) || null,
         title: product?.produktnavn?.[0] || null,
         price: product?.nypris?.[0] || null,
         oldPrice: product?.glpris?.[0] || null,

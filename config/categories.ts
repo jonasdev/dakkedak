@@ -1,105 +1,93 @@
-export type CategoryLinkProps = {
-  href: string;
-  text: string;
-};
+type Category = { slug: string; name: string; regex?: string };
 
-type CategoryCollection =
-  | "vogne"
-  | "koersel"
-  | "spisetid"
-  | "sovetid"
-  | "toej-og-sko"
-  | "amning"
-  | "barsel"
-  | "legetoej"
-  | "grej"
-  | "pleje"
-  | "diverse";
+export const vogneCategories: Category[] = [
+  {
+    slug: "barnevogne",
+    name: "Barnevogne",
+    regex: "Barnevogn",
+  },
+  {
+    slug: "klapvogne",
+    name: "Klapvogne",
+    regex: "Klapvogn",
+  },
+  {
+    slug: "joggere",
+    name: "Joggere",
+    regex: "Jogger",
+  },
+  {
+    slug: "lifte",
+    name: "Lifte",
+    regex: "Lift",
+  },
+  {
+    slug: "tvillingevogne",
+    name: "Tvillingevogne",
+    regex: "Tvillingevogn",
+  },
+  {
+    slug: "kombivogne",
+    name: "Kombivogne",
+    regex: "Kombivogn",
+  },
+  {
+    slug: "rejseklapvogne",
+    name: "Rejseklapvogne",
+    regex: "Rejseklapvogn",
+  },
+  {
+    slug: "multivogne",
+    name: "Multivogne",
+    regex: "Multivogn",
+  },
+  {
+    slug: "barnevognspuder",
+    name: "Barnevognspuder",
+    regex: "Barnevognspude",
+  },
+  {
+    slug: "holdere",
+    name: "Holdere",
+    regex: "Holder",
+  },
+  {
+    slug: "madrasser-og-lagner",
+    name: "Madrasser og lagner",
+    regex: "Madras|Lagen|Lagner",
+  },
+  {
+    slug: "regnslag-og-insektnet",
+    name: "Regnslag og insektnet",
+    regex: "Regnslag|Insektnet",
+  },
+  {
+    slug: "seler",
+    name: "Seler",
+    regex: "Sele",
+  },
+  {
+    slug: "solskaerme",
+    name: "Solskærme",
+    regex: "Solskærm",
+  },
+  {
+    slug: "vedligeholdese",
+    name: "Vedligholdelse",
+    regex: "Vedligeholdelse",
+  },
+];
 
-export type CategoryName =
-  | "barnevogne"
-  | "klapvogne"
-  | "joggere"
-  | "lifte"
-  | "tvillingevogne"
-  | "kombivogne"
-  | "rejseklapvogne"
-  | "multivogne"
-  | "barnevognspuder"
-  | "holdere"
-  | "madrasser-og-lagner"
-  | "regnslag-og-insektnet"
-  | "seler"
-  | "solskaerme"
-  | "vedligeholdese";
-
-export type CategoryData = { href: string; text: string };
-
-export type CategorySet = Record<CategoryName, CategoryData>;
-
-export const vogneCategories: CategorySet = {
-  barnevogne: {
-    href: "/barnevogne",
-    text: "Barnevogne",
-  },
-  klapvogne: {
-    href: "/klapvogne",
-    text: "Klapvogne",
-  },
-  joggere: {
-    href: "/joggere",
-    text: "Joggere",
-  },
-  lifte: {
-    href: "/lifte",
-    text: "Lifte",
-  },
-  tvillingevogne: {
-    href: "/tvillingevogne",
-    text: "Tvillingevogne",
-  },
-  kombivogne: {
-    href: "/kombivogne",
-    text: "Kombivogne",
-  },
-  rejseklapvogne: {
-    href: "/rejseklapvogne",
-    text: "Rejseklapvogne",
-  },
-  multivogne: {
-    href: "/multivogne",
-    text: "Multivogne",
-  },
-  barnevognspuder: {
-    href: "/barnevognspuder",
-    text: "Barnevognspuder",
-  },
-  holdere: {
-    href: "/holdere",
-    text: "Holdere",
-  },
-  "madrasser-og-lagner": {
-    href: "/madrasser-og-lagner",
-    text: "Madrasser og lagner",
-  },
-  "regnslag-og-insektnet": {
-    href: "/regnslag-og-insektnet",
-    text: "Regnslag og insektnet",
-  },
-  seler: {
-    href: "/seler",
-    text: "Seler",
-  },
-  solskaerme: {
-    href: "/solskaerme",
-    text: "Solskærme",
-  },
-  vedligeholdese: {
-    href: "/vedligeholdese",
-    text: "Vedligholdelse",
-  },
-};
-
-export const categories: CategorySet = {
+export const categories: Category[] = [
   ...vogneCategories,
+  {
+    slug: "diverse",
+    name: "Diverse",
+  },
+];
+
+export type CategorySet = Record<string, Category[]>;
+
+export const vogneCategoriesSet: CategorySet = {
+  Vogntyper: { ...vogneCategories },
 };

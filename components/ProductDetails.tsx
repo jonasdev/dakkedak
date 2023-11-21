@@ -11,6 +11,8 @@ type Props = {
 };
 
 export default function ProductDetails({ product, relatedProducts }: Props) {
+  console.log(product);
+
   const { image, brand, oldPrice, price, title, url, description } = product;
 
   return (

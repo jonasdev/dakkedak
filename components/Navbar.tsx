@@ -32,7 +32,7 @@ export default function Navbar() {
     { href: "#", text: "Legetøj", icon: <IconHorseToy /> },
     { href: "#", text: "Grej", icon: <IconDeviceMobile /> },
     { href: "#", text: "Pleje", icon: <IconMedicineSyrup /> },
-    { href: "#", text: "Diverse", icon: <IconDots /> },
+    { href: "/diverse", text: "Diverse", icon: <IconDots /> },
   ];
 
   const [favoriteItemsCount, setFavoriteItemsCount] = useState(0);

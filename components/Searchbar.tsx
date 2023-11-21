@@ -1,15 +1,6 @@
-import {
-  IconArrowRight,
-  IconClearAll,
-  IconCross,
-  IconSearch,
-  IconX,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconSearch, IconX } from "@tabler/icons-react";
 import { Product } from "./ProductCard";
 import { useEffect, useState } from "react";
-import Button from "./Button";
-import { Url } from "next/dist/shared/lib/router/router";
-import { handleCategory } from "@/utils/handleCategory";
 import Link from "next/link";
 
 export default function Searchbar() {
@@ -25,8 +16,8 @@ export default function Searchbar() {
   useEffect(() => {
     fetch(`/api/feed?query=${searchQuery}`)
       .then((res) => res.json())
-      .then((dav) => {
-        setSearchResults(dav.feed);
+      .then((data) => {
+        setSearchResults(data.feed);
       });
   }, [searchQuery]);
 
