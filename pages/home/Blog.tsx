@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+import CategoryCard from "@/components/CategoryCard";
 import React from "react";
 
 export default function Blog() {
@@ -20,19 +22,15 @@ export default function Blog() {
           <li>
             <a href="#" className="relative block group">
               <img
-                src="https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                src="/sut.png"
                 alt=""
-                className="object-cover w-full transition duration-500 aspect-square group-hover:opacity-90"
+                className="object-cover w-full transition duration-500 aspect-square group-hover:opacity-80 rounded-lg"
               />
 
-              <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
-                <h3 className="text-xl font-medium text-white">
-                  Casual Trainers
-                </h3>
+              <div className="absolute inset-0 flex flex-col items-start justify-end p-6 bg-black/10 rounded-lg">
+                <h3 className="text-xl font-medium text-white mb-2">Sutter</h3>
 
-                <span className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white">
-                  Shop Now
-                </span>
+                <Button href="/sutter" text="Se kategori" />
               </div>
             </a>
           </li>

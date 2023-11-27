@@ -1,6 +1,9 @@
 import iconv from "iconv-lite";
 import xml2js from "xml2js";
 import { handleCategory, handleCategory2 } from "./handleCategory";
+import formatDescription from "./formatDescription";
+import decodeString from "./decodeString";
+import filterUniqueProducts from "./findUniqueString";
 
 export const beautifyURL = (title = "") =>
   title
@@ -11,11 +14,12 @@ export const beautifyURL = (title = "") =>
 
 const partnerAds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055", // BIBS
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", // Zleepii
+  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", Zleepii -> Udgået!!!
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
 ];
 
 export const getFeeds = async (filter = null, api = false) => {
@@ -53,27 +57,30 @@ export const getFeeds = async (filter = null, api = false) => {
     const result = [].concat.apply([], response);
     if (!result || !result.length) return [];
 
+    console.log("Total products!: ", result.length);
     result.forEach((product, key) => {
-      if (product?.ean?.[0] === "7332650604097") console.log(product);
       // Push all products into one array
       products.push({
         productKey: key,
         shop: product?.forhandler?.[0] || null,
         // category: product?.kategorinavn?.[0] || null,
         // category: handleCategory(product?.kategorinavn?.[0]) || null,
+        originalCategory: product?.kategorinavn?.[0],
         category: handleCategory2(product) || null,
-        title: product?.produktnavn?.[0] || null,
+        title: product?.produktnavn?.[0]
+          ? decodeString(product?.produktnavn?.[0] || "")
+          : null,
         price: product?.nypris?.[0] || null,
         oldPrice: product?.glpris?.[0] || null,
         discount:
           Number(product?.glpris?.[0]) - Number(product?.nypris?.[0]) || null,
         url: product?.vareurl?.[0] || null,
         image: product?.billedurl?.[0] || null,
-        brand: product?.brand?.[0] || null,
+        brand: product?.brand?.[0] ? decodeString(product?.brand?.[0]) : null,
         // description: replaceInvalidCharacters(product?.beskrivelse?.[0]) || null,
-        description: product?.beskrivelse?.[0] || null,
+        description: formatDescription(product?.beskrivelse?.[0]) || null,
         id: product?.produktid?.[0] || null,
-        inStock: product?.lagerantal?.[0] || null,
+        inStock: product?.lagerantal?.[0] || null, // (in_stock / "backorder")
         keywords: product?.produktnavn?.[0]?.split(" ") || null,
         sku: product?.ean?.[0] || null,
         path: beautifyURL(product?.produktnavn?.[0]),
@@ -85,7 +92,11 @@ export const getFeeds = async (filter = null, api = false) => {
     }
   });
 
-  return filter ? filteredProducts : products;
+  const productsToReturn = filter ? filteredProducts : products;
+
+  const trimmedByDifferentSize = filterUniqueProducts(productsToReturn);
+
+  return productsToReturn;
 };
 
 export const handleFilter = (products, filter) => {
@@ -110,9 +121,14 @@ export const handleFilter = (products, filter) => {
       return product;
     }
 
-    const reg = new RegExp(category, "gi");
+    const categoryRegex = new RegExp(category, "gi");
     // Filter by category
-    if (category && product.category?.match(reg)) {
+    if (category && product.category?.match(categoryRegex)) {
+      return product;
+    }
+
+    const titleRegex = new RegExp(title, "gi");
+    if (category && product.title?.match(titleRegex)) {
       return product;
     }
   });

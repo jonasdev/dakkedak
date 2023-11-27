@@ -7,6 +7,7 @@ import {
   IconClock,
   IconDeviceMobile,
   IconDots,
+  IconGift,
   IconHeart,
   IconHorseToy,
   IconMedicineSyrup,
@@ -19,42 +20,94 @@ import SideMenu from "./SideMenu";
 import { FavoriteItem } from "./FavoriteButton";
 import { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
-import CategoryList from "./CategoryList";
+import CategoryList, { ICategoryList } from "./CategoryList";
+import {
+  CategorySet,
+  paaFartenCategories,
+  paaFartenCategorySet,
+  paaTurCategorySet,
+  sovetidCategorySet,
+  toejOgSkoCategorySet,
+  udstyrCategoriesSet,
+} from "@/config/categories";
+
+export interface ICategoryList {
+  title: string;
+  categorySet: CategorySet;
+  icon?: JSX.Element;
+}
 
 export default function Navbar() {
-  const links: Array<AppLinkProps> = [
-    { href: "#", text: "På farten", icon: <IconCar /> },
-    { href: "#", text: "Spisetid", icon: <IconSoup /> },
-    { href: "#", text: "Sovetid", icon: <IconZzz /> },
-    { href: "/toej-og-sko", text: "Tøj og sko", icon: <IconShirt /> },
-    { href: "#", text: "Amning", icon: <IconBabyBottle /> },
-    { href: "#", text: "Ventetid og barsel", icon: <IconClock /> },
-    { href: "#", text: "Legetøj", icon: <IconHorseToy /> },
-    { href: "#", text: "Grej", icon: <IconDeviceMobile /> },
-    { href: "#", text: "Pleje", icon: <IconMedicineSyrup /> },
-    { href: "/diverse", text: "Diverse", icon: <IconDots /> },
+  // const links: Array<AppLinkProps> = [
+  //   { href: "#", text: "På farten", icon: <IconCar /> },
+  //   { href: "#", text: "Spisetid", icon: <IconSoup /> },
+  //   { href: "#", text: "Sovetid", icon: <IconZzz /> },
+  //   { href: "/toej-og-sko", text: "Tøj og sko", icon: <IconShirt /> },
+  //   { href: "#", text: "Amning", icon: <IconBabyBottle /> },
+  //   { href: "#", text: "Ventetid og barsel", icon: <IconClock /> },
+  //   { href: "#", text: "Legetøj", icon: <IconHorseToy /> },
+  //   { href: "#", text: "Grej", icon: <IconDeviceMobile /> },
+  //   { href: "#", text: "Pleje", icon: <IconMedicineSyrup /> },
+  //   { href: "/diverse", text: "Diverse", icon: <IconDots /> },
+  // ];
+
+  const categoryLists: Array<ICategoryList> = [
+    {
+      categorySet: paaTurCategorySet,
+      title: "På tur",
+      icon: <IconBabyCarriage />,
+    },
+    {
+      categorySet: paaFartenCategorySet,
+      title: "På farten",
+      icon: <IconCar />,
+    },
+    {
+      categorySet: toejOgSkoCategorySet,
+      title: "Tøj og sko",
+      icon: <IconShirt />,
+    },
+    {
+      categorySet: udstyrCategoriesSet,
+      title: "Udstyr",
+      icon: <IconDeviceMobile />,
+    },
+    {
+      categorySet: sovetidCategorySet,
+      title: "Sovetid",
+      icon: <IconZzz />,
+    },
+    {
+      categorySet: [],
+      title: "Gaver",
+      icon: <IconGift />,
+    },
+    // { href: "#", text: "På farten", icon: <IconCar /> },
+    // { href: "#", text: "Spisetid", icon: <IconSoup /> },
+    // { href: "#", text: "Sovetid", icon: <IconZzz /> },
+    // { href: "/toej-og-sko", text: "Tøj og sko", icon: <IconShirt /> },
+    // { href: "#", text: "Amning", icon: <IconBabyBottle /> },
+    // { href: "#", text: "Ventetid og barsel", icon: <IconClock /> },
+    // { href: "#", text: "Legetøj", icon: <IconHorseToy /> },
+    // { href: "#", text: "Grej", icon: <IconDeviceMobile /> },
+    // { href: "#", text: "Pleje", icon: <IconMedicineSyrup /> },
+    // { href: "/diverse", text: "Diverse", icon: <IconDots /> },
   ];
 
-  const [favoriteItemsCount, setFavoriteItemsCount] = useState(0);
+  const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
+  const [favoriteItemsCnt, setFavoriteItemsCnt] = useState(0);
 
   useEffect(() => {
-    const handleStorageChange = (e: StorageEvent) => {
-      console.log("Called");
-
-      if (e.key === "favorites") {
-        const updatedFavorites = JSON.parse(
-          e.newValue || "[]"
-        ) as FavoriteItem[];
-        setFavoriteItemsCount(updatedFavorites.length);
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
+    const favorites = localStorage.getItem("favorites");
+    if (favorites) {
+      const favoriteItemsArray = JSON.parse(favorites) as FavoriteItem[];
+      setFavoriteItems(favoriteItemsArray);
+    }
   }, []);
+
+  useEffect(() => {
+    setFavoriteItemsCnt(favoriteItems.length);
+  }, [favoriteItems]);
 
   return (
     <nav className="w-full px-6 py-5 transition-all delay-75 duration-500 ease-out bg-inherit bg-opacity-95 z-30 rounded-b-3xl lg:px-12 lg:py-8">
@@ -72,102 +125,25 @@ export default function Navbar() {
             icon={
               <span className="relative inline-block">
                 <IconHeart />
-                {favoriteItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-primary-dark rounded-full">
-                    {favoriteItemsCount}
+                {/* {favoriteItemsCnt > 0 && (
+                  <span className="absolute not-italic -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-primary-dark rounded-full">
+                    {favoriteItemsCnt}
                   </span>
-                )}
+                )} */}
               </span>
             }
             text="Favoritter"
           />
         </div>
-        <SideMenu links={links} />
+        <SideMenu categoryLists={categoryLists} />
       </div>
       <div className="flex justify-center border-t-2 border-gray-300">
         <div className="hidden lg:block">
           <div className="flex flex-wrap space-y-2 justify-center items-center space-x-12 mt-4">
-            <CategoryList
-              title="På tur"
-              icon={<IconBabyCarriage />}
-              categoryList={[
-                {
-                  subtitle: "Vogntyper",
-                  categories: [
-                    {
-                      href: "/barnevogne",
-                      text: "Barnevogne",
-                    },
-                    {
-                      href: "/klapvogne",
-                      text: "Klapvogne",
-                    },
-                    {
-                      href: "/joggere",
-                      text: "Joggere",
-                    },
-                    {
-                      href: "/lifte",
-                      text: "Lifte",
-                    },
-                    {
-                      href: "/tvillingevogne",
-                      text: "Tvillingevogne",
-                    },
-                    {
-                      href: "/kombivogne",
-                      text: "Kombivogne",
-                    },
-                    {
-                      href: "/rejseklapvogne",
-                      text: "Rejseklapvogne",
-                    },
-                    {
-                      href: "/multivogne",
-                      text: "Multivogne",
-                    },
-                  ],
-                },
-                {
-                  subtitle: "Tilbehør",
-                  categories: [
-                    {
-                      href: "/barnevognspuder",
-                      text: "Barnevognspuder",
-                    },
-                    {
-                      href: "/holdere",
-                      text: "Holdere",
-                    },
-                    {
-                      href: "/madrasser-og-lagner",
-                      text: "Madrasser og lagner",
-                    },
-                    {
-                      href: "/regnslag-og-insektnet",
-                      text: "Regnslag og insektnet",
-                    },
-                    {
-                      href: "/seler",
-                      text: "Seler",
-                    },
-                    {
-                      href: "/solskaerme",
-                      text: "Solskærme",
-                    },
-                    {
-                      href: "/vedligeholdese",
-                      text: "Vedligholdelse",
-                    },
-                  ],
-                },
-              ]}
-            />
-            {links.map((link) => (
-              <span key={`${link.href}+${link.text}`}>
-                <AppLink {...link} />{" "}
-              </span>
+            {categoryLists.map((list) => (
+              <CategoryList categoryList={list} key={list.title} />
             ))}
+            <AppLink href="/diverse" icon={<IconDots />} text="Diverse" />
           </div>
         </div>
         <div className="lg:hidden mt-4">

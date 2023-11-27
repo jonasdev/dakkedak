@@ -8,8 +8,6 @@ export default function Searchbar() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("Called handleInputChange");
-
     setSearchQuery(event.target.value);
   };
 
@@ -30,6 +28,7 @@ export default function Searchbar() {
         <input
           type="text"
           id="Search"
+          autoComplete="off"
           placeholder="Søg..."
           value={searchQuery}
           onChange={(e) => handleInputChange(e)}
@@ -52,7 +51,7 @@ export default function Searchbar() {
       <div className="relative">
         {/* <div className="">Search Query: {searchQuery}</div>
         <div className="">Search Results: {searchResults.length}</div> */}
-        <div className="bg-white rounded-md absolute max-h-72 overflow-y-scroll overflow-x-hidden">
+        <div className="bg-white rounded-md absolute max-h-72 overflow-y-scroll overflow-x-hidden z-50">
           {searchResults.map((product) => (
             <div onClick={() => setSearchQuery("")}>
               <SearchResultItem {...product} />
@@ -66,7 +65,6 @@ export default function Searchbar() {
 
 function SearchResultItem(product: Product) {
   if (!product) return null;
-  console.log(product.category);
 
   const { image, price, title, url } = product;
 

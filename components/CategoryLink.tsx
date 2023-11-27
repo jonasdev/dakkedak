@@ -15,7 +15,7 @@ export default function CategoryLink({
 }: CategoryLinkProps) {
   return (
     <Link
-      href={href}
+      href={`/${href}`}
       className={classNames(
         mode === "dark"
           ? "lg:group-hover:text-gray-600 active:text-gray-600"

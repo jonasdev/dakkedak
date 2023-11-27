@@ -1,28 +1,26 @@
-import { IconChevronDown } from "@tabler/icons-react";
+import { IconChevronDown, IconDots } from "@tabler/icons-react";
 import classNames from "classnames";
 import Link from "next/link";
-import React from "react";
+import React, { ReactNode } from "react";
 import CategoryLink, { CategoryLinkProps } from "./CategoryLink";
+import { CategorySet } from "@/config/categories";
+import { ICategoryList } from "./Navbar";
+import AppLink from "./AppLink";
 
-type CategorySubList = {
+export type CategorySubList = {
   subtitle: string;
   categories: CategoryLinkProps[];
 };
 
 type Props = {
-  title: string;
-  icon?: JSX.Element;
   mode?: "light" | "dark";
-  categoryList: CategorySubList[];
+  categoryList: ICategoryList;
   onClickAction?: () => void;
 };
 
-export default function CategoryList({
-  title,
-  icon,
-  categoryList,
-  mode = "dark",
-}: Props) {
+export default function CategoryList({ categoryList, mode = "dark" }: Props) {
+  const { categorySet, title, icon } = categoryList;
+
   return (
     <div className="relative group pl-6">
       <div className="inline-flex items-center overflow-hidden">
@@ -55,20 +53,27 @@ export default function CategoryList({
       </div>
 
       <div
-        className="absolute end-0 z-10 pt-2 w-fit rounded-md border border-gray-100 bg-white shadow-lg hidden group-hover:flex group-active:flex items-start"
+        className="absolute end-0 z-10 pt-2 rounded-md border border-gray-100 bg-white shadow-lg hidden group-hover:flex group-active:grid items-start"
         role="menu"
       >
-        {categoryList.map((list) => (
-          <div className="p-2">
-            <strong className="block p-2 text-xs font-bold uppercase text-primary-dark">
-              {list.subtitle}
-            </strong>
+        {Object.entries(categorySet).map(([key, cats]) => {
+          if (!cats) return null;
 
-            {list.categories.map((category) => (
-              <CategoryLink href={category.href} text={category.text} />
-            ))}
-          </div>
-        ))}
+          return (
+            <div className="p-2 col-span-1" key={key}>
+              <strong className="block p-2 text-xs font-bold uppercase text-primary-dark">
+                {key}
+              </strong>
+              {Object.values(cats).map((category) => (
+                <CategoryLink
+                  href={category.slug}
+                  text={category.name}
+                  key={category.name}
+                />
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

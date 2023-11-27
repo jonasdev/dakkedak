@@ -19,7 +19,7 @@ export default function Home() {
       <HighlightedProducts />
       <About />
       <Categories />
-      <Blog />
+      {/* <Blog /> */}
     </>
   );
 }

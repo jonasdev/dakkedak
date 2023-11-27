@@ -1,6 +1,6 @@
 import ProductDetails from "@/components/ProductDetails";
 import { getFeeds } from "@/utils/getFeeds";
-import selectRandomObjectsWithKeywords from "@/utils/getRelatedProducts";
+import getRelatedProducts from "@/utils/getRelatedProducts";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
@@ -9,8 +9,6 @@ export default function ProductPage({
   product,
   relatedProducts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(product);
-
   return (
     <>
       <Head>
@@ -49,14 +47,9 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const { category, product } = params;
+  const { product } = params;
 
-  const data = await getFeeds({
-    category: new RegExp(
-      `${currentCategory?.regex || currentCategory.slug}`,
-      "gi"
-    ),
-  });
+  const data = await getFeeds();
 
   if (!data) {
     return {
@@ -72,7 +65,8 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const relatedProducts = selectRandomObjectsWithKeywords(data, currentProduct);
+  const relatedProducts = getRelatedProducts(data, currentProduct);
+  console.log("relatedProducts: ", relatedProducts);
 
   return {
     props: { product: { ...currentProduct }, relatedProducts: relatedProducts },

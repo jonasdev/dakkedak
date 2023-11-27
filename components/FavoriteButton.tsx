@@ -51,9 +51,6 @@ export default function FavoriteButton({ product, category, size }: Props) {
       localStorage.setItem("favorites", JSON.stringify(favoriteItems));
       setIsFavorite(!isFavorite);
     } else {
-      console.log("Went in here");
-      console.log("Product: ", product);
-
       const favoriteItems: FavoriteItem[] = [
         {
           product: product,
@@ -61,7 +58,6 @@ export default function FavoriteButton({ product, category, size }: Props) {
           productKey: product.path || "",
         },
       ];
-      console.log(favoriteItems);
 
       localStorage.setItem("favorites", JSON.stringify(favoriteItems));
       setIsFavorite(true);

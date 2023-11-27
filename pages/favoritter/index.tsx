@@ -21,11 +21,7 @@ export default function FavoritesPage() {
         {favoriteItems.length ? (
           <div className="lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4">
             {favoriteItems.map((item) => (
-              <ProductCard
-                product={item.product}
-                productCategory={item.productCategory}
-                key={item.productKey}
-              />
+              <ProductCard product={item.product} key={item.productKey} />
             ))}
           </div>
         ) : (

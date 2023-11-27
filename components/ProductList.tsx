@@ -1,3 +1,4 @@
+import Breadcrumb from "./Breadcrumb";
 import ProductCard, { Product } from "./ProductCard";
 
 type Props = {
@@ -14,6 +15,7 @@ export default function ProductList({ products, category }: Props) {
       <h1 className="text-6xl font-semibold text-center mb-10">
         {category?.name}
       </h1>
+
       <div className="flex justify-center mb-10">Filters Go here</div>
 
       <div className="flex flex-col w-full p-6">

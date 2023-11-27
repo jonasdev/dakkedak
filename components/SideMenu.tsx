@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import SideMenuButton from "./SideMenuButton";
 import classNames from "classnames";
 import { ReactNode } from "react";
-import AppLink, { NavLinkProps } from "./AppLink";
+import AppLink from "./AppLink";
 import { IconHeart } from "@tabler/icons-react";
+import { ICategoryList } from "./Navbar";
+import CategoryAccordion from "./CategoryAccordion";
 
 type Props = {
-  links: Array<NavLinkProps>;
+  categoryLists: Array<ICategoryList>;
 };
 
-export default function SideMenu({ links }: Props) {
+export default function SideMenu({ categoryLists }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("");
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleSidebar = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
@@ -35,17 +36,30 @@ export default function SideMenu({ links }: Props) {
         onClick={toggleSidebar}
       />
       <div
-        className={`bg-primary fixed right-0 top-0 z-40 h-screen w-4/5 transform shadow-md transition-transform duration-500 ease-in-out ${
+        className={`bg-primary flex items-end min-h-full fixed right-0 top-0 z-40 h-screen w-4/5 transform shadow-md transition-transform duration-500 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex h-full flex-col items-center justify-center z-40 space-y-12 text-3xl text-white">
-          <AppLink href="/favoritter" icon={<IconHeart />} text="Favoritter" />
-          {links.map((link) => (
-            <span key={link.href}>
-              <AppLink {...link} mode="light" onClickAction={toggleSidebar} />
-            </span>
-          ))}
+        <div className="flex h-full max-h-[90%] overflow-y-scroll w-full flex-col items-start z-40 space-y-12 text-3xl text-white">
+          <div className="w-full space-y-2">
+            {categoryLists.map((list) => (
+              <CategoryAccordion
+                categoryList={list}
+                isActive={activeCategory === list.title}
+                setIsActive={setActiveCategory}
+                onPageChange={toggleSidebar}
+                key={list.title}
+              />
+            ))}
+          </div>
+          <div className="p-4">
+            <AppLink
+              href="/favoritter"
+              icon={<IconHeart />}
+              text="Favoritter"
+              mode="light"
+            />
+          </div>
         </div>
       </div>
     </div>

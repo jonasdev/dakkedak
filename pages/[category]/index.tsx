@@ -13,8 +13,6 @@ interface ICategoryPage {
 }
 
 export default function CategoryPage({ category, products }: ICategoryPage) {
-  console.log(products.length);
-
   return <ProductList products={products} category={category} />;
 }
 
@@ -49,9 +47,11 @@ export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
       `${currentCategory?.regex || currentCategory.slug}`,
       "gi"
     ),
+    title: new RegExp(
+      `${currentCategory?.regex || currentCategory.slug}`,
+      "gi"
+    ),
   });
-
-  console.log("products.length: ", products.length);
 
   return {
     props: {
