@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import {
   IconClock,
 } from "@tabler/icons-react";
 import decodeString from "@/utils/decodeString";
+import sut from "@/public/sut.png";
 
 export type Product = {
   productKey: number | string;
@@ -49,6 +50,8 @@ export default function ProductCard({ product }: ProductCardProps) {
     inStock,
   } = product;
 
+  const [imgSrc, setImgSrc] = useState(image);
+
   const renderStock = () => {
     if (inStock === "in_stock" || "in stock")
       return (
@@ -81,11 +84,18 @@ export default function ProductCard({ product }: ProductCardProps) {
         <FavoriteButton product={product} category={category || ""} size="sm" />
       </div>
 
-      <img
-        src={image}
-        alt={`product-${productKey}`}
-        className="min-h-[256px] h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 sm:min-h-[288px] bg-white"
-      />
+      <div className="flex justify-center items-center">
+        <img
+          src={imgSrc}
+          alt={`product-${productKey}`}
+          className="min-h-[256px] h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 sm:min-h-[288px] bg-white"
+          // onError={() =>
+          //   setImgSrc(
+          //     ""
+          //   )
+          // }
+        />
+      </div>
 
       <div className="relative border border-gray-100 bg-gray-100 p-6 h-full flex flex-col justify-between">
         <div className="flex justify-between">

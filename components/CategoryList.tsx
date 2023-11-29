@@ -21,6 +21,8 @@ type Props = {
 export default function CategoryList({ categoryList, mode = "dark" }: Props) {
   const { categorySet, title, icon } = categoryList;
 
+  const gridCols = Object.entries(categorySet).length;
+
   return (
     <div className="relative group pl-6">
       <div className="inline-flex items-center overflow-hidden">
@@ -53,14 +55,14 @@ export default function CategoryList({ categoryList, mode = "dark" }: Props) {
       </div>
 
       <div
-        className="absolute end-0 z-10 pt-2 rounded-md border border-gray-100 bg-white shadow-lg hidden group-hover:flex group-active:grid items-start"
+        className="absolute end-0 z-10 pt-2 rounded-md border border-gray-100 bg-white shadow-lg hidden group-hover:flex items-start justify-evenly"
         role="menu"
       >
         {Object.entries(categorySet).map(([key, cats]) => {
           if (!cats) return null;
 
           return (
-            <div className="p-2 col-span-1" key={key}>
+            <div className="p-2" key={key}>
               <strong className="block p-2 text-xs font-bold uppercase text-primary-dark">
                 {key}
               </strong>

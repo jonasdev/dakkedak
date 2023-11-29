@@ -263,11 +263,162 @@ export const sovetidCategories: Category[] = [
   },
 ];
 
+export const legetoejIndendoersCategories: Category[] = [
+  {
+    //Check
+    slug: "babylegetoej",
+    name: "Babylegetoej",
+    regex: "Babylegetoej|Babylegetøj",
+  },
+  {
+    //Check
+    slug: "badelegetoej",
+    name: "Badelegetøj",
+    regex: "Legetøj",
+  },
+  {
+    //Check
+    slug: "bamser",
+    name: "Bamser",
+    regex: "Bamse",
+  },
+  {
+    slug: "bideringe",
+    name: "Bideringe",
+    regex: "Bidering",
+  },
+  {
+    //Check
+    slug: "biler-fly-tog",
+    name: "Biler, fly og tog",
+    regex: "Biler|Flyvemaskine|Tog",
+  },
+  {
+    slug: "bolde",
+    name: "Bolde",
+    regex:
+      "Boldbassin|Badebold|Kidkii 50 Bolde|Baby Einstein Bøjelig Bold|Oball Disney|Oball Rattle|Oball Grasp|Oball Floating|Oball Rainstick|Oball Classic Bold|Oball Frogball|Tiny Tot Silikone Bold|Bold med Labels|Lærebold|Uldbolde|Skindbold|Sansebold|Aktivitetsbold|Massagebold|Motorisk Bold|Aktivitetsbold",
+  },
+  {
+    slug: "byggesaet-og-klodser",
+    name: "Byggesæt og klodser",
+    regex: "Byggesæt|Klodser",
+  },
+  {
+    slug: "boerneboeger",
+    name: "Børnebøger",
+    regex:
+      "Børnebog|Bogstaverne|Flip bog|Musikbog|Min bedste bog|Folde-ud bog|Lydbog|Bog med farver|Aktivitetsbog|Dobbeltsidet bog|Playgro Bog|Playgro Halebog|Opdagelsesbog|Min Lille Ordbog|Stofbog|Magnetbog|Regnbuebog|Mærk og Føl-bog|Malebog|Løft Flapperne-bog|Papbog|Billedbog|SangbogTotte- og Lotte",
+  },
+  {
+    slug: "dukker",
+    name: "Dukker",
+    regex: "Dukke",
+  },
+  {
+    slug: "figurer",
+    name: "Figurer",
+    regex: "Figur",
+  },
+  {
+    slug: "gaavogne",
+    name: "Gåvogne",
+    regex: "Gåbil|Gåvogn|Gå-vogn",
+  },
+  {
+    slug: "hoppedyr-og-gynger",
+    name: "Hoppedyr og gynger",
+    regex: "Hoppedyr|Gynge|Hoppebold|Little Tikes Vippe Hval|Kænguru bold",
+  },
+  {
+    slug: "haandtryk-og-fodtryk",
+    name: "Hånd- og fodaftryk",
+    regex: "Aftryk|Afstøbning",
+  },
+  {
+    slug: "julekalendere",
+    name: "Julekalendere",
+    regex: "Julekalender",
+  },
+  {
+    //Remove?
+    slug: "kostumer",
+    name: "Kostumer",
+    regex: "Kostume|Udklædning",
+  },
+  {
+    slug: "kreativ-leg",
+    name: "Kreativ leg",
+    regex:
+      "Kreativ|Modellervoks|Farvelæg|Mosaik|Malebog|Vandfarver|Skrabeark|Maling|Papirsaks|Tavle|Blyanter|Viskelædder|Stempler|Farvekridt|Tusser",
+  },
+  {
+    // Check
+    slug: "koekken",
+    name: "Køkken",
+    regex: "Køkken|Kitchen|Frugt|Kaffemaskine|Småkage|LegetøjsmadBagesæt",
+  },
+  {
+    // Made it here
+    slug: "legetaepper-og-gulve",
+    name: "Legetæpper og gulve",
+    regex: "Legetæppe|Gulv",
+  },
+  {
+    slug: "telte",
+    name: "Telte",
+    regex: "Telt|Tipi",
+  },
+  {
+    slug: "musik",
+    name: "Musik",
+    regex: "Musik",
+  },
+  {
+    slug: "rangler",
+    name: "Rangler",
+    regex: "Rangler",
+  },
+  {
+    slug: "rollespil",
+    name: "Rollespil",
+    regex: "Rollespil",
+  },
+  {
+    slug: "braetspil-og-puslespil",
+    name: "Bræt- og puslespil",
+    regex: "Brætspil|Puslespil",
+  },
+  {
+    slug: "traekdyr",
+    name: "Trækdyr",
+    regex: "Trækdyr",
+  },
+  {
+    slug: "traelegetoej",
+    name: "Trælegetøj",
+    regex: "Trælegetøj",
+  },
+  {
+    slug: "tumlemoebler",
+    name: "Tumlemøbler",
+    regex: "Tumlem",
+  },
+  {
+    slug: "uroer",
+    name: "Uroer",
+    regex: "Uro",
+  },
+];
+
+export const legetoejCategories: Category[] = [...legetoejIndendoersCategories];
+
 export const categories: Category[] = [
   ...vogneCategories,
   ...paaFartenCategories,
   ...toejOgSkoCategories,
   ...udstyrCategories,
+  ...legetoejCategories,
   ...plejeCategories,
   ...sovetidCategories,
   {
@@ -299,4 +450,8 @@ export const udstyrCategoriesSet: CategorySet = {
 
 export const sovetidCategorySet: CategorySet = {
   Vugger: { ...sovetidCategories },
+};
+
+export const legetoejCategorySet: CategorySet = {
+  Indendørs: { ...legetoejIndendoersCategories },
 };

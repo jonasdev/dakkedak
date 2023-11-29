@@ -16,6 +16,9 @@ const variousReplaceMap: { [key: string]: string } = {
   "â": '"', // Left quotation mark
   "â": '"', // Right quotation mark
   "Â®": "®",
+  "â¢": "™",
+  "Â": "", // Question mark
+  "â": "‘",
 };
 
 export default function decodeString(string: string): string {

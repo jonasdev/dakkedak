@@ -23,6 +23,8 @@ import Searchbar from "./Searchbar";
 import CategoryList, { ICategoryList } from "./CategoryList";
 import {
   CategorySet,
+  legetoejCategoriesSet,
+  legetoejCategorySet,
   paaFartenCategories,
   paaFartenCategorySet,
   paaTurCategorySet,
@@ -76,6 +78,11 @@ export default function Navbar() {
       categorySet: sovetidCategorySet,
       title: "Sovetid",
       icon: <IconZzz />,
+    },
+    {
+      categorySet: legetoejCategorySet,
+      title: "Legetid",
+      icon: <IconHorseToy />,
     },
     {
       categorySet: [],
