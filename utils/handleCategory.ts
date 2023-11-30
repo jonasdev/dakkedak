@@ -1,58 +1,56 @@
 import { categories } from "@/config/categories";
 
-export const handleCategory = (category: string | undefined) => {
-  if (!category) return "";
-  // return Object.keys(categories).find((key) =>
-  //   category.toLowerCase().match(key)
-  // );
-
-  // const reg = new RegExp(category, "gi");
-  // // Filter by category
-  // if (category && product.category?.match(reg)) {
-  //   return product;
-  // }
-
-  // const matchingCategory = categories.find((cat) =>
-  //   category.toLowerCase().match(cat.slug)
-  // )?.slug;
-
-  const matchingCategory = categories.find((cat) =>
-    category.toLowerCase().match(new RegExp(cat?.regex || cat.slug, "gi"))
-  )?.slug;
-
-  // return matchingCategory ?? "diverse";
-  return matchingCategory;
-};
-
-export const handleCategory2 = (product: any) => {
+export const handleCategory = (product: any) => {
   if (!product) return "";
   const { produktnavn, kategorinavn } = product;
 
   if (!produktnavn && !kategorinavn) return null;
-  // return Object.keys(categories).find((key) =>
-  //   category.toLowerCase().match(key)
-  // );
 
-  // const reg = new RegExp(category, "gi");
-  // // Filter by category
-  // if (category && product.category?.match(reg)) {
-  //   return product;
-  // }
+  // let matchingCategory: string | undefined = undefined;
 
-  // const matchingCategory = categories.find((cat) =>
-  //   category.toLowerCase().match(cat.slug)
+  // matchingCategory = categories.find(
+  //   (
+  //     cat //
+  //   ) => {
+  //     const regex = new RegExp(cat.regex, "gi");
+  //     if (kategorinavn[0].match(regex)) {
+  //       return cat;
+  //     }
+  //   }
   // )?.slug;
 
-  const matchingCategory = categories.find(
-    (cat) =>
-      kategorinavn[0]
-        .toLowerCase()
-        .match(new RegExp(cat?.regex || cat.slug, "gi")) ||
-      produktnavn[0]
-        .toLowerCase()
-        .match(new RegExp(cat?.regex || cat.slug, "gi"))
-  )?.slug;
+  // console.log("matchingCategory after prodktnavn: ", matchingCategory);
+
+  // if (!matchingCategory) {
+  //   matchingCategory = categories.find(
+  //     (
+  //       cat //
+  //     ) => {
+  //       const regex = new RegExp(cat.regex, "gi");
+
+  //       if (produktnavn[0].match(regex)) {
+  //         return cat;
+  //       }
+  //     }
+  //   )?.slug;
+  // }
+
+  // console.log("matchingCategory after kategorinavn: ", matchingCategory);
 
   // return matchingCategory ?? "diverse";
-  return matchingCategory;
+
+  const x = categories.find(
+    (
+      cat //
+    ) => {
+      const regex = new RegExp(cat.regex, "gi");
+      if (kategorinavn[0].match(regex)) {
+        return cat;
+      }
+    }
+  )?.slug;
+
+  return x || "diverse";
+
+  //return matchingCategory;
 };

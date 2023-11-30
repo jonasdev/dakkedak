@@ -1,4 +1,4 @@
-type Category = { slug: string; name: string; regex?: string };
+type Category = { slug: string; name: string; regex: string };
 
 export const paaTurVogneCategories: Category[] = [
   {
@@ -78,7 +78,7 @@ export const babyOgBoerneToejCategories: Category[] = [
   {
     slug: "badetoej",
     name: "Badetøj",
-    regex: "Badebukser|Svømme|Badedragt|Bikini",
+    regex: "Badetøj|Badebukser|Svømme|Badedragt|Bikini",
   },
   {
     slug: "bodyer",
@@ -266,18 +266,6 @@ export const sovetidCategories: Category[] = [
 export const legetoejIndendoersCategories: Category[] = [
   {
     //Check
-    slug: "babylegetoej",
-    name: "Babylegetoej",
-    regex: "Babylegetoej|Babylegetøj",
-  },
-  {
-    //Check
-    slug: "badelegetoej",
-    name: "Badelegetøj",
-    regex: "Legetøj",
-  },
-  {
-    //Check
     slug: "bamser",
     name: "Bamser",
     regex: "Bamse",
@@ -309,6 +297,12 @@ export const legetoejIndendoersCategories: Category[] = [
     name: "Børnebøger",
     regex:
       "Børnebog|Bogstaverne|Flip bog|Musikbog|Min bedste bog|Folde-ud bog|Lydbog|Bog med farver|Aktivitetsbog|Dobbeltsidet bog|Playgro Bog|Playgro Halebog|Opdagelsesbog|Min Lille Ordbog|Stofbog|Magnetbog|Regnbuebog|Mærk og Føl-bog|Malebog|Løft Flapperne-bog|Papbog|Billedbog|SangbogTotte- og Lotte",
+  },
+  {
+    // Made it here
+    slug: "boernemoebler",
+    name: "Børnemøbler",
+    regex: "Børnemøbler",
   },
   {
     slug: "dukker",
@@ -356,7 +350,7 @@ export const legetoejIndendoersCategories: Category[] = [
     // Check
     slug: "koekken",
     name: "Køkken",
-    regex: "Køkken|Kitchen|Frugt|Kaffemaskine|Småkage|LegetøjsmadBagesæt",
+    regex: "Køkken|Kitchen|Frugt|Kaffemaskine|Småkage|Legetøjsmad|Bagesæt",
   },
   {
     // Made it here
@@ -364,6 +358,7 @@ export const legetoejIndendoersCategories: Category[] = [
     name: "Legetæpper og gulve",
     regex: "Legetæppe|Gulv",
   },
+
   {
     slug: "telte",
     name: "Telte",
@@ -409,6 +404,11 @@ export const legetoejIndendoersCategories: Category[] = [
     name: "Uroer",
     regex: "Uro",
   },
+  {
+    slug: "andet-legetoej",
+    name: "Andet legetøj",
+    regex: "Legetøj",
+  },
 ];
 
 export const legetoejCategories: Category[] = [...legetoejIndendoersCategories];
@@ -421,10 +421,11 @@ export const categories: Category[] = [
   ...legetoejCategories,
   ...plejeCategories,
   ...sovetidCategories,
-  {
-    slug: "diverse",
-    name: "Diverse",
-  },
+  // {
+  //   slug: "diverse",
+  //   name: "Diverse",
+  //   regex: "",
+  // },
 ];
 
 export type CategorySet = Record<string, Category[]>;

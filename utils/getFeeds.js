@@ -1,6 +1,6 @@
 import iconv from "iconv-lite";
 import xml2js from "xml2js";
-import { handleCategory, handleCategory2 } from "./handleCategory";
+import { handleCategory } from "./handleCategory";
 import formatDescription from "./formatDescription";
 import decodeString from "./decodeString";
 import filterUniqueProducts from "./findUniqueString";
@@ -20,6 +20,8 @@ const partnerAds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=88629&feedid=2219", // Babadut
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=96617&feedid=2660", // Kalendergaver.dk
 ];
 
 export const getFeeds = async (filter = null, api = false) => {
@@ -59,6 +61,7 @@ export const getFeeds = async (filter = null, api = false) => {
 
     console.log("Total products!: ", result.length);
     result.forEach((product, key) => {
+      // if (product?.ean?.[0] !== "5715335222748") return null;
       // Push all products into one array
       products.push({
         productKey: key,
@@ -66,7 +69,7 @@ export const getFeeds = async (filter = null, api = false) => {
         // category: product?.kategorinavn?.[0] || null,
         // category: handleCategory(product?.kategorinavn?.[0]) || null,
         originalCategory: product?.kategorinavn?.[0],
-        category: handleCategory2(product) || null,
+        category: handleCategory(product) || null,
         title: product?.produktnavn?.[0]
           ? decodeString(product?.produktnavn?.[0] || "")
           : null,
@@ -127,10 +130,10 @@ export const handleFilter = (products, filter) => {
       return product;
     }
 
-    const titleRegex = new RegExp(title, "gi");
-    if (category && product.title?.match(titleRegex)) {
-      return product;
-    }
+    // const titleRegex = new RegExp(title, "gi");
+    // if (category && product.title?.match(titleRegex)) {
+    //   return product;
+    // }
   });
 
   return filterProducts;
