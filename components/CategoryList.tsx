@@ -1,11 +1,9 @@
-import { IconChevronDown, IconDots } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import classNames from "classnames";
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React from "react";
 import CategoryLink, { CategoryLinkProps } from "./CategoryLink";
-import { CategorySet } from "@/config/categories";
 import { ICategoryList } from "./Navbar";
-import AppLink from "./AppLink";
 
 export type CategorySubList = {
   subtitle: string;
@@ -20,8 +18,6 @@ type Props = {
 
 export default function CategoryList({ categoryList, mode = "dark" }: Props) {
   const { categorySet, title, icon } = categoryList;
-
-  const gridCols = Object.entries(categorySet).length;
 
   return (
     <div className="relative group pl-6">
@@ -44,7 +40,7 @@ export default function CategoryList({ categoryList, mode = "dark" }: Props) {
                 mode === "dark"
                   ? "border-black lg:group-hover:border-gray-600 active:border-gray-600"
                   : "border-white lg:group-hover:border-gray-100 active:border-gray-100",
-                "border-b pb-0.5 whitespace-nowrap"
+                "whitespace-nowrap"
               )}
             >
               {title}
@@ -66,6 +62,7 @@ export default function CategoryList({ categoryList, mode = "dark" }: Props) {
               <strong className="block p-2 text-xs font-bold uppercase text-primary-dark">
                 {key}
               </strong>
+
               {Object.values(cats).map((category) => (
                 <CategoryLink
                   href={category.slug}

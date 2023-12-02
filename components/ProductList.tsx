@@ -12,11 +12,11 @@ export default function ProductList({ products, category }: Props) {
 
   return (
     <section className="w-full flex flex-col justify-center lg:w-10/12 pt-10">
-      <h1 className="text-6xl font-semibold text-center mb-10">
+      <h1 className="text-3xl lg:text-6xl font-semibold text-center mb-10">
         {category?.name}
       </h1>
 
-      <div className="flex justify-center mb-10">Filters Go here</div>
+      {/* <div className="flex justify-center mb-10">Filters Go here</div> */}
 
       <div className="flex flex-col w-full p-6">
         <p className="mb-4 font-semibold">Antal produkter: {products.length}</p>

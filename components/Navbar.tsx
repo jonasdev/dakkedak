@@ -3,6 +3,7 @@ import Image from "next/image";
 import {
   IconBabyBottle,
   IconBabyCarriage,
+  IconBed,
   IconCar,
   IconClock,
   IconDeviceMobile,
@@ -10,9 +11,13 @@ import {
   IconGift,
   IconHeart,
   IconHorseToy,
+  IconList,
+  IconListCheck,
   IconMedicineSyrup,
   IconShirt,
+  IconSofa,
   IconSoup,
+  IconTag,
   IconZzz,
 } from "@tabler/icons-react";
 import AppLink, { AppLinkProps } from "./AppLink";
@@ -20,15 +25,15 @@ import SideMenu from "./SideMenu";
 import { FavoriteItem } from "./FavoriteButton";
 import { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
-import CategoryList, { ICategoryList } from "./CategoryList";
+import CategoryList from "./CategoryList";
 import {
   CategorySet,
-  legetoejCategoriesSet,
   legetoejCategorySet,
   paaFartenCategories,
   paaFartenCategorySet,
   paaTurCategorySet,
   sovetidCategorySet,
+  spisetidOgPlejeCategoriesSet,
   toejOgSkoCategorySet,
   udstyrCategoriesSet,
 } from "@/config/categories";
@@ -75,9 +80,19 @@ export default function Navbar() {
       icon: <IconDeviceMobile />,
     },
     {
+      categorySet: [],
+      title: "Møbler",
+      icon: <IconBed />,
+    },
+    {
       categorySet: sovetidCategorySet,
       title: "Sovetid",
       icon: <IconZzz />,
+    },
+    {
+      categorySet: spisetidOgPlejeCategoriesSet,
+      title: "Spisetid og pleje",
+      icon: <IconSoup />,
     },
     {
       categorySet: legetoejCategorySet,
@@ -86,9 +101,20 @@ export default function Navbar() {
     },
     {
       categorySet: [],
+      title: "Barsel og ventetid",
+      icon: <IconClock />,
+    },
+    {
+      categorySet: [],
+      title: "Amning",
+      icon: <IconBabyBottle />,
+    },
+    {
+      categorySet: [],
       title: "Gaver",
       icon: <IconGift />,
     },
+
     // { href: "#", text: "På farten", icon: <IconCar /> },
     // { href: "#", text: "Spisetid", icon: <IconSoup /> },
     // { href: "#", text: "Sovetid", icon: <IconZzz /> },
@@ -128,6 +154,34 @@ export default function Navbar() {
         </div>
         <div className="lg:flex items-center space-x-4 hidden">
           <AppLink
+            href="/maerker"
+            icon={
+              <span className="relative inline-block">
+                <IconTag />
+                {/* {favoriteItemsCnt > 0 && (
+                  <span className="absolute not-italic -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-primary-dark rounded-full">
+                    {favoriteItemsCnt}
+                  </span>
+                )} */}
+              </span>
+            }
+            text="Maerker"
+          />
+          <AppLink
+            href="/tjekliste"
+            icon={
+              <span className="relative inline-block">
+                <IconListCheck />
+                {/* {favoriteItemsCnt > 0 && (
+                  <span className="absolute not-italic -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-primary-dark rounded-full">
+                    {favoriteItemsCnt}
+                  </span>
+                )} */}
+              </span>
+            }
+            text="Tjekliste"
+          />
+          <AppLink
             href="/favoritter"
             icon={
               <span className="relative inline-block">
@@ -146,7 +200,7 @@ export default function Navbar() {
       </div>
       <div className="flex justify-center border-t-2 border-gray-300">
         <div className="hidden lg:block">
-          <div className="flex flex-wrap space-y-2 justify-center items-center space-x-12 mt-4">
+          <div className="flex flex-wrap space-y-2 justify-center items-center space-x-6 mt-4">
             {categoryLists.map((list) => (
               <CategoryList categoryList={list} key={list.title} />
             ))}

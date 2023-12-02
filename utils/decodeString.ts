@@ -19,6 +19,9 @@ const variousReplaceMap: { [key: string]: string } = {
   "â¢": "™",
   "Â": "", // Question mark
   "â": "‘",
+  "â": "´",
+  "Ã¯": "ï",
+  "rÂ®": "r®",
 };
 
 export default function decodeString(string: string): string {
