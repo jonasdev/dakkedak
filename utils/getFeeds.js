@@ -14,14 +14,14 @@ export const beautifyURL = (title = "") =>
 
 const partnerAds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055", // BIBS
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", Zleepii -> Udgået!!!
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", // Zleepii -> Udgået!!!
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=88629&feedid=2219", // Babadut
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=96617&feedid=2660", // Kalendergaver.dk
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=106557&feedid=3317", // Littleroom
 ];
 
 export const getFeeds = async (filter = null, api = false) => {
@@ -61,7 +61,8 @@ export const getFeeds = async (filter = null, api = false) => {
 
     console.log("Total products!: ", result.length);
     result.forEach((product, key) => {
-      // if (product?.ean?.[0] !== "5715335222748") return null;
+      // if (product?.kategorinavn?.[0] === "Basic V2 Junama kollektion")
+      //   console.log(product);
       // Push all products into one array
       products.push({
         productKey: key,

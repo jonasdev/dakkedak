@@ -1,5 +1,5 @@
 import { getFeeds } from "@/utils/getFeeds";
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { Product } from "@/components/ProductCard";
 import ProductList from "@/components/ProductList";
 import { categories } from "@/config/categories";
@@ -38,18 +38,9 @@ export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
       notFound: true,
     };
   }
-  console.log("currentCategory: ", currentCategory);
 
-  //   const products = await getFeeds({
-  //     category: new RegExp(`${currentCategory}`, "gi"),
-  //   });
   const products = await getFeeds({
-    // category: currentCategory,
     category: currentCategory.slug,
-    // title: new RegExp(
-    //   `${currentCategory?.regex || currentCategory.slug}`,
-    //   "gi"
-    // ),
   });
 
   return {

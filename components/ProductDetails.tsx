@@ -6,6 +6,7 @@ import { Url } from "next/dist/shared/lib/router/router";
 import Carousel from "./Carousel";
 import Breadcrumb from "./Breadcrumb";
 import { IconCircleCheck, IconCircleX, IconClock } from "@tabler/icons-react";
+import decodeString from "@/utils/decodeString";
 
 type Props = {
   product: Product;
@@ -73,7 +74,9 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
                 {title}
               </h1>
 
-              <p className="leading-relaxed">{description}</p>
+              <p className="leading-relaxed">
+                {decodeString(description || "")}
+              </p>
               <div className="flex justify-center my-4 lg:my-8">
                 <div className="w-1/2 h-1 bg-primary bg-opacity-30" />
               </div>

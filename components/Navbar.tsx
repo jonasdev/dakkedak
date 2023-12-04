@@ -18,6 +18,8 @@ import {
   IconSofa,
   IconSoup,
   IconTag,
+  IconTree,
+  IconWalk,
   IconZzz,
 } from "@tabler/icons-react";
 import AppLink, { AppLinkProps } from "./AppLink";
@@ -62,12 +64,7 @@ export default function Navbar() {
     {
       categorySet: paaTurCategorySet,
       title: "På tur",
-      icon: <IconBabyCarriage />,
-    },
-    {
-      categorySet: paaFartenCategorySet,
-      title: "På farten",
-      icon: <IconCar />,
+      icon: <IconTree />,
     },
     {
       categorySet: toejOgSkoCategorySet,
@@ -152,35 +149,25 @@ export default function Navbar() {
         <div className="lg:flex items-center hidden">
           <Searchbar />
         </div>
-        <div className="lg:flex items-center space-x-4 hidden">
-          <AppLink
+        <div className="lg:flex items-center space-x-6 hidden">
+          {/* <AppLink
             href="/maerker"
             icon={
               <span className="relative inline-block">
                 <IconTag />
-                {/* {favoriteItemsCnt > 0 && (
-                  <span className="absolute not-italic -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-primary-dark rounded-full">
-                    {favoriteItemsCnt}
-                  </span>
-                )} */}
               </span>
             }
             text="Maerker"
-          />
-          <AppLink
+          /> */}
+          {/* <AppLink
             href="/tjekliste"
             icon={
               <span className="relative inline-block">
                 <IconListCheck />
-                {/* {favoriteItemsCnt > 0 && (
-                  <span className="absolute not-italic -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-primary-dark rounded-full">
-                    {favoriteItemsCnt}
-                  </span>
-                )} */}
               </span>
             }
             text="Tjekliste"
-          />
+          /> */}
           <AppLink
             href="/favoritter"
             icon={
@@ -200,7 +187,7 @@ export default function Navbar() {
       </div>
       <div className="flex justify-center border-t-2 border-gray-300">
         <div className="hidden lg:block">
-          <div className="flex flex-wrap space-y-2 justify-center items-center space-x-6 mt-4">
+          <div className="flex flex-wrap justify-center items-center space-x-6 mt-4">
             {categoryLists.map((list) => (
               <CategoryList categoryList={list} key={list.title} />
             ))}

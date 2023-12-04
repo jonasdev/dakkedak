@@ -1,62 +1,6 @@
 type Category = { slug: string; name: string; regex: string };
 
-export const paaTurVogneCategories: Category[] = [
-  {
-    slug: "barnevogne",
-    name: "Barnevogne",
-    regex: "Barnevogn",
-  },
-  {
-    slug: "klapvogne",
-    name: "Klapvogne",
-    regex: "Klapvogn",
-  },
-  {
-    slug: "lifte",
-    name: "Lifte",
-    regex: "Lift",
-  },
-];
-
-export const paaTurTilbehoerCategories: Category[] = [
-  {
-    slug: "barnevognspuder",
-    name: "Barnevognspuder",
-    regex: "barnevognspude",
-  },
-  // {
-  //   slug: "holdere",
-  //   name: "Holdere",
-  //   regex: "kopholder|smartphone|kaffe|tray|cup|",
-  // },
-  {
-    slug: "regnslag-og-insektnet",
-    name: "Regnslag og insektnet",
-    regex: "Regnslag|Insektnet|Insekt|Mygge",
-  },
-  {
-    slug: "seler",
-    name: "Seler",
-    regex: "sele til barnevogn|sele til vogn",
-  },
-  // {
-  //   slug: "solskaerme",
-  //   name: "Solskærme",
-  //   regex: "Solskærm|Solskaerm",
-  // },
-  // {
-  //   slug: "vedligeholdese",
-  //   name: "Vedligeholdelse",
-  //   regex: "behandling|rengøring|spray til barnevogn",
-  // },
-];
-
-export const vogneCategories: Category[] = [
-  ...paaTurVogneCategories,
-  ...paaTurTilbehoerCategories,
-];
-
-export const paaFartenCategories: Category[] = [
+export const tilBilenCategories: Category[] = [
   {
     slug: "autostole",
     name: "Autostole",
@@ -65,13 +9,46 @@ export const paaFartenCategories: Category[] = [
   {
     slug: "koereposer",
     name: "Køreposer",
-    regex: "Kørepose|voksi",
+    regex: "Kørepose|Voksi|Sovepose",
   },
   {
     slug: "spejle",
     name: "Spejle",
     regex: "autostol spejl|bagsæde spejl|bagsædespejl|Cover med spejl",
   },
+];
+
+export const vogneCategories: Category[] = [
+  {
+    slug: "barnevogne",
+    name: "Barnevogne",
+    regex: "Barnevogn|Basic V2 Junama kollektion|Baby Strollers",
+  },
+  {
+    slug: "klapvogne",
+    name: "Klapvogne",
+    regex: "Klapvogn",
+  },
+  {
+    slug: "kombivogne",
+    name: "Kombivogne",
+    regex: "Kombivogn",
+  },
+  {
+    slug: "lifte",
+    name: "Lifte",
+    regex: "Lift|Carrier|Babynest",
+  },
+  {
+    slug: "tilbehoer-til-vogne",
+    name: "Tilbehør til vogne",
+    regex: "Tilbehør til vogne|Insekt|Mygge|Regnslag|Solskærm|Kopholder",
+  },
+];
+
+export const paaTurCategories: Category[] = [
+  ...vogneCategories,
+  ...tilBilenCategories,
 ];
 
 export const babyOgBoerneToejCategories: Category[] = [
@@ -528,8 +505,7 @@ export const legetoejCategories: Category[] = [
 ];
 
 export const categories: Category[] = [
-  ...vogneCategories,
-  ...paaFartenCategories,
+  ...paaTurCategories,
   ...toejOgSkoCategories,
   ...udstyrCategories,
   ...sovetidCategories,
@@ -546,13 +522,11 @@ export const categories: Category[] = [
 export type CategorySet = Record<string, Category[]>;
 
 export const paaTurCategorySet: CategorySet = {
-  Vogne: { ...paaTurVogneCategories },
-  Tilbehør: { ...paaTurTilbehoerCategories },
+  "Vogne og tilbehør": { ...vogneCategories },
+  "Til bilturen": { ...tilBilenCategories },
 };
 
-export const paaFartenCategorySet: CategorySet = {
-  "Til bilen": { ...paaFartenCategories },
-};
+export const paaFartenCategorySet: CategorySet = {};
 
 export const toejOgSkoCategorySet: CategorySet = {
   Tøj: { ...babyOgBoerneToejCategories },
