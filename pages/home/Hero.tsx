@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="mx-auto max-w-screen-xl px-3 py-4 sm:py-12 sm:px-6 lg:py-16 lg:px-8 lg:mt-24">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="flex justify-center items-center w-full lg:order-last">
-            <div className="relative flex justify-center items-center w-80 h-80 overflow-hidden rounded-full sm:h-[550px] sm:w-[550px] lg:w-full lg:h-full">
+            <div className="relative flex justify-center items-center w-60 h-60 overflow-hidden rounded-full sm:h-[550px] sm:w-[550px] lg:w-full lg:h-full">
               <Image
                 alt="hdr-logo"
                 src="/shark3.svg"
@@ -26,8 +26,8 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 z-10 text-gray-500 font-medium text-lg">
-              Dyk ned og find det du skal bruge til dit barn og lad inspirere af
-              de mange interessante produkter her på siden.
+              Dyk ned og find det du skal bruge til dit barn og lad dig
+              inspirere af de mange interessante produkter her på siden.
             </p>
           </div>
         </div>

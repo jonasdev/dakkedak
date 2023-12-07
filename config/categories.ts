@@ -37,7 +37,7 @@ export const vogneCategories: Category[] = [
   {
     slug: "lifte",
     name: "Lifte",
-    regex: "Lift|Carrier|Babynest",
+    regex: "Lift|Carrier|Babynest|Liftmadras",
   },
   {
     slug: "tilbehoer-til-vogne",
@@ -207,22 +207,57 @@ export const udstyrCategories: Category[] = [
   },
 ];
 
-export const sovetidCategories: Category[] = [
+export const moeblerCategories: Category[] = [
+  {
+    slug: "garderobe",
+    name: "Garderobe",
+    regex: "Garderobe",
+  },
+  {
+    slug: "skraastol",
+    name: "Skråstole",
+    regex: "Skråstol|skraastol|skråstol|Bouncer|Vippestol",
+  },
+  {
+    slug: "hoejstole",
+    name: "Højstole og tilbehør",
+    regex: "Hoejstole|Tripp",
+  },
+  {
+    slug: "kravlegaard",
+    name: "Kravlegård",
+    regex: "Kravlegård|Kravle",
+  },
+  {
+    slug: "puslebord",
+    name: "Puslebord",
+    regex: "Puslebord|Puslemøbel",
+  },
+  {
+    slug: "reol",
+    name: "Reoler og kommoder",
+    regex: "Reol|Kommode",
+  },
+  // {
+  //   slug: "tumlemoebler",
+  //   name: "Tumlemøbler",
+  //   regex: "Tumlemøbler",
+  // },
   {
     slug: "vugger",
     name: "Vugger",
     regex: "vugge|slyngevugge|vuggemotor",
   },
   {
-    slug: "senge-og-madrasser",
-    name: "Senge og Madrasser",
-    regex:
-      "Babyseng|Babysenge|Leander Babysenge|Barneseng|Børneseng|Juniorseng|Boerneseng|Tremmeseng|Voksenseng|Rejsesenge|madras|sengemadras",
+    slug: "madrasser",
+    name: "Madrasser",
+    regex: "madras",
   },
   {
-    slug: "babynest",
-    name: "Babynest",
-    regex: "Babynest",
+    slug: "senge",
+    name: "Senge",
+    regex:
+      "Babyseng|Babysenge|Leander Babysenge|Barneseng|Børneseng|Juniorseng|Boerneseng|Tremmeseng|Voksenseng|Rejsesenge",
   },
   {
     slug: "dyner-og-puder",
@@ -230,6 +265,36 @@ export const sovetidCategories: Category[] = [
     regex:
       "babydyne|hovedpude|juniordyne|barnedyne|børnedyne|boernedyne|dundyne|fjerdyne|sovedyne|sengedyne",
   },
+  {
+    slug: "andet-moebler",
+    name: "Andet møbler",
+    regex: "boernemoebler",
+  },
+];
+
+export const sovetidCategories: Category[] = [
+  // {
+  //   slug: "vugger",
+  //   name: "Vugger",
+  //   regex: "vugge|slyngevugge|vuggemotor",
+  // },
+  // {
+  //   slug: "senge-og-madrasser",
+  //   name: "Senge og Madrasser",
+  //   regex:
+  //     "Babyseng|Babysenge|Leander Babysenge|Barneseng|Børneseng|Juniorseng|Boerneseng|Tremmeseng|Voksenseng|Rejsesenge|madras|sengemadras",
+  // },
+  // {
+  //   slug: "babynest",
+  //   name: "Babynest",
+  //   regex: "Babynest",
+  // },
+  // {
+  //   slug: "dyner-og-puder",
+  //   name: "Dyner og Puder",
+  //   regex:
+  //     "babydyne|hovedpude|juniordyne|barnedyne|børnedyne|boernedyne|dundyne|fjerdyne|sovedyne|sengedyne",
+  // },
 ];
 
 export const spisetidServiceCategories: Category[] = [
@@ -424,7 +489,7 @@ export const legetoejIndendoersCategories: Category[] = [
     // Made it here
     slug: "legetaepper-og-gulve",
     name: "Legetæpper og gulve",
-    regex: "Legetæppe|Gulv|Legetøjstæpper",
+    regex: "Legetæppe|Gulv|Legetøjstæpper|Legemadras",
   },
 
   {
@@ -508,6 +573,7 @@ export const categories: Category[] = [
   ...paaTurCategories,
   ...toejOgSkoCategories,
   ...udstyrCategories,
+  ...moeblerCategories,
   ...sovetidCategories,
   ...spisetidOgPlejeCategories,
   ...legetoejCategories,
@@ -532,6 +598,10 @@ export const toejOgSkoCategorySet: CategorySet = {
   Tøj: { ...babyOgBoerneToejCategories },
   Fodtøj: { ...fodtoejCategories },
   Diverse: { ...toejAccessoriesCategories },
+};
+
+export const moeblerCategorySet: CategorySet = {
+  Møbler: { ...moeblerCategories },
 };
 
 export const udstyrCategoriesSet: CategorySet = {

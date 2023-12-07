@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
   }
 
   const products = await getFeeds({
-    category: currentCategory.slug,
+    category: currentCategory.regex,
   });
 
   return {

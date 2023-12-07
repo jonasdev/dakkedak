@@ -3,6 +3,33 @@ import { Product } from "./ProductCard";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+interface ApiResponse {
+  products: Product[]; // Modify this according to the structure of your API response
+}
+
+function fetchDataFromAPI(query: string): Promise<ApiResponse> {
+  return fetch(`/api/feed?query=${query}`)
+    .then((res) => res.json())
+    .then((data: ApiResponse) => data)
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      return {} as ApiResponse;
+    });
+}
+
+// Debounce function implementation
+function debounce<T extends (...args: any[]) => any>(func: T, delay: number) {
+  let timeoutId: NodeJS.Timeout;
+
+  return function (this: any, ...args: Parameters<T>) {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  } as (...args: Parameters<T>) => ReturnType<T>;
+}
+
 export default function Searchbar() {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -12,11 +39,13 @@ export default function Searchbar() {
   };
 
   useEffect(() => {
-    fetch(`/api/feed?query=${searchQuery}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSearchResults(data.feed);
+    if (searchQuery.trim().length > 2) {
+      const debouncedFetchData = debounce(fetchDataFromAPI, 500); // Adjust debounce delay as needed
+
+      debouncedFetchData(searchQuery)?.then((data: ApiResponse) => {
+        setSearchResults(data.products);
       });
+    }
   }, [searchQuery]);
 
   return (

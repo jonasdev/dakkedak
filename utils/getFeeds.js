@@ -105,7 +105,7 @@ export const getFeeds = async (filter = null, api = false) => {
 
 export const handleFilter = (products, filter) => {
   let filterProducts = [...products];
-  const { category, title, shop, others } = filter;
+  const { category, title, shop, others, brands } = filter;
 
   // Andet
   if (others) {
@@ -128,6 +128,10 @@ export const handleFilter = (products, filter) => {
     const categoryRegex = new RegExp(category, "gi");
     // Filter by category
     if (category && product.category?.match(categoryRegex)) {
+      return product;
+    }
+
+    if (brands && product.brand?.toLowerCase().match(shop.toLowerCase())) {
       return product;
     }
 

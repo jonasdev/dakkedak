@@ -31,6 +31,7 @@ import CategoryList from "./CategoryList";
 import {
   CategorySet,
   legetoejCategorySet,
+  moeblerCategorySet,
   paaFartenCategories,
   paaFartenCategorySet,
   paaTurCategorySet,
@@ -72,14 +73,14 @@ export default function Navbar() {
       icon: <IconShirt />,
     },
     {
+      categorySet: moeblerCategorySet,
+      title: "Møbler",
+      icon: <IconBed />,
+    },
+    {
       categorySet: udstyrCategoriesSet,
       title: "Udstyr",
       icon: <IconDeviceMobile />,
-    },
-    {
-      categorySet: [],
-      title: "Møbler",
-      icon: <IconBed />,
     },
     {
       categorySet: sovetidCategorySet,
@@ -150,15 +151,15 @@ export default function Navbar() {
           <Searchbar />
         </div>
         <div className="lg:flex items-center space-x-6 hidden">
-          {/* <AppLink
-            href="/maerker"
+          <AppLink
+            href="/brands"
             icon={
               <span className="relative inline-block">
                 <IconTag />
               </span>
             }
             text="Maerker"
-          /> */}
+          />
           {/* <AppLink
             href="/tjekliste"
             icon={
