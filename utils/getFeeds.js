@@ -4,25 +4,10 @@ import { handleCategory } from "./handleCategory";
 import formatDescription from "./formatDescription";
 import decodeString from "./decodeString";
 import filterUniqueProducts from "./findUniqueString";
+import { beautifyUrl } from "./beautifyUrl";
+import { partnerFeeds } from "@/config/partners";
 
-export const beautifyURL = (title = "") =>
-  title
-    .replace(/\s/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/[^a-å0-9-]/gi, "")
-    .toLowerCase();
-
-const partnerAds = [
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055", // BIBS
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", // Zleepii -> Udgået!!!
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=88629&feedid=2219", // Babadut
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=106557&feedid=3317", // Littleroom
-];
+const handleSpecialCategories = () => {};
 
 export const getFeeds = async (filter = null, api = false) => {
   let products = [];
@@ -30,7 +15,7 @@ export const getFeeds = async (filter = null, api = false) => {
     return products;
   }
 
-  const promises = partnerAds.map((partner) =>
+  const promises = partnerFeeds.map((partner) =>
     fetch(partner)
       .then((response) => response.arrayBuffer())
       .then((buffer) => iconv.decode(Buffer.from(buffer), "iso-8859-1"))
@@ -87,7 +72,7 @@ export const getFeeds = async (filter = null, api = false) => {
         inStock: product?.lagerantal?.[0] || null, // (in_stock / "backorder")
         keywords: product?.produktnavn?.[0]?.split(" ") || null,
         sku: product?.ean?.[0] || null,
-        path: beautifyURL(product?.produktnavn?.[0]),
+        path: beautifyUrl(product?.produktnavn?.[0]),
       });
     });
 
@@ -131,7 +116,7 @@ export const handleFilter = (products, filter) => {
       return product;
     }
 
-    if (brands && product.brand?.toLowerCase().match(shop.toLowerCase())) {
+    if (brands && product.brand?.toLowerCase().match(brands.toLowerCase())) {
       return product;
     }
 

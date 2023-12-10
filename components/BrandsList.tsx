@@ -1,3 +1,5 @@
+import { beautifyUrl } from "@/utils/beautifyUrl";
+import Link from "next/link";
 import { useRef } from "react";
 
 type Props = {
@@ -32,11 +34,11 @@ export default function BrandsList({ brands }: Props) {
         Mærker
       </h1>
       <div className="flex relative h-full flex-row lg:flex-col">
-        <div className="flex sticky right-0 top-5 justify-center order-last lg:order-first mr-2 lg:mr-0 h-fit">
+        <div className="flex sticky right-0 top-5 sm:static justify-center order-last lg:order-first mr-2 lg:mr-0 h-fit">
           <div className="bg-primary text-white text-sm lg:text-lg p-2 rounded mb-10 w-fit">
             {/* Navbar to scroll to each letter section */}
             <ul
-              className="list-none flex flex-col space-y-2 lg:space-y-0 items-center lg:flex-row p-0 lg:space-x-4"
+              className="list-none flex flex-col px-4 space-y-2 lg:space-y-0 items-center lg:flex-row p-0 lg:space-x-4"
               ref={navRef}
             >
               {Object.keys(brandsByLetter).map((letter) => (
@@ -54,10 +56,20 @@ export default function BrandsList({ brands }: Props) {
           {Object.entries(brandsByLetter).map(([letter, brands]) => (
             <div key={`brandSection-${letter}`} id={`brandSection-${letter}`}>
               <h3 className="text-xl font-bold">{letter}</h3>
-              <ul>
-                {brands.map((brand, index) => (
-                  <li key={index}>{brand}</li>
-                ))}
+              <ul className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+                {brands.map((brand, index) => {
+                  const beautyfiedBrand = beautifyUrl(brand);
+                  return (
+                    <li key={index} className="mb-2">
+                      <Link
+                        href={`/brands/${brand}`}
+                        className="underline underline-offset-4 decoration-dotted"
+                      >
+                        {brand}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

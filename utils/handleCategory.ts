@@ -50,7 +50,7 @@ export const handleCategory = (product: any) => {
     }
   )?.slug;
 
-  return x || "diverse";
+  return x ?? "diverse";
 
   //return matchingCategory;
 };

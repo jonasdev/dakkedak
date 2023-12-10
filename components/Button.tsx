@@ -8,6 +8,7 @@ type Props = {
   type?: "primary" | "secondary";
   className?: string;
   href: Url;
+  newTab?: boolean;
 };
 
 export default function Button({
@@ -15,12 +16,14 @@ export default function Button({
   type = "primary",
   className,
   href,
+  newTab = false,
 }: Props) {
   // const [play] = useSound("/blob.mp3");
 
   return (
     <Link
       href={href}
+      target={newTab ? "_blank" : "_self"}
       className={classNames(
         type === "primary"
           ? "bg-primary text-white focus:ring-primary active:bg-primary-dark lg:hover:bg-primary-dark"

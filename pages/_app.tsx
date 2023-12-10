@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import CookieConsent from "react-cookie-consent";
 
 export default function App({ Component, pageProps }: AppProps) {
   const canonical = typeof window !== "undefined" ? window.location.href : "";
@@ -15,6 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="flex flex-col items-center justify-between w-full bg-secondary">
         <Navbar />
         <Component {...pageProps} />
+        <CookieConsent>
+          This website uses cookies to enhance the user experience.
+        </CookieConsent>
         <Footer />
       </div>
     </>

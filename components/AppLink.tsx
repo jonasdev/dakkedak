@@ -36,7 +36,7 @@ export default function AppLink({
             mode === "dark"
               ? "border-black lg:group-hover:border-gray-600 active:border-gray-600"
               : "border-white lg:group-hover:border-gray-100 active:border-gray-100",
-            "border-b pb-0.5 whitespace-nowrap"
+            "whitespace-nowrap"
           )}
         >
           {text}

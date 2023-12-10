@@ -84,6 +84,13 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="absolute end-4 top-4 z-20">
         <FavoriteButton product={product} category={category || ""} size="sm" />
       </div>
+      {/* <div className="absolute start-4 top-4 z-20">
+        {price && oldPrice && price !== oldPrice && (
+          <div className="bg-primary-dark rounded-full w-14 h-14 flex justify-center items-center text-xs font-semibold text-white">
+            %
+          </div>
+        )}
+      </div> */}
 
       <div className="flex justify-center items-center">
         <img
@@ -103,12 +110,12 @@ export default function ProductCard({ product }: ProductCardProps) {
               </span>
             )}
             {price && oldPrice && price !== oldPrice && (
-              <span className="ml-2 whitespace-nowrap w-fit bg-white text-primary border-primary border px-3 py-1.5 text-xs font-medium capitalize">
-                På tilbud
+              <span className="ml-2 whitespace-nowrap w-fit bg-white text-primary border-primary border px-3 py-1.5 text-xs font-medium">
+                Nedsat
               </span>
             )}
           </span>
-          <span>{renderStock()}</span>
+          <span className="whitespace-nowrap">{renderStock()}</span>
         </div>
 
         <h3 className="mt-4 text-lg font-medium text-gray-900 truncate">

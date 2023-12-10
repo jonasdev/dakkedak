@@ -2,24 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   IconBabyBottle,
-  IconBabyCarriage,
   IconBed,
-  IconCar,
   IconClock,
   IconDeviceMobile,
   IconDots,
   IconGift,
   IconHeart,
+  IconHeartHandshake,
   IconHorseToy,
-  IconList,
   IconListCheck,
-  IconMedicineSyrup,
   IconShirt,
-  IconSofa,
   IconSoup,
   IconTag,
   IconTree,
-  IconWalk,
   IconZzz,
 } from "@tabler/icons-react";
 import AppLink, { AppLinkProps } from "./AppLink";
@@ -30,10 +25,9 @@ import Searchbar from "./Searchbar";
 import CategoryList from "./CategoryList";
 import {
   CategorySet,
+  barselOgVentetidCategoriesSet,
   legetoejCategorySet,
   moeblerCategorySet,
-  paaFartenCategories,
-  paaFartenCategorySet,
   paaTurCategorySet,
   sovetidCategorySet,
   spisetidOgPlejeCategoriesSet,
@@ -98,14 +92,9 @@ export default function Navbar() {
       icon: <IconHorseToy />,
     },
     {
-      categorySet: [],
+      categorySet: barselOgVentetidCategoriesSet,
       title: "Barsel og ventetid",
       icon: <IconClock />,
-    },
-    {
-      categorySet: [],
-      title: "Amning",
-      icon: <IconBabyBottle />,
     },
     {
       categorySet: [],
@@ -158,9 +147,18 @@ export default function Navbar() {
                 <IconTag />
               </span>
             }
-            text="Maerker"
+            text="Mærker"
           />
-          {/* <AppLink
+          <AppLink
+            href="/partnere"
+            icon={
+              <span className="relative inline-block">
+                <IconHeartHandshake />
+              </span>
+            }
+            text="Partnere"
+          />
+          <AppLink
             href="/tjekliste"
             icon={
               <span className="relative inline-block">
@@ -168,7 +166,7 @@ export default function Navbar() {
               </span>
             }
             text="Tjekliste"
-          /> */}
+          />
           <AppLink
             href="/favoritter"
             icon={

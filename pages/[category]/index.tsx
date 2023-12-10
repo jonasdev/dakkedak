@@ -13,7 +13,7 @@ interface ICategoryPage {
 }
 
 export default function CategoryPage({ category, products }: ICategoryPage) {
-  return <ProductList products={products} category={category} />;
+  return <ProductList products={products} title={category.name} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
   }
 
   const products = await getFeeds({
-    category: currentCategory.regex,
+    category: currentCategory.slug,
   });
 
   return {

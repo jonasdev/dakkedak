@@ -5,19 +5,20 @@ import ProductFilters from "./ProductFilters";
 
 type Props = {
   products: Product[] | null;
-  category: any;
+  title: string;
 };
 
-export default function ProductList({ products, category }: Props) {
+export default function ProductList({ products, title }: Props) {
   if (!products) return null;
 
-  const [filteredProducts, setFilteredProducts] =
-    useState<Array<Product>>(products);
+  const [filteredProducts, setFilteredProducts] = useState<Array<Product>>(
+    products || []
+  );
 
   return (
     <section className="w-full flex flex-col justify-center lg:w-10/12 pt-10 min-h-full">
       <h1 className="text-3xl lg:text-6xl font-semibold text-center mb-8">
-        {category?.name}
+        {title}
       </h1>
 
       <div className="flex flex-col w-full p-6">
@@ -29,7 +30,7 @@ export default function ProductList({ products, category }: Props) {
 
         <div>
           {filteredProducts.length > 0 ? (
-            <div className="grid lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4 grid-cols-1 gap-8">
               {filteredProducts.map((product) => (
                 <ProductCard product={product} key={product.productKey} />
               ))}

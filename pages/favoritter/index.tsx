@@ -32,9 +32,8 @@ export default function FavoritesPage() {
               <IconHeart className="mx-1" /> på et produkt, for at tilføje en
               favorit.
             </p>
-            <p className="font-medium flex break-words">
+            <p className="font-medium break-words">
               Så kan du nemt finde produktet igen
-              <IconMoodWink2 className="ml-1" />
             </p>
           </div>
         )}
