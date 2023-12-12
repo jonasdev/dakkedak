@@ -26,10 +26,10 @@ import CategoryList from "./CategoryList";
 import {
   CategorySet,
   barselOgVentetidCategoriesSet,
+  gaverCategoriesSet,
   legetoejCategorySet,
   moeblerCategorySet,
   paaTurCategorySet,
-  sovetidCategorySet,
   spisetidOgPlejeCategoriesSet,
   toejOgSkoCategorySet,
   udstyrCategoriesSet,
@@ -77,11 +77,6 @@ export default function Navbar() {
       icon: <IconDeviceMobile />,
     },
     {
-      categorySet: sovetidCategorySet,
-      title: "Sovetid",
-      icon: <IconZzz />,
-    },
-    {
       categorySet: spisetidOgPlejeCategoriesSet,
       title: "Spisetid og pleje",
       icon: <IconSoup />,
@@ -97,7 +92,7 @@ export default function Navbar() {
       icon: <IconClock />,
     },
     {
-      categorySet: [],
+      categorySet: gaverCategoriesSet,
       title: "Gaver",
       icon: <IconGift />,
     },

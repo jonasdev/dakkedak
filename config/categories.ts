@@ -55,7 +55,7 @@ export const babyOgBoerneToejCategories: Category[] = [
   {
     slug: "badetoej",
     name: "Badetøj",
-    regex: "Badetøj|Badebukser|Svømme|Badedragt|Bikini",
+    regex: "Badetøj|Badebukser|Svømme|Badedragt|Badesokker",
   },
   {
     slug: "bodyer",
@@ -151,15 +151,19 @@ export const fodtoejCategories: Category[] = [
 
 export const toejAccessoriesCategories: Category[] = [
   {
+    slug: "boejler",
+    name: "Børnebøjler",
+    regex: "Børnebøjler",
+  },
+  {
     slug: "huer-og-hatte",
     name: "Huer og hatte",
     regex: "Hue|Solhat|Bøllehat|Stråhat|Kasket|Nissehue",
   },
   {
-    slug: "smykker",
-    name: "Smykker",
-    regex:
-      "Smykke|Ørering|Fingerring|Armbånd|Halskæde|Hårspænde|Hårbånd|Hårelastik",
+    slug: "haarspaender-og-elastikker",
+    name: "Hårspænder -og elastikker",
+    regex: "Hårspænde|Hårbånd|Hårelastik",
   },
   {
     slug: "savlesmaek",
@@ -236,7 +240,7 @@ export const moeblerCategories: Category[] = [
   {
     slug: "reol",
     name: "Reoler og kommoder",
-    regex: "Reol|Kommode",
+    regex: "Reol|Kommode|Bogreoler",
   },
   // {
   //   slug: "tumlemoebler",
@@ -268,38 +272,18 @@ export const moeblerCategories: Category[] = [
     slug: "dyner-og-puder",
     name: "Dyner og Puder",
     regex:
-      "babydyne|hovedpude|juniordyne|barnedyne|børnedyne|boernedyne|dundyne|fjerdyne|sovedyne|sengedyne",
+      "dyne|Dyner|Dyner, puder mm.|babydyne|hovedpude|juniordyne|barnedyne|børnedyne|boernedyne|dundyne|fjerdyne|sovedyne|sengedyne",
   },
   {
     slug: "andet-moebler",
     name: "Andet møbler",
     regex: "boernemoebler",
   },
-];
-
-export const sovetidCategories: Category[] = [
-  // {
-  //   slug: "vugger",
-  //   name: "Vugger",
-  //   regex: "vugge|slyngevugge|vuggemotor",
-  // },
-  // {
-  //   slug: "senge-og-madrasser",
-  //   name: "Senge og Madrasser",
-  //   regex:
-  //     "Babyseng|Babysenge|Leander Babysenge|Barneseng|Børneseng|Juniorseng|Boerneseng|Tremmeseng|Voksenseng|Rejsesenge|madras|sengemadras",
-  // },
-  // {
-  //   slug: "babynest",
-  //   name: "Babynest",
-  //   regex: "Babynest",
-  // },
-  // {
-  //   slug: "dyner-og-puder",
-  //   name: "Dyner og Puder",
-  //   regex:
-  //     "babydyne|hovedpude|juniordyne|barnedyne|børnedyne|boernedyne|dundyne|fjerdyne|sovedyne|sengedyne",
-  // },
+  {
+    slug: "Dørstoppere",
+    name: "Dørstoppere",
+    regex: "Dørstoppere",
+  },
 ];
 
 export const spisetidServiceCategories: Category[] = [
@@ -345,6 +329,11 @@ export const plejeCategories: Category[] = [
     slug: "badekar-badestole",
     name: "Badekar, stativer og badestole",
     regex: "Badekar|Badestativer|Badestole",
+  },
+  {
+    slug: "haandklaeder-og-badekaaber",
+    name: "Håndklæder og badekåber",
+    regex: "Håndklæde|Badekåber",
   },
   {
     slug: "hudpleje-og-shampoo",
@@ -406,7 +395,7 @@ export const legetoejIndendoersCategories: Category[] = [
   {
     slug: "badelegetoej",
     name: "Badelegetøj",
-    regex: "Badelegetøj",
+    regex: "Badelegetøj|Badetid",
   },
   {
     //Check
@@ -417,7 +406,7 @@ export const legetoejIndendoersCategories: Category[] = [
   {
     slug: "bidelegetoej",
     name: "Bidelegetøj",
-    regex: "Bidering|Bidelegetøj|Bidedyr|Armbåndsbidering",
+    regex: "Bidering|Bidelegetøj|Bidedyr|Armbåndsbidering|Bidesmykker",
   },
   {
     //Check
@@ -445,7 +434,12 @@ export const legetoejIndendoersCategories: Category[] = [
   {
     slug: "dukker",
     name: "Dukker",
-    regex: "Dukke|Barbie",
+    regex: "Dukke|Barbie|Dukketøj",
+  },
+  {
+    slug: "figure",
+    name: "Figure",
+    regex: "Avengers tema",
   },
   {
     slug: "gaavogne-ruller-vipper",
@@ -543,10 +537,10 @@ export const legetoejIndendoersCategories: Category[] = [
 export const legetoejUdendoersCategories: Category[] = [
   {
     //Check
-    slug: "loebecykler-loebehjul-biler",
-    name: "Løbehjul, løbecykler og biler",
+    slug: "loebecykler-loebehjul",
+    name: "Løbehjul, løbecykler",
     regex:
-      "Løbehjul|Løbecykel|Cykel|Scooter|Motorcykel|Traktor|Cross|Gåbil|Trailer",
+      "Løbehjul|Løbecykel|Cykel|Scooter|Motorcykel|Traktor|Cross|Trailer|Børnecykler|Cykelhjelme",
   },
   {
     slug: "rutsjebane",
@@ -556,7 +550,7 @@ export const legetoejUdendoersCategories: Category[] = [
   {
     slug: "sand-og-vand",
     name: "Sand og vand",
-    regex: "Udeleg|Vandpistol|Legetøj til sand og vand",
+    regex: "Vandpistol|Legetøj til sand og vand|Børnepools",
   },
 ];
 
@@ -597,7 +591,7 @@ export const amningCategories: Category[] = [
   {
     slug: "ammebh",
     name: "Amme BH'er",
-    regex: "BH",
+    regex: "BH|Amning",
   },
   {
     slug: "brystpumper",
@@ -611,21 +605,29 @@ export const barselOgVentetidCategories: Category[] = [
   ...amningCategories,
 ];
 
+export const gaverCategories: Category[] = [
+  {
+    slug: "foedselsdag-og-fejring",
+    name: "Fødselsdag og fejring",
+    regex: "Bannere og guirlander|Balloner|Duge",
+  },
+];
+
 export const categories: Category[] = [
   ...paaTurCategories,
   ...toejOgSkoCategories,
   ...udstyrCategories,
   ...moeblerCategories,
-  ...sovetidCategories,
   ...spisetidOgPlejeCategories,
   ...legetoejCategories,
   ...barselOgVentetidCategories,
+  ...gaverCategories,
 
-  // {
-  //   slug: "diverse",
-  //   name: "Diverse",
-  //   regex: "diverse",
-  // },
+  {
+    slug: "diverse",
+    name: "Diverse",
+    regex: "Dørstoppere",
+  },
 ];
 
 export type CategorySet = Record<string, Category[]>;
@@ -651,10 +653,6 @@ export const udstyrCategoriesSet: CategorySet = {
   Udstyr: { ...udstyrCategories },
 };
 
-export const sovetidCategorySet: CategorySet = {
-  Vugger: { ...sovetidCategories },
-};
-
 export const spisetidOgPlejeCategoriesSet: CategorySet = {
   Service: { ...spisetidServiceCategories },
   Pleje: { ...plejeCategories },
@@ -668,7 +666,7 @@ export const legetoejCategorySet: CategorySet = {
     {
       slug: "andet-legetoej",
       name: "Andet legetøj",
-      regex: "Legetøj",
+      regex: "Legetøj|Blandet legetøj",
     },
   ],
 };
@@ -676,4 +674,8 @@ export const legetoejCategorySet: CategorySet = {
 export const barselOgVentetidCategoriesSet: CategorySet = {
   Barsel: { ...barselCategories },
   Amning: { ...amningCategories },
+};
+
+export const gaverCategoriesSet: CategorySet = {
+  "Gaver og fest": { ...gaverCategories },
 };

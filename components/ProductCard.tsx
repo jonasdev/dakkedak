@@ -47,6 +47,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     productKey,
     category,
     id,
+    shop,
     path,
     inStock,
   } = product;
@@ -104,9 +105,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="relative border border-gray-100 bg-gray-100 p-6 h-full flex flex-col justify-between">
         <div className="flex justify-between">
           <span className="h-6">
-            {brand && (
+            {(brand || shop) && (
               <span className="whitespace-nowrap w-fit bg-primary-dark text-white px-3 py-1.5 text-xs font-medium capitalize">
-                {brand}
+                {brand || shop}
               </span>
             )}
             {price && oldPrice && price !== oldPrice && (

@@ -39,7 +39,7 @@ export const handleCategory = (product: any) => {
 
   // return matchingCategory ?? "diverse";
 
-  const x = categories.find(
+  return categories.find(
     (
       cat //
     ) => {
@@ -49,8 +49,4 @@ export const handleCategory = (product: any) => {
       }
     }
   )?.slug;
-
-  return x ?? "diverse";
-
-  //return matchingCategory;
 };
