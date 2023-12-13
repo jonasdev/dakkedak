@@ -39,14 +39,16 @@ export const handleCategory = (product: any) => {
 
   // return matchingCategory ?? "diverse";
 
-  return categories.find(
-    (
-      cat //
-    ) => {
-      const regex = new RegExp(cat.regex, "gi");
-      if (kategorinavn[0].match(regex)) {
-        return cat;
+  return (
+    categories.find(
+      (
+        cat //
+      ) => {
+        const regex = new RegExp(cat.regex, "gi");
+        if (kategorinavn[0].match(regex)) {
+          return cat;
+        }
       }
-    }
-  )?.slug;
+    )?.slug ?? "diverse"
+  );
 };
