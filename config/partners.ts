@@ -26,8 +26,8 @@ export const partnerFeeds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=106557&feedid=3317", // Littleroom
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=88629&feedid=2219", // Babadut
-  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=95113&feedid=2582", // LittleNap -> IKKE ANVENDT
+  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=88629&feedid=2219", // Babadut -> Trælse produkter og kategorier
+  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=95113&feedid=2582", // LittleNap -> IKKE ANVENDT (Produkter virker ikke)
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", // Zleepii -> Udgået!!!
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=99931&feedid=2857", // Slyngevenner - Grimme billeder
 ];

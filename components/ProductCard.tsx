@@ -95,10 +95,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       <div className="flex justify-center items-center">
         <img
-          src={imgSrc}
+          src={image}
           alt={`product-${title}`}
           className="min-h-[256px] h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 sm:min-h-[288px] bg-white"
-          onError={() => setImgSrc(<IconPhoto />)}
+          // onError={() => setImgSrc(<IconPhoto />)}
         />
       </div>
 

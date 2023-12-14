@@ -22,6 +22,7 @@ const variousReplaceMap: { [key: string]: string } = {
   "â": "´",
   "Ã¯": "ï",
   "rÂ®": "r®",
+  "Ã": "É",
 };
 
 export default function decodeString(string: string): string {

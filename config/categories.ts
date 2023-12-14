@@ -166,6 +166,11 @@ export const toejAccessoriesCategories: Category[] = [
     regex: "Hårspænde|Hårbånd|Hårelastik",
   },
   {
+    slug: "navnemaerker",
+    name: "Navnemærker",
+    regex: "Colored name tags|Navnemærker",
+  },
+  {
     slug: "savlesmaek",
     name: "Savle- og hagesmække",
     regex: "Savlesmæk|Savl|TØJ & SKO > Hagesmække|Bandana Bib",
@@ -310,12 +315,14 @@ export const spisetidServiceCategories: Category[] = [
   {
     slug: "hagesmaekke",
     name: "Hagesmække",
-    regex: "Dinner Bib|MÅLTIDET > Hagesmække|Service > Hagesmække",
+    regex:
+      "Dinner Bib|MÅLTIDET > Hagesmække|Service > Hagesmække|Spise & drikke  > Hagesmæk uden navn|Spise & drikke  > Hagesmække",
   },
   {
     slug: "kopper",
     name: "Kopper",
-    regex: "Kopper|Tudkop|Krus|Sugerør|Cup Set",
+    regex:
+      "Kopper|Tudkop|Krus|Sugerør|Cup Set|Spise & drikke  > Drikkekop|Drikkekop",
   },
   {
     slug: "sutteflasker",
@@ -331,7 +338,8 @@ export const spisetidServiceCategories: Category[] = [
   {
     slug: "andet-service",
     name: "Andet Service",
-    regex: "Service|Dækserviet|Place Mat|Spise-service",
+    regex:
+      "Service|Dækserviet|Place Mat|Spise-service|Spise & drikke  > Spisesæt baby",
   },
 ];
 
@@ -352,14 +360,14 @@ export const plejeCategories: Category[] = [
     regex: "Hudpleje|Shampoo",
   },
   {
-    slug: "plejeartikler",
+    slug: "plejeartikler-til-baby",
     name: "Plejeartikler til baby",
-    regex: "Plejeartikler",
+    regex: "Plejeartikler|Babyserien >|K-serien > KRAES junior",
   },
   {
-    slug: "plejeartikler",
+    slug: "plejeartikler-til-mor",
     name: "Plejeartikler til mor",
-    regex: "Plejeartikler",
+    regex: "Plejeartikler|K-serien",
   },
   {
     slug: "potter-toilet-skamler",
@@ -379,7 +387,7 @@ export const plejeCategories: Category[] = [
   {
     slug: "sutteklude",
     name: "Sutteklude",
-    regex: "Cuddle Cloth|Sutteklud",
+    regex: "Cuddle Cloth|Sutteklud|Nusseklud",
   },
   {
     slug: "sutte-opbevaring",
@@ -392,11 +400,11 @@ export const plejeCategories: Category[] = [
     name: "Sutter",
     regex: "Sut|Sutter|Pacifier",
   },
-  {
-    slug: "andet-pleje",
-    name: "Andet pleje",
-    regex: "Pleje",
-  },
+  // {
+  //   slug: "andet-pleje",
+  //   name: "Andet pleje",
+  //   regex: "Pleje",
+  // },
 ];
 
 export const pusleCategories: Category[] = [
@@ -674,7 +682,7 @@ export const categories: Category[] = [
   {
     slug: "diverse",
     name: "Diverse",
-    regex: "Diverse",
+    regex: "KRAES pakker",
   },
 ];
 
