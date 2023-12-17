@@ -124,6 +124,11 @@ export const handleFilter = (products, filter) => {
     }
 
     // const categoryRegex = new RegExp(category, "gi");
+    // // Filter by category
+    // if (category && product.category?.match(categoryRegex)) {
+    //   return product;
+    // }
+
     // Filter by category
     if (category && product.category === category) {
       return product;
