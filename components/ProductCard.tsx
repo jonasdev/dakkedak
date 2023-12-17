@@ -55,28 +55,30 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [imgSrc, setImgSrc] = useState(image);
 
   const renderStock = () => {
-    if (inStock === "in_stock" || "in stock")
-      return (
-        <span className="flex items-center gap-x-1">
-          <IconCircleCheck className="text-green-500" />{" "}
-          <span className="font-medium">På lager</span>
-        </span>
-      );
-    if (inStock === "out_of_stock") {
-      return (
-        <span className="flex items-center gap-x-1">
-          <IconCircleX className="text-red-500" />{" "}
-          <span className="font-medium">Udsolgt</span>
-        </span>
-      );
-    }
-    if (inStock === "back_order" || "backorder") {
-      return (
-        <span className="flex items-center gap-x-1">
-          <IconClock className="text-yellow-500" />{" "}
-          <span className="font-medium">Kan bestilles</span>
-        </span>
-      );
+    if (inStock) {
+      if (["in_stock", "in stock"].includes(inStock))
+        return (
+          <span className="flex items-center gap-x-1">
+            <IconCircleCheck className="text-green-500" />{" "}
+            <span className="font-medium">På lager</span>
+          </span>
+        );
+      if (["out_of_stock", "out_of_stock"].includes(inStock)) {
+        return (
+          <span className="flex items-center gap-x-1">
+            <IconCircleX className="text-red-500" />{" "}
+            <span className="font-medium">Udsolgt</span>
+          </span>
+        );
+      }
+      if (["back_order", "in backorder"].includes(inStock)) {
+        return (
+          <span className="flex items-center gap-x-1">
+            <IconClock className="text-yellow-500" />{" "}
+            <span className="font-medium">Kan bestilles</span>
+          </span>
+        );
+      }
     }
   };
 

@@ -19,13 +19,13 @@ import { ReactNode } from "react";
 export const partnerFeeds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055", // BIBS
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=58100&feedid=1059", // ByHappyMe
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=104520&feedid=3182", // Lillenordic
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=106557&feedid=3317", // Littleroom
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=88629&feedid=2219", // Babadut -> Trælse produkter og kategorier
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=95113&feedid=2582", // LittleNap -> IKKE ANVENDT (Produkter virker ikke)
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", // Zleepii -> Udgået!!!

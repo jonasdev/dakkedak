@@ -76,7 +76,8 @@ export default function FavoriteButton({ product, category, size }: Props) {
     >
       <IconHeart
         className={classNames(
-          isFavorite ? "fill-primary-dark stroke-primary-dark" : "fill-blue-50"
+          isFavorite ? "fill-primary-dark stroke-primary-dark" : "fill-blue-50",
+          "active:scale-125 transition duration-150"
         )}
         size={size === "lg" ? 20 : 16}
       />

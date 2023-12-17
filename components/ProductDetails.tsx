@@ -45,6 +45,13 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
     }
   };
 
+  const handleDescription = () => {
+    if (!description) return "Ingen beskrivelse tilgængelig";
+    const decodedString = decodeString(description || "");
+    // const stringList = decodedString.split("\n");
+    return decodedString;
+  };
+
   return (
     <section className="overflow-hidden">
       <div className="container p-6 mx-auto bg-white rounded-2xl shadow-lg z-10">
@@ -74,9 +81,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
                 {title}
               </h1>
 
-              <p className="leading-relaxed">
-                {decodeString(description || "")}
-              </p>
+              <p className="leading-relaxed">{handleDescription()}</p>
               <div className="flex justify-center my-4 lg:my-8">
                 <div className="w-1/2 h-1 bg-primary bg-opacity-30" />
               </div>

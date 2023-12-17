@@ -81,9 +81,22 @@ export const getFeeds = async (filter = null, api = false) => {
     }
   });
 
-  const productsToReturn = filter ? filteredProducts : products;
+  const productsByFilter = filter ? filteredProducts : products;
 
-  const trimmedByDifferentSize = filterUniqueProducts(productsToReturn);
+  // const trimmedByDifferentSize = filterUniqueProducts(productsByFilter);
+
+  const uniqueCombinations = new Set();
+
+  const productsToReturn = productsByFilter.filter((product) => {
+    const combination = `${product.category}-${product.path}`;
+    if (!uniqueCombinations.has(combination)) {
+      uniqueCombinations.add(combination);
+      return true;
+    }
+    return false;
+  });
+
+  console.log("Actual products: ", productsToReturn.length);
 
   return productsToReturn;
 };
@@ -110,9 +123,9 @@ export const handleFilter = (products, filter) => {
       return product;
     }
 
-    const categoryRegex = new RegExp(category, "gi");
+    // const categoryRegex = new RegExp(category, "gi");
     // Filter by category
-    if (category && product.category?.match(categoryRegex)) {
+    if (category && product.category === category) {
       return product;
     }
 

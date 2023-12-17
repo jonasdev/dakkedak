@@ -24,6 +24,7 @@ import { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
 import CategoryList from "./CategoryList";
 import {
+  Category,
   CategorySet,
   barselOgVentetidCategoriesSet,
   gaverCategoriesSet,

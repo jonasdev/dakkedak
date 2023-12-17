@@ -23,6 +23,8 @@ const variousReplaceMap: { [key: string]: string } = {
   "Ã¯": "ï",
   "rÂ®": "r®",
   "Ã": "É",
+  Ã: "í",
+  "Â": "•",
 };
 
 export default function decodeString(string: string): string {
@@ -42,6 +44,8 @@ export default function decodeString(string: string): string {
     regex,
     (match) => variousReplaceMap[match]
   );
+
+  // stringToReturn = stringToReturn.replace(/•/g, "•\n");
 
   return stringToReturn;
 }
