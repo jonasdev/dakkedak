@@ -89,7 +89,7 @@ export default function Navbar() {
     },
     {
       categorySet: barselOgVentetidCategoriesSet,
-      title: "Barsel og ventetid",
+      title: "Barsel og amning",
       icon: <IconClock />,
     },
     {

@@ -27,7 +27,7 @@ export default function AppLink({
           mode === "dark"
             ? "lg:group-hover:text-gray-600 active:text-gray-600"
             : "lg:group-hover:text-gray-100 active:text-gray-100",
-          "flex justify-center items-center pb-1"
+          "flex items-center pb-1"
         )}
       >
         {icon && <i className="mr-1">{icon}</i>}

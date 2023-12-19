@@ -9,91 +9,52 @@ export default function Footer() {
       <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Image alt="hdr-logo" src="/logo.svg" height={125} width={250} />
-
-          {/* <span className="flex items-center">
-            Alt til dit barn{" "}
-            <IconHeart className="ml-1 fill-primary stroke-primary" size={16} />
-          </span> */}
         </div>
 
-        <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
-          <div>
+        <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-12">
+          <div className="flex flex-col items-start">
             <p className="font-medium text-gray-900">Babyhaj</p>
 
-            <ul className="mt-6 space-y-4 text-sm">
-              <li>
-                <AppLink href="/" text="Om os" />
-              </li>
-              <li>
-                <AppLink href="/" text="Om os" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="Om os" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="Om os" />
-              </li>
-              <li>
-                <AppLink href="/" text="Om os" />
-              </li>
-            </ul>
+            <div className="mt-6 space-y-3 flex flex-col text-sm text-start">
+              <AppLink href="/" text="Om os" />
+              <AppLink href="/partnere" text="Partnere" />
+              <AppLink href="/maerker" text="Mærker" />
+              <AppLink href="/cookies" text="Cookies" />
+            </div>
           </div>
 
-          <div>
-            <p className="font-medium text-gray-900">Kategorier</p>
-
-            <ul className="mt-6 space-y-4 text-sm">
-              <li>
-                <AppLink href="/" text="Partner" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="Partner" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="Partner" />
-              </li>
-            </ul>
-          </div>
-
-          <div>
+          <div className="flex flex-col items-start">
             <p className="font-medium text-gray-900">Hjælp</p>
 
-            <ul className="mt-6 space-y-4 text-sm">
-              <li>
-                <AppLink href="/" text="Kontakt" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="FAQs" />
-              </li>
-            </ul>
+            <div className="mt-6 space-y-3 flex flex-col text-sm text-start">
+              <AppLink href="/partnere" text="Favoritter" />
+              <AppLink href="/maerker" text="Tjekliste" />
+              <AppLink href="/cookies" text="FAQs" />
+              <AppLink href="/blog" text="Blog" />
+            </div>
           </div>
 
-          <div>
+          {/* <div className="flex flex-col items-start">
+            <p className="font-medium text-gray-900">Hjælp</p>
+
+            <div className="mt-6 space-y-3 flex flex-col text-sm text-start">
+              <AppLink href="/partnere" text="Favoritter" />
+              <AppLink href="/maerker" text="Tjekliste" />
+              <AppLink href="/cookies" text="FAQs" />
+              <AppLink href="/blog" text="Blog" />
+            </div>
+          </div> */}
+
+          {/* <div className="flex flex-col items-start">
             <p className="font-medium text-gray-900">Partnere</p>
 
-            <ul className="mt-6 space-y-4 text-sm">
-              <li>
-                <AppLink href="/" text="Partner" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="Partner" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="Partner" />
-              </li>
-
-              <li>
-                <AppLink href="/" text="Partner" />
-              </li>
-            </ul>
-          </div>
+            <div className="mt-6 space-y-3 flex flex-col text-sm text-start">
+              <AppLink href="/partnere" text="X" />
+              <AppLink href="/maerker" text="X" />
+              <AppLink href="/cookies" text="X" />
+              <AppLink href="/blog" text="X" />
+            </div>
+          </div> */}
         </div>
 
         <p className="text-xs text-gray-500">

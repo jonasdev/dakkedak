@@ -1,4 +1,5 @@
 import ProductDetails from "@/components/ProductDetails";
+import { categories } from "@/config/categories";
 import { getFeeds } from "@/utils/getFeeds";
 import getRelatedProducts from "@/utils/getRelatedProducts";
 import { InferGetStaticPropsType } from "next";
@@ -47,17 +48,26 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const { product } = params;
+  const { product, category } = params!;
+  const currentCategory = categories.find((cat) => cat.slug === category);
 
-  const data = await getFeeds();
-
-  if (!data) {
+  if (!currentCategory) {
     return {
       notFound: true,
     };
   }
 
-  const [currentProduct] = data.filter((pro) => product === pro.path);
+  const products = await getFeeds({
+    category: currentCategory.slug,
+  });
+
+  if (!products) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const [currentProduct] = products.filter((pro) => product === pro.path);
 
   if (!currentProduct) {
     return {
@@ -65,8 +75,7 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const relatedProducts = getRelatedProducts(data, currentProduct);
-  console.log("relatedProducts: ", relatedProducts);
+  const relatedProducts = getRelatedProducts(products, currentProduct);
 
   return {
     props: { product: { ...currentProduct }, relatedProducts: relatedProducts },

@@ -7,7 +7,28 @@ type Props = {
 };
 
 export default function BrandsList({ brands }: Props) {
-  const brandsByLetter: { [key: string]: string[] } = brands.reduce(
+  const uniqueBrands: string[] = brands.reduce(
+    (unique: string[], brand: string) => {
+      if (brand !== undefined) {
+        const lowercaseBrand = brand.toLowerCase();
+        const isDuplicate = unique.some(
+          (existingBrand) => existingBrand.toLowerCase() === lowercaseBrand
+        );
+        if (!isDuplicate) {
+          unique.push(brand);
+        }
+      }
+      return unique;
+    },
+    []
+  );
+
+  // Sort unique brands alphabetically
+  const sortedBrands: string[] = uniqueBrands.sort((a: string, b: string) =>
+    a.localeCompare(b)
+  );
+
+  const brandsByLetter: { [key: string]: string[] } = sortedBrands.reduce(
     (acc: { [key: string]: string[] }, brand: string) => {
       const firstLetter = brand.charAt(0).toUpperCase();
       if (!acc[firstLetter]) {
@@ -62,7 +83,7 @@ export default function BrandsList({ brands }: Props) {
                   return (
                     <li key={index} className="mb-2">
                       <Link
-                        href={`/brands/${brand}`}
+                        href={`/brands/${beautyfiedBrand}`}
                         className="underline underline-offset-4 decoration-dotted"
                       >
                         {brand}

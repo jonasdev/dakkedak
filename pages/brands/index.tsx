@@ -1,18 +1,17 @@
 import { getFeeds } from "@/utils/getFeeds";
 import { GetStaticProps } from "next";
 import BrandsList from "@/components/BrandsList";
+import { Product, ProductCardProps } from "@/components/ProductCard";
 
-interface ICategoryPage {
+interface IBrandsPage {
   brands: string[];
 }
 
-export default function BrandsPage({ brands }: ICategoryPage) {
+export default function BrandsPage({ brands }: IBrandsPage) {
   return <BrandsList brands={brands} />;
 }
 
-export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
-  params,
-}) => {
+export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
   const products = await getFeeds();
 
   if (!products) {
@@ -21,18 +20,32 @@ export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
     };
   }
 
-  const uniqueBrands: string[] = products.reduce((unique, product) => {
-    if (product.brand && !unique.includes(product.brand)) {
-      unique.push(product.brand);
-    }
-    return unique;
-  }, []);
+  const productsBrands: string[] = (products as Product[])
+    .map((product) => product.brand)
+    .filter(
+      (brand) => typeof brand === "string" && brand.length > 0
+    ) as string[];
 
-  const sortedUniqueBrands = uniqueBrands.sort((a, b) => a.localeCompare(b));
+  const uniqueBrands: string[] = products.reduce(
+    (unique: string[], product: Product) => {
+      if (product.brand) {
+        const primaryBrand = product.brand.split(",")[0].trim(); // Get the primary brand name
+        const lowercaseBrand = primaryBrand.toLowerCase();
+        const isDuplicate = unique.some(
+          (existingBrand) => existingBrand.toLowerCase() === lowercaseBrand
+        );
+        if (!isDuplicate) {
+          unique.push(primaryBrand);
+        }
+      }
+      return unique;
+    },
+    []
+  );
 
   return {
     props: {
-      brands: sortedUniqueBrands,
+      brands: uniqueBrands,
     },
   };
 };

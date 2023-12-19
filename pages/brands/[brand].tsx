@@ -1,15 +1,18 @@
-import ProductDetails from "@/components/ProductDetails";
+import { Product } from "@/components/ProductCard";
 import ProductList from "@/components/ProductList";
+import { beautifyUrl, revertBeautifyUrl } from "@/utils/beautifyUrl";
 import { getFeeds } from "@/utils/getFeeds";
-import getRelatedProducts from "@/utils/getRelatedProducts";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
 
-export default function BrandPage({
-  products,
-  brand,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+type Props = {
+  products: Product[];
+};
+
+export default function BrandPage({ products }: Props) {
+  const brand = products[0].brand || products[0].shop;
+
   return (
     <>
       <Head>
@@ -29,7 +32,7 @@ export const getStaticPaths = async () => {
 
   const paths = data?.map((product) => ({
     params: {
-      brand: product.brand || "",
+      brand: beautifyUrl(product.brand || ""),
     },
   }));
 
@@ -47,6 +50,9 @@ export const getStaticProps = async ({ params }) => {
   }
 
   const { brand } = params;
+  console.log(brand);
+
+  const revertedBrand = revertBeautifyUrl(brand);
 
   const products = await getFeeds({ brands: brand });
 
@@ -57,6 +63,6 @@ export const getStaticProps = async ({ params }) => {
   }
 
   return {
-    props: { products: products, brand: brand },
+    props: { products: products },
   };
 };
