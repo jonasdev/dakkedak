@@ -22,12 +22,12 @@ export const partnerFeeds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=58100&feedid=1059", // ByHappyMe
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102033&feedid=2996", // Vierbørn.dk
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=104520&feedid=3182", // Lillenordic
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=106557&feedid=3317", // Littleroom
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=76492&feedid=1748", // Kære børn
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=45423&feedid=607", // MamMilla
+  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=105813&feedid=3269", // Junama
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=88629&feedid=2219", // Babadut -> Trælse produkter og kategorier
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=95113&feedid=2582", // LittleNap -> IKKE ANVENDT (Produkter virker ikke)
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=97595&feedid=2716", // Zleepii -> Udgået!!!
@@ -126,13 +126,13 @@ export const partners: Array<Partner> = [
     href: "https://www.partner-ads.com/dk/klikbanner.php?partnerid=50033&bannerid=73273",
     image: "/partners/saga_copenhagen.png",
   },
-  {
-    name: "Slyngevenner",
-    description:
-      "Salg af bæreseler, vikler og slynger, samt diverse tilbehør. Du finder bl.a. slyngevugger, køreposer, bæreseler, sutter, suttesnore, bideringe, ammekæder, ravæder, moderne stofbleer, bærejakker, og meget andet.",
-    href: "https://www.partner-ads.com/dk/klikbanner.php?partnerid=50033&bannerid=99941",
-    image: "/partners/slyngevenner.png",
-  },
+  // {
+  //   name: "Slyngevenner",
+  //   description:
+  //     "Salg af bæreseler, vikler og slynger, samt diverse tilbehør. Du finder bl.a. slyngevugger, køreposer, bæreseler, sutter, suttesnore, bideringe, ammekæder, ravæder, moderne stofbleer, bærejakker, og meget andet.",
+  //   href: "https://www.partner-ads.com/dk/klikbanner.php?partnerid=50033&bannerid=99941",
+  //   image: "/partners/slyngevenner.png", // Billede mangler
+  // },
   {
     name: "Vierbørn.dk",
     description:

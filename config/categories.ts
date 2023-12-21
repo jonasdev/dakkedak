@@ -8,6 +8,12 @@ export const tilBilenCategories: Category[] = [
       "Tilbehør til autostolen|autostol spejl|bagsæde spejl|bagsædespejl|Cover med spejl|AUTOSTOLE > Til bilturen|AUTOSTOLE > Tilbehør til autostol og bil|AUTOSTOLE > Tilbehør til autostol og bil > På farten > På farten - i bilen|Tilbehør til autostol og bil",
   },
   {
+    slug: "koereposer",
+    name: "Køreposer",
+    regex:
+      "Kørepose|Voksi|Sovepose|Tilbehør til kørepose|Sove-og køreposer|Web Only > PÅ TUR > Køreposer > Tilbehør til vogne",
+  },
+  {
     slug: "autostole",
     name: "Autostole",
     regex: "Autostole|Autostol",
@@ -16,11 +22,6 @@ export const tilBilenCategories: Category[] = [
     slug: "koeredragter",
     name: "Køredragter",
     regex: "Køredragt",
-  },
-  {
-    slug: "koereposer",
-    name: "Køreposer",
-    regex: "Kørepose|Voksi|Sovepose|Tilbehør til kørepose|Sove-og køreposer",
   },
 ];
 
@@ -37,18 +38,6 @@ export const vogneCategories: Category[] = [
       "Klapvogn|PÅ TUR > Tilbehør til vogne > Babyzen Yoyo2|Asalvo|Bumbleride|Home page|Klap-og løbevogne|Tilbehør til Bumbleride vogne",
   },
   {
-    slug: "tilbehoer-til-vogne",
-    name: "Tilbehør til vogne",
-    regex:
-      "Tilbehør til vogne|Tilbehør vogne|Insekt|Mygge|Regnslag|Solskærm|Kopholder|Tilbehør til barnevogn|Barnevognskæde|Barnevognsophæng|Web Only > PÅ TUR > Tilbehør til vogne",
-  },
-  {
-    slug: "barnevognspude",
-    name: "Barnevognspude",
-    regex:
-      "Barnevognspude|BØRNEVÆRELSET > PÅ TUR > Gode tilbud til turen > Tekstiler",
-  },
-  {
     slug: "kombivogne",
     name: "Kombivogne",
     regex: "Kombivogn",
@@ -57,7 +46,13 @@ export const vogneCategories: Category[] = [
     slug: "lifte",
     name: "Lifte",
     regex:
-      "Lift|Carrier|Babynest|Liftmadras|Cover til babynest|Kantpude|lagen til babynest|lagen til juniornest|Liftcover|Tilbehør til babynest",
+      "Lift|Carrier|Babynest|Liftmadras|Cover til babynest|Kantpude|lagen til babynest|lagen til juniornest|Liftcover|Tilbehør til babynest|PÅ TUR > Lifte > Tilbehør til vogne > Nordic Lux|PÅ TUR > Tilbehør til vogne > Joolz Hub+",
+  },
+  {
+    slug: "tilbehoer-til-vogne",
+    name: "Tilbehør til vogne",
+    regex:
+      "Tilbehør til vogne|Tilbehør vogne|Insektnet|Mygge|Regnslag|Solskærm|Kopholder|Tilbehør til barnevogn|Barnevognskæde|Barnevognsophæng|Web Only > PÅ TUR > Tilbehør til vogne|Barnevognspude",
   },
   {
     slug: "barnevogne",
@@ -67,8 +62,8 @@ export const vogneCategories: Category[] = [
 ];
 
 export const paaTurCategories: Category[] = [
-  ...vogneCategories,
   ...tilBilenCategories,
+  ...vogneCategories,
 ];
 
 export const babyOgBoerneToejCategories: Category[] = [
@@ -167,17 +162,16 @@ export const fodtoejCategories: Category[] = [
     regex: "Sandal|KlipKlap",
   },
   {
-    slug: "sneakers",
-    name: "Sneakers",
-    regex: "Sneakers",
-  },
-  {
     slug: "vinter-og-termostoevler",
     name: "Vinter og Termostøvler",
     regex: "Vinterstøvler|Termostøvler|Bamsestøvlen",
   },
+  {
+    slug: "andet-sko",
+    name: "Andet sko",
+    regex: "Sko",
+  },
 ];
-
 export const toejAccessoriesCategories: Category[] = [
   {
     slug: "boejler",
@@ -225,8 +219,8 @@ export const toejAccessoriesCategories: Category[] = [
 
 export const toejOgSkoCategories: Category[] = [
   ...babyOgBoerneToejCategories,
-  ...fodtoejCategories,
   ...toejAccessoriesCategories,
+  ...fodtoejCategories,
 ];
 
 export const udstyrCategories: Category[] = [
@@ -454,13 +448,13 @@ export const spisetidServiceCategories: Category[] = [
     slug: "hagesmaekke",
     name: "Hagesmække",
     regex:
-      "Hagesmække|Dinner Bib|MÅLTIDET > Hagesmække|Service > Hagesmække|Spise & drikke  > Hagesmæk uden navn|Spise & drikke  > Hagesmække|Silikone hagesmæk",
+      "Hagesmække|Dinner Bib|MÅLTIDET > Hagesmække|Service > Hagesmække|Spise & drikke  > Hagesmæk uden navn|Spise & drikke  > Hagesmække|Silikone hagesmæk|Hagesmæk",
   },
   {
     slug: "kopper",
     name: "Kopper",
     regex:
-      "Kopper|Tudkop|Krus|Sugerør|Sugerørskoppen|Cup Set|Spise & drikke  > Drikkekop|Drikkekop",
+      "Kopper|Tudkop|Krus|Sugerør|Sugerørskoppen|Cup Set|Spise & drikke  > Drikkekop|Drikkekop|Sugerørskoppen",
   },
   {
     slug: "sutteflasker",
@@ -481,7 +475,7 @@ export const spisetidServiceCategories: Category[] = [
   {
     slug: "andet-service",
     name: "Andet Service",
-    regex: "Service|Spise-service|Spise & drikke  > Spisesæt baby",
+    regex: "Service|Spise-service|Spise & drikke  > Spisesæt baby|Bibs Dinner",
   },
 ];
 
@@ -503,9 +497,10 @@ export const plejeCategories: Category[] = [
     regex: "Hudpleje|Shampoo",
   },
   {
-    slug: "plejeartikler-til-baby",
-    name: "Plejeartikler til baby",
-    regex: "Babyserien >|K-serien > KRAES junior|Plejemidler",
+    slug: "plejeartikler-til-barn",
+    name: "Plejeartikler til barn",
+    regex:
+      "Babyserien >|K-serien > KRAES junior|Plejemidler|Babyserien|KRAES junior",
   },
   {
     slug: "plejeartikler-til-mor",
@@ -705,7 +700,7 @@ export const legetoejIndendoersCategories: Category[] = [
   {
     slug: "rangler",
     name: "Rangler",
-    regex: "Rangler|Rattle|Rangler & bideringe",
+    regex: "Rangler|Rattle|Rangler & bideringe|Rangle",
   },
   {
     slug: "ringe",
@@ -798,7 +793,7 @@ export const legetoejCategories: Category[] = [
   {
     slug: "andet-legetoej",
     name: "Andet legetøj",
-    regex: "Legetøj|Øvrigt legetøj",
+    regex: "Legetøj|Øvrigt legetøj|Small foot|Regne & måle",
   },
 ];
 
@@ -884,8 +879,8 @@ export const categories: Category[] = [
   ...toejOgSkoCategories,
   ...udstyrCategories,
   ...moeblerCombinedCategories,
-  ...legetoejCategories,
   ...spisetidOgPlejeCategories,
+  ...legetoejCategories,
   ...barselOgVentetidCategories,
   ...gaverCategories,
 

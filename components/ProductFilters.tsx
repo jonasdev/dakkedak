@@ -34,12 +34,6 @@ export default function ProductFilters({
   useEffect(() => {
     let updatedProducts: Product[] = [...allProducts];
 
-    // if (categoryFilter !== 'All') {
-    //   updatedProducts = updatedProducts.filter(
-    //     product => product.category === categoryFilter
-    //   );
-    // }
-
     if (searchTerm.trim() !== "") {
       updatedProducts = updatedProducts.filter(
         (product) =>

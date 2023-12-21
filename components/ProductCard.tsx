@@ -1,35 +1,26 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
-import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
-import {
-  IconCheck,
-  IconCircleCheck,
-  IconCircleX,
-  IconClock,
-} from "@tabler/icons-react";
-import decodeString from "@/utils/decodeString";
-import sut from "@/public/sut.png";
-import { IconPhoto } from "@tabler/icons-react";
+import ProductStock from "./ProductStock";
 
 export type Product = {
   productKey: number | string;
-  shop?: string | null;
-  category?: string | null;
-  title: string | null;
-  price: string | null;
-  oldPrice?: string | null;
-  discount?: number | null;
-  url: string | null;
-  description?: string | null;
+  shop?: string;
+  category?: string;
+  title: string;
+  price: string;
+  oldPrice?: string;
+  discount?: number;
+  url: string;
+  description?: string;
   image: string;
-  brand?: string | null;
-  id?: string | null;
-  inStock?: string | null;
-  keywords?: string[] | null;
-  sku?: string | null;
-  path?: string | null;
+  brand?: string;
+  id?: string;
+  inStock?: string;
+  keywords?: string[];
+  sku?: string;
+  path?: string;
 };
 
 export type ProductCardProps = {
@@ -53,34 +44,6 @@ export default function ProductCard({ product }: ProductCardProps) {
   } = product;
 
   const [imgSrc, setImgSrc] = useState(image);
-
-  const renderStock = () => {
-    if (inStock) {
-      if (["in_stock", "in stock"].includes(inStock))
-        return (
-          <span className="flex items-center gap-x-1">
-            <IconCircleCheck className="text-green-500" />{" "}
-            <span className="font-medium">På lager</span>
-          </span>
-        );
-      if (["out_of_stock", "out_of_stock"].includes(inStock)) {
-        return (
-          <span className="flex items-center gap-x-1">
-            <IconCircleX className="text-red-500" />{" "}
-            <span className="font-medium">Udsolgt</span>
-          </span>
-        );
-      }
-      if (["back_order", "in backorder"].includes(inStock)) {
-        return (
-          <span className="flex items-center gap-x-1">
-            <IconClock className="text-yellow-500" />{" "}
-            <span className="font-medium">Kan bestilles</span>
-          </span>
-        );
-      }
-    }
-  };
 
   return (
     <article className="group relative flex flex-col justify-between overflow-hidden rounded-lg shadow-xl col-span-1">
@@ -118,7 +81,9 @@ export default function ProductCard({ product }: ProductCardProps) {
               </span>
             )}
           </span>
-          <span className="whitespace-nowrap">{renderStock()}</span>
+          <span className="whitespace-nowrap">
+            <ProductStock inStock={inStock} />
+          </span>
         </div>
 
         <h3 className="mt-4 text-lg font-medium text-gray-900 truncate">

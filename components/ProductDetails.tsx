@@ -7,6 +7,7 @@ import Carousel from "./Carousel";
 import Breadcrumb from "./Breadcrumb";
 import { IconCircleCheck, IconCircleX, IconClock } from "@tabler/icons-react";
 import decodeString from "@/utils/decodeString";
+import ProductStock from "./ProductStock";
 
 type Props = {
   product: Product;
@@ -20,28 +21,30 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
     product;
 
   const renderStock = () => {
-    if (inStock === "in_stock" || "in stock")
-      return (
-        <span className="flex items-center gap-x-1">
-          <IconCircleCheck className="text-green-500" />{" "}
-          <span className="font-medium">På lager</span>
-        </span>
-      );
-    if (inStock === "out_of_stock") {
-      return (
-        <span className="flex items-center gap-x-1">
-          <IconCircleX className="text-red-500" />{" "}
-          <span className="font-medium">Udsolgt</span>
-        </span>
-      );
-    }
-    if (inStock === "back_order" || "backorder") {
-      return (
-        <span className="flex items-center gap-x-1">
-          <IconClock className="text-yellow-500" />{" "}
-          <span className="font-medium">Kan bestilles</span>
-        </span>
-      );
+    if (inStock) {
+      if (["in_stock", "in stock"].includes(inStock))
+        return (
+          <span className="flex items-center gap-x-1">
+            <IconCircleCheck className="text-green-500" />{" "}
+            <span className="font-medium">På lager</span>
+          </span>
+        );
+      if (["out_of_stock", "out_of_stock"].includes(inStock)) {
+        return (
+          <span className="flex items-center gap-x-1">
+            <IconCircleX className="text-red-500" />{" "}
+            <span className="font-medium">Udsolgt</span>
+          </span>
+        );
+      }
+      if (["back_order", "in backorder", "backorder"].includes(inStock)) {
+        return (
+          <span className="flex items-center gap-x-1">
+            <IconClock className="text-yellow-500" />{" "}
+            <span className="font-medium">Kan bestilles</span>
+          </span>
+        );
+      }
     }
   };
 
@@ -86,7 +89,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
                 <div className="w-1/2 h-1 bg-primary bg-opacity-30" />
               </div>
               <div className="flex flex-col items-center lg:items-start space-y-6">
-                {renderStock()}
+                <ProductStock inStock={inStock} />
 
                 <div className="flex flex-col">
                   {price && oldPrice && price !== oldPrice && (

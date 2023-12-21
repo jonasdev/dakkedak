@@ -13,6 +13,7 @@ const badProducts = [
   "kort",
   "alm-indpakning-og-kort",
   "ekstra-køb-af-porto",
+  "juleindpakning-og-kort",
 ];
 
 export const getFeeds = async (filter = null, api = false) => {

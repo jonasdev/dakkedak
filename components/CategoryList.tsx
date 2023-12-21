@@ -22,10 +22,7 @@ export default function CategoryList({ categoryList, mode = "dark" }: Props) {
   return (
     <div className="relative group pl-6">
       <div className="inline-flex items-center overflow-hidden">
-        <Link
-          href="#"
-          className="font-semibold transition duration-300 text-sm lg:text-xs"
-        >
+        <span className="font-semibold transition duration-300 text-sm lg:text-xs">
           <div
             className={classNames(
               mode === "dark"
@@ -47,7 +44,7 @@ export default function CategoryList({ categoryList, mode = "dark" }: Props) {
             </span>
             <IconChevronDown className="ml-1" size={16} />
           </div>
-        </Link>
+        </span>
       </div>
 
       <div
