@@ -3,6 +3,8 @@ import Image from "next/image";
 import {
   IconBabyBottle,
   IconBed,
+  IconBriefcase,
+  IconBriefcase2,
   IconClock,
   IconDeviceMobile,
   IconDots,
@@ -11,6 +13,8 @@ import {
   IconHeartHandshake,
   IconHorseToy,
   IconListCheck,
+  IconLuggage,
+  IconMoodHeart,
   IconShirt,
   IconSoup,
   IconTag,
@@ -27,6 +31,7 @@ import {
   Category,
   CategorySet,
   barselOgVentetidCategoriesSet,
+  boernevaerelsetCategorySet,
   gaverCategoriesSet,
   legetoejCategorySet,
   moeblerCategorySet,
@@ -68,19 +73,19 @@ export default function Navbar() {
       icon: <IconShirt />,
     },
     {
-      categorySet: moeblerCategorySet,
-      title: "Møbler",
+      categorySet: boernevaerelsetCategorySet,
+      title: "Børneværelset",
       icon: <IconBed />,
     },
     {
       categorySet: udstyrCategoriesSet,
       title: "Udstyr",
-      icon: <IconDeviceMobile />,
+      icon: <IconBriefcase2 />,
     },
     {
       categorySet: spisetidOgPlejeCategoriesSet,
       title: "Spisetid og pleje",
-      icon: <IconSoup />,
+      icon: <IconMoodHeart />,
     },
     {
       categorySet: legetoejCategorySet,
@@ -183,8 +188,12 @@ export default function Navbar() {
       <div className="flex justify-center border-t-2 border-gray-300">
         <div className="hidden lg:block">
           <div className="flex flex-wrap justify-center items-center space-x-6 mt-4">
-            {categoryLists.map((list) => (
-              <CategoryList categoryList={list} key={list.title} />
+            {categoryLists.map((list, key) => (
+              <CategoryList
+                categoryList={list}
+                key={list.title}
+                navbarIdnex={key}
+              />
             ))}
             <AppLink href="/diverse" icon={<IconDots />} text="Diverse" />
           </div>

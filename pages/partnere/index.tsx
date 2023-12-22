@@ -17,8 +17,8 @@ export default function Partners() {
         Partnere
       </h1>
       <p className="mb-8">
-        Vi samarbejder med en række samarbejdspartnere, som tilbyder et stort
-        udvalg af produkter til dit barn, så du er bedst muligt forberedt.
+        Vi samarbejder med en række partnere, som tilbyder et stort udvalg af
+        produkter til dit barn, så du er bedst muligt forberedt.
       </p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 grid-cols-1 gap-8">
         {partners.map((partner) => (

@@ -43,15 +43,21 @@ export default function ProductFilters({
 
     if (sortOption === "priceLowToHigh") {
       updatedProducts.sort((a, b) => {
-        if (a.price && b.price) {
-          return parseFloat(a.price) - parseFloat(b.price);
+        const priceA = a?.price || a?.oldPrice;
+        const priceB = b?.price || b?.oldPrice;
+
+        if (priceA && priceB) {
+          return parseFloat(priceA) - parseFloat(priceB);
         }
         return 0;
       });
     } else if (sortOption === "priceHighToLow") {
       updatedProducts.sort((a, b) => {
-        if (a.price && b.price) {
-          return parseFloat(b.price) - parseFloat(a.price);
+        const priceA = a?.price || a?.oldPrice;
+        const priceB = b?.price || b?.oldPrice;
+
+        if (priceA && priceB) {
+          return parseFloat(priceB) - parseFloat(priceA);
         }
         return 0;
       });

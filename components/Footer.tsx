@@ -1,4 +1,3 @@
-import { IconBabyBottle, IconFish, IconHeart } from "@tabler/icons-react";
 import React from "react";
 import AppLink from "./AppLink";
 import Image from "next/image";

@@ -5,6 +5,7 @@ import formatDescription from "./formatDescription";
 import decodeString from "./decodeString";
 import { beautifyUrl } from "./beautifyUrl";
 import { partnerFeeds } from "@/config/partners";
+import combineSimilarProducts from "./combineSimilarProducts";
 
 const badProducts = [
   "test-vare-1",
@@ -84,7 +85,7 @@ export const getFeeds = async (filter = null, api = false) => {
     ? handleFilter(filteredBadProducts, filter)
     : filteredBadProducts;
 
-  // const trimmedByDifferentSize = filterUniqueProducts(productsByFilter);
+  // const trimmedByDifferentSize = combineSimilarProducts(productsByFilter);
 
   const uniqueCombinations = new Set();
 

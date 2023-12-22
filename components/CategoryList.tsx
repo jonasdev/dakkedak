@@ -14,9 +14,14 @@ type Props = {
   mode?: "light" | "dark";
   categoryList: ICategoryList;
   onClickAction?: () => void;
+  navbarIdnex: number;
 };
 
-export default function CategoryList({ categoryList, mode = "dark" }: Props) {
+export default function CategoryList({
+  categoryList,
+  mode = "dark",
+  navbarIdnex: navbarIndex,
+}: Props) {
   const { categorySet, title, icon } = categoryList;
 
   return (
@@ -48,7 +53,10 @@ export default function CategoryList({ categoryList, mode = "dark" }: Props) {
       </div>
 
       <div
-        className="absolute end-0 z-10 pt-2 rounded-md border border-gray-100 bg-white shadow-lg hidden group-hover:flex items-start justify-evenly"
+        className={classNames(
+          navbarIndex < 4 ? "start-0" : "end-0 ",
+          "absolute z-40 pt-2 rounded-md border border-gray-100 bg-white shadow-lg hidden group-hover:flex items-start justify-evenly"
+        )}
         role="menu"
       >
         {Object.entries(categorySet).map(([key, cats]) => {

@@ -71,7 +71,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="flex justify-between">
           <span className="h-6">
             {(brand || shop) && (
-              <span className="whitespace-nowrap w-fit bg-primary-dark text-white px-3 py-1.5 text-xs font-medium capitalize">
+              <span className="whitespace-nowrap w-fit bg-primary-dark text-white px-3 py-1.5 text-xs font-medium">
                 {brand || shop}
               </span>
             )}

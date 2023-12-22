@@ -3,7 +3,12 @@ import SideMenuButton from "./SideMenuButton";
 import classNames from "classnames";
 import { ReactNode } from "react";
 import AppLink from "./AppLink";
-import { IconHeart } from "@tabler/icons-react";
+import {
+  IconHeart,
+  IconHeartHandshake,
+  IconListCheck,
+  IconTag,
+} from "@tabler/icons-react";
 import { ICategoryList } from "./Navbar";
 import CategoryAccordion from "./CategoryAccordion";
 
@@ -54,10 +59,41 @@ export default function SideMenu({ categoryLists }: Props) {
           </div>
           <div className="p-4">
             <AppLink
+              href="/brands"
+              icon={
+                <span className="relative inline-block">
+                  <IconTag />
+                </span>
+              }
+              text="Mærker"
+              onClickAction={toggleSidebar}
+            />
+            <AppLink
+              href="/partnere"
+              icon={
+                <span className="relative inline-block">
+                  <IconHeartHandshake />
+                </span>
+              }
+              text="Partnere"
+              onClickAction={toggleSidebar}
+            />
+            <AppLink
+              href="/tjekliste"
+              icon={
+                <span className="relative inline-block">
+                  <IconListCheck />
+                </span>
+              }
+              text="Tjekliste"
+              onClickAction={toggleSidebar}
+            />
+            <AppLink
               href="/favoritter"
               icon={<IconHeart />}
               text="Favoritter"
               mode="light"
+              onClickAction={toggleSidebar}
             />
           </div>
         </div>
