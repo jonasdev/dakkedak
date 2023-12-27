@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Product } from "./ProductCard";
+import { Product } from "./Product";
 import { IconSearch, IconX } from "@tabler/icons-react";
 
 type SortingOption =

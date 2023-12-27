@@ -1,9 +1,10 @@
 import React from "react";
-import ProductCard, { Product } from "./ProductCard";
+import ProductCard from "./ProductCard";
+import { Product } from "./Product";
 import FavoriteButton from "./FavoriteButton";
 import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
-import Carousel from "./Carousel";
+import ProductCarousel from "./ProductCarousel";
 import Breadcrumb from "./Breadcrumb";
 import { IconCircleCheck, IconCircleX, IconClock } from "@tabler/icons-react";
 import decodeString from "@/utils/decodeString";
@@ -122,7 +123,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
             Relaterede produkter
           </h2>
           <div className="lg:hidden block">
-            <Carousel products={relatedProducts} />
+            <ProductCarousel products={relatedProducts} />
           </div>
           <div className="hidden lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4">
             {relatedProducts?.map((product) => (

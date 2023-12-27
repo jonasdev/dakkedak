@@ -1,3 +1,4 @@
+import Cookies from "@/components/Cookies";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
@@ -16,9 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="flex flex-col items-center justify-between w-full bg-secondary">
         <Navbar />
         <Component {...pageProps} />
-        <CookieConsent>
-          This website uses cookies to enhance the user experience.
-        </CookieConsent>
+        <Cookies />
         <Footer />
       </div>
     </>

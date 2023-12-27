@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { Product } from "@/components/ProductCard";
+import { Product } from "@/components/Product";
 import { getFeeds } from "@/utils/getFeeds";
 import type { NextApiRequest, NextApiResponse } from "next";
 

@@ -1,7 +1,8 @@
 import { getFeeds } from "@/utils/getFeeds";
 import { GetStaticProps } from "next";
 import BrandsList from "@/components/BrandsList";
-import { Product, ProductCardProps } from "@/components/ProductCard";
+import { ProductCardProps } from "@/components/ProductCard";
+import { Product } from "@/components/Product";
 
 interface IBrandsPage {
   brands: string[];

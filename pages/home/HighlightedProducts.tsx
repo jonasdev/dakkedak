@@ -1,5 +1,6 @@
-import Carousel from "@/components/Carousel";
-import ProductCard, { Product } from "@/components/ProductCard";
+import ProductCarousel from "@/components/ProductCarousel";
+import ProductCard from "@/components/ProductCard";
+import { Product } from "@/components/Product";
 import React from "react";
 
 type HighlightedProduct = {
@@ -111,7 +112,7 @@ export default function HighlightedProducts() {
       </h2>
 
       <div className="lg:hidden block">
-        <Carousel
+        <ProductCarousel
           products={highlightedProducts.map(
             (highlightedProduct) => highlightedProduct.product
           )}

@@ -133,8 +133,11 @@ export default function Navbar() {
   return (
     <nav className="w-full px-6 py-5 transition-all delay-75 duration-500 ease-out bg-inherit bg-opacity-95 z-30 rounded-b-3xl lg:px-12 lg:py-8">
       <div className="flex w-full items-center justify-between mb-6">
-        <Link href="/">
+        <Link href="/" className="hidden xl:block">
           <Image alt="hdr-logo" src="/logo.svg" height={100} width={250} />
+        </Link>
+        <Link href="/" className="xl:hidden block">
+          <Image alt="hdr-logo" src="/logo.svg" height={100} width={200} />
         </Link>
 
         <div className="lg:flex items-center hidden">

@@ -18,7 +18,7 @@ export default function ChecklistPage() {
     <section className="w-full h-full flex flex-col items-center">
       <h1 className="text-4xl">Tjekliste</h1>
       <div className="mt-16 flex flex-col items-center justify-center">
-        <IconTools size={100} /> Kommer snart!
+        <IconTools size={65} /> Kommer snart!
       </div>
     </section>
   );

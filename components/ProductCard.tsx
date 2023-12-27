@@ -3,25 +3,8 @@ import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
 import FavoriteButton from "./FavoriteButton";
 import ProductStock from "./ProductStock";
-
-export type Product = {
-  productKey: number | string;
-  shop?: string;
-  category?: string;
-  title: string;
-  price: string;
-  oldPrice?: string;
-  discount?: number;
-  url: string;
-  description?: string;
-  image: string;
-  brand?: string;
-  id?: string;
-  inStock?: string;
-  keywords?: string[];
-  sku?: string;
-  path?: string;
-};
+import { Product } from "@/types/types";
+import Link from "next/link";
 
 export type ProductCardProps = {
   product: Product;
@@ -58,14 +41,17 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
       </div> */}
 
-      <div className="flex justify-center items-center">
+      <Link
+        className="flex justify-center items-center"
+        href={`/${category}/${path}`}
+      >
         <img
           src={image}
           alt={`product-${title}`}
           className="min-h-[256px] h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 sm:min-h-[288px] bg-white"
           // onError={() => setImgSrc(<IconPhoto />)}
         />
-      </div>
+      </Link>
 
       <div className="relative border border-gray-100 bg-gray-100 p-6 h-full flex flex-col justify-between">
         <div className="flex justify-between">

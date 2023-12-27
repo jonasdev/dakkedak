@@ -1,4 +1,4 @@
-import { Product } from "@/components/ProductCard";
+import { Product } from "@/components/Product";
 
 const count = 4;
 

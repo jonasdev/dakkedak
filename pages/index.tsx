@@ -2,7 +2,7 @@ import Hero from "@/pages/home/Hero";
 import HighlightedProducts from "./home/HighlightedProducts";
 import About from "./home/About";
 import Blog from "./home/Blog";
-import Categories from "./home/Categories";
+import HighlightedCategories from "./home/HighlightedCategories";
 import Head from "next/head";
 
 export default function Home() {
@@ -15,11 +15,13 @@ export default function Home() {
           content="Babyhaj tilbyder ét samlet sted hvor du kan finde alt til dit barn. Udforsk de mange produkter og gør dig baby-klar!"
         />
       </Head>
-      <Hero />
-      <HighlightedProducts />
-      <About />
-      <Categories />
-      {/* <Blog /> */}
+      <div className="flex flex-col items-center space-y-24 w-full">
+        <Hero />
+        <HighlightedProducts />
+        <About />
+        <HighlightedCategories />
+        {/* <Blog /> */}
+      </div>
     </>
   );
 }

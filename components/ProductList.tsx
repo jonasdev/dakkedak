@@ -1,5 +1,6 @@
 import { useState } from "react";
-import ProductCard, { Product } from "./ProductCard";
+import ProductCard from "./ProductCard";
+import { Product } from "./Product";
 import { IconMoodCry } from "@tabler/icons-react";
 import ProductFilters from "./ProductFilters";
 

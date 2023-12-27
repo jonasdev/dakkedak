@@ -3,7 +3,7 @@ import { IconHeart } from "@tabler/icons-react";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 // import useSound from "use-sound";
-import { Product } from "./ProductCard";
+import { Product } from "./Product";
 
 interface Props {
   product: Product;

@@ -1,4 +1,4 @@
-import { Product } from "@/components/ProductCard";
+import { Product } from "@/components/Product";
 import ProductList from "@/components/ProductList";
 import { beautifyUrl, revertBeautifyUrl } from "@/utils/beautifyUrl";
 import { getFeeds } from "@/utils/getFeeds";

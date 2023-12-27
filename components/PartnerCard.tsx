@@ -11,7 +11,7 @@ export default function PartnerCard({ partner }: Props) {
 
   const { name, description, href, image } = partner;
   return (
-    <div className="relative grid grid-rows-3 grid-cols-1 overflow-hidden rounded-lg min-w-full bg-white shadow-xl p-4 sm:p-6 lg:p-8">
+    <div className="relative grid grid-rows-3 grid-cols-1 overflow-hidden rounded-lg min-w-full bg-white shadow-xl p-6 lg:p-8">
       <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-primary to-primary-dark"></span>
 
       <div className="flex justify-between items-center mb-6">

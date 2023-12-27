@@ -4,27 +4,19 @@ import classNames from "classnames";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
 import { Product } from "./Product";
-import { HighlightedCategory } from "@/types/types";
-import HighlightedCategoryCard from "./HighlightedCategoryCard";
 
 type Props = {
-  highlightedCategories: HighlightedCategory[];
+  products: Product[];
 };
 
-export default function HighlightedCategoryCarousel({
-  highlightedCategories,
-}: Props) {
+export default function ProductCarousel({ products }: Props) {
   const [curr, setCurr] = useState(0);
 
   const setPreviousSlide = () =>
-    setCurr((curr) =>
-      curr === 0 ? highlightedCategories.length - 1 : curr - 1
-    );
+    setCurr((curr) => (curr === 0 ? products.length - 1 : curr - 1));
 
   const setNextSlide = () =>
-    setCurr((curr) =>
-      curr === highlightedCategories.length - 1 ? 0 : curr + 1
-    );
+    setCurr((curr) => (curr === products.length - 1 ? 0 : curr + 1));
 
   const [touchPosition, setTouchPosition] = useState<number | null>(null);
 
@@ -62,17 +54,17 @@ export default function HighlightedCategoryCarousel({
         onTouchStart={(e) => handleTouchStart(e)}
         onTouchMove={(e) => handleTouchMove(e)}
       >
-        {highlightedCategories.map((category, i) => (
+        {products.map((s, i) => (
           <div className="w-full min-w-full flex flex-col items-center" key={i}>
             <div className="w-10/12 h-full items-center justify-center grid grid-cols-1 grid-flow-row-dense">
-              <HighlightedCategoryCard {...category} key={i} />
+              <ProductCard product={s} key={i} productCategory="barnevogne" />
             </div>
           </div>
         ))}
       </div>
       <div className="absolute bottom-0 left-0 right-0">
         <div className="flex h-5 items-center justify-center gap-4">
-          {highlightedCategories.map((_, i) => (
+          {products.map((_, i) => (
             <div
               className={classNames(
                 curr === i ? "h-4 w-4" : "h-3 w-3 bg-opacity-50",

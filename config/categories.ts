@@ -163,7 +163,7 @@ export const fodtoejCategories: Category[] = [
   },
   {
     slug: "vinter-og-termostoevler",
-    name: "Vinter og Termostøvler",
+    name: "Vinter- og termostøvler",
     regex: "Vinterstøvler|Termostøvler|Bamsestøvlen|Støvle",
   },
   {
@@ -691,7 +691,7 @@ export const legetoejUdendoersCategories: Category[] = [
       "Vandpistol|Legetøj til sand og vand|Børnepools|Vandlegetøj|Badebassin|Sandkasser og tilbehør",
   },
   {
-    slug: "telte|legehuse",
+    slug: "telte-legehuse",
     name: "Telte og legehuse",
     regex:
       "Telt|Tipi|baby products > baby gear > play tents & shades|Uv-telt|Legehus, telt & Tipi",

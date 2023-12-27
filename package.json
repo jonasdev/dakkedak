@@ -17,6 +17,7 @@
     "react": "^18",
     "react-cookie-consent": "^9.0.0",
     "react-dom": "^18",
+    "tailwind-scrollbar": "^3.0.5",
     "use-sound": "^4.0.1",
     "xml2js": "^0.6.2"
   },
