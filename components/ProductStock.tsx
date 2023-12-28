@@ -4,7 +4,7 @@ import React from "react";
 
 type Props = {
   inStock?: string;
-  size: "lg" | "sm";
+  size?: "lg" | "sm";
 };
 
 export default function ProductStock({ inStock, size = "lg" }: Props) {

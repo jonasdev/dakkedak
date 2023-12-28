@@ -4,6 +4,7 @@ import About from "./home/About";
 import Blog from "./home/Blog";
 import HighlightedCategories from "./home/HighlightedCategories";
 import Head from "next/head";
+import FeatureHighlight from "./home/HighlightedFeatures";
 
 export default function Home() {
   return (
@@ -20,7 +21,8 @@ export default function Home() {
         <HighlightedProducts />
         <About />
         <HighlightedCategories />
-        {/* <Blog /> */}
+        <FeatureHighlight />
+        <Blog />
       </div>
     </>
   );

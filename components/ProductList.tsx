@@ -17,7 +17,7 @@ export default function ProductList({ products, title }: Props) {
   );
 
   return (
-    <section className="w-full flex flex-col lg:w-10/12 pt-10 min-h-[70vh]">
+    <section className="w-full flex flex-col lg:w-10/12 pt-10 min-h-[70vh] pb-12">
       <h1 className="text-3xl lg:text-6xl font-semibold text-center mb-8">
         {title}
       </h1>

@@ -1,40 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  IconBabyBottle,
   IconBed,
-  IconBriefcase,
   IconBriefcase2,
   IconClock,
-  IconDeviceMobile,
   IconDots,
   IconGift,
   IconHeart,
   IconHeartHandshake,
   IconHorseToy,
   IconListCheck,
-  IconLuggage,
   IconMoodHeart,
   IconShirt,
-  IconSoup,
   IconTag,
   IconTree,
-  IconZzz,
 } from "@tabler/icons-react";
-import AppLink, { AppLinkProps } from "./AppLink";
+import AppLink from "./AppLink";
 import SideMenu from "./SideMenu";
 import { FavoriteItem } from "./FavoriteButton";
 import { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
 import CategoryList from "./CategoryList";
 import {
-  Category,
   CategorySet,
   barselOgVentetidCategoriesSet,
   boernevaerelsetCategorySet,
   gaverCategoriesSet,
   legetoejCategorySet,
-  moeblerCategorySet,
   paaTurCategorySet,
   spisetidOgPlejeCategoriesSet,
   toejOgSkoCategorySet,
@@ -48,19 +40,6 @@ export interface ICategoryList {
 }
 
 export default function Navbar() {
-  // const links: Array<AppLinkProps> = [
-  //   { href: "#", text: "På farten", icon: <IconCar /> },
-  //   { href: "#", text: "Spisetid", icon: <IconSoup /> },
-  //   { href: "#", text: "Sovetid", icon: <IconZzz /> },
-  //   { href: "/toej-og-sko", text: "Tøj og sko", icon: <IconShirt /> },
-  //   { href: "#", text: "Amning", icon: <IconBabyBottle /> },
-  //   { href: "#", text: "Ventetid og barsel", icon: <IconClock /> },
-  //   { href: "#", text: "Legetøj", icon: <IconHorseToy /> },
-  //   { href: "#", text: "Grej", icon: <IconDeviceMobile /> },
-  //   { href: "#", text: "Pleje", icon: <IconMedicineSyrup /> },
-  //   { href: "/diverse", text: "Diverse", icon: <IconDots /> },
-  // ];
-
   const categoryLists: Array<ICategoryList> = [
     {
       categorySet: paaTurCategorySet,
@@ -102,17 +81,6 @@ export default function Navbar() {
       title: "Gaver",
       icon: <IconGift />,
     },
-
-    // { href: "#", text: "På farten", icon: <IconCar /> },
-    // { href: "#", text: "Spisetid", icon: <IconSoup /> },
-    // { href: "#", text: "Sovetid", icon: <IconZzz /> },
-    // { href: "/toej-og-sko", text: "Tøj og sko", icon: <IconShirt /> },
-    // { href: "#", text: "Amning", icon: <IconBabyBottle /> },
-    // { href: "#", text: "Ventetid og barsel", icon: <IconClock /> },
-    // { href: "#", text: "Legetøj", icon: <IconHorseToy /> },
-    // { href: "#", text: "Grej", icon: <IconDeviceMobile /> },
-    // { href: "#", text: "Pleje", icon: <IconMedicineSyrup /> },
-    // { href: "/diverse", text: "Diverse", icon: <IconDots /> },
   ];
 
   const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
@@ -145,15 +113,6 @@ export default function Navbar() {
         </div>
         <div className="lg:flex items-center space-x-6 hidden">
           <AppLink
-            href="/brands"
-            icon={
-              <span className="relative inline-block">
-                <IconTag />
-              </span>
-            }
-            text="Mærker"
-          />
-          <AppLink
             href="/partnere"
             icon={
               <span className="relative inline-block">
@@ -163,6 +122,15 @@ export default function Navbar() {
             text="Partnere"
           />
           <AppLink
+            href="/brands"
+            icon={
+              <span className="relative inline-block">
+                <IconTag />
+              </span>
+            }
+            text="Mærker"
+          />
+          {/* <AppLink
             href="/tjekliste"
             icon={
               <span className="relative inline-block">
@@ -170,7 +138,7 @@ export default function Navbar() {
               </span>
             }
             text="Tjekliste"
-          />
+          /> */}
           <AppLink
             href="/favoritter"
             icon={

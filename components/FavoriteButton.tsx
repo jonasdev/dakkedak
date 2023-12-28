@@ -71,13 +71,13 @@ export default function FavoriteButton({ product, category, size }: Props) {
         toggleFavorite();
       }}
       className={classNames(
-        "flex justify-center items-center rounded-full bg-white p-2 ring-opacity-60 text-gray-900 transition hover:bg-primary hover:bg-opacity-10"
+        "flex group/favoriteBtn justify-center items-center rounded-full bg-white p-2 ring-opacity-60 text-slate-900 transition duration-200 hover:bg-neutral-100 shadow-lg"
       )}
     >
       <IconHeart
         className={classNames(
           isFavorite ? "fill-primary-dark stroke-primary-dark" : "fill-blue-50",
-          "active:scale-125 transition duration-150"
+          "group-active/favoriteBtn:scale-125  transition duration-150"
         )}
         size={size === "lg" ? 20 : 16}
       />

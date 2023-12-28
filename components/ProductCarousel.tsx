@@ -57,7 +57,7 @@ export default function ProductCarousel({ products }: Props) {
         {products.map((s, i) => (
           <div className="w-full min-w-full flex flex-col items-center" key={i}>
             <div className="w-10/12 h-full items-center justify-center grid grid-cols-1 grid-flow-row-dense">
-              <ProductCard product={s} key={i} productCategory="barnevogne" />
+              <ProductCard product={s} key={i} />
             </div>
           </div>
         ))}

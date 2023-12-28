@@ -38,7 +38,7 @@ export type Partner = {
   name: string;
   href: string | Url;
   description: string;
-  image: string | ReactNode;
+  image: string;
 };
 
 export const partners: Array<Partner> = [

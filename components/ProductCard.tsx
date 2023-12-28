@@ -5,6 +5,7 @@ import FavoriteButton from "./FavoriteButton";
 import ProductStock from "./ProductStock";
 import { Product } from "@/types/types";
 import Link from "next/link";
+import ChecklistButton from "./ChecklistButton";
 
 export type ProductCardProps = {
   product: Product;
@@ -30,7 +31,12 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <article className="group relative flex flex-col justify-between overflow-hidden rounded-lg shadow-xl col-span-1">
-      <div className="absolute end-4 top-4 z-20">
+      <div className="absolute end-4 flex gap-x-3 top-4 z-20">
+        <ChecklistButton
+          product={product}
+          category={category || ""}
+          size="sm"
+        />
         <FavoriteButton product={product} category={category || ""} size="sm" />
       </div>
       {/* <div className="absolute start-4 top-4 z-20">
@@ -53,7 +59,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
       </Link>
 
-      <div className="relative border border-gray-100 bg-gray-100 p-6 h-full flex flex-col justify-between">
+      <div className="relative border border-gray-200 bg-gray-100 p-6 h-full flex flex-col justify-between">
         <div className="flex justify-between">
           <span className="h-6">
             {(brand || shop) && (

@@ -4,7 +4,7 @@ export type CardType = {
   text?: string;
 };
 
-export default function Card({ icon, title, text }: CardType) {
+export default function AboutCard({ icon, title, text }: CardType) {
   return (
     <div className="relative z-10 flex h-full max-h-full w-full flex-col justify-between space-y-8 rounded-3xl bg-white px-8 pb-12 pt-8 shadow-2xl">
       <div className="flex items-center justify-start border-b-2 pb-4 ">

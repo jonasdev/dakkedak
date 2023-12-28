@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="canonical" href={canonical} />
       </Head>
-      <div className="flex flex-col items-center justify-between w-full bg-secondary">
+      <div className="flex flex-col items-center justify-between w-full bg-secondary text-slate-900">
         <Navbar />
         <Component {...pageProps} />
         <Cookies />
