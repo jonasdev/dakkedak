@@ -6,8 +6,11 @@ import decodeString from "./decodeString";
 import { beautifyUrl } from "./beautifyUrl";
 import { partnerFeeds } from "@/config/partners";
 import combineSimilarProducts from "./combineSimilarProducts";
+import { Product } from "@/types/types";
+import fs from "fs";
+import { generateSitemap } from "./generateSitemap";
 
-const badProducts = [
+const badProducts: string[] = [
   "test-vare-1",
   "test-vare-2",
   "test-vare-3",
@@ -17,13 +20,16 @@ const badProducts = [
   "juleindpakning-og-kort",
 ];
 
-export const getFeeds = async (filter = null, api = false) => {
-  let products = [];
+export const getFeeds = async (
+  filter: any = null,
+  api: boolean = false
+): Promise<Product[]> => {
+  let products: Product[] = [];
   if (api && products.length) {
     return products;
   }
 
-  const promises = partnerFeeds.map((partner) =>
+  const promises: Promise<any>[] = partnerFeeds.map((partner) =>
     fetch(partner)
       .then((response) => response.arrayBuffer())
       .then((buffer) => iconv.decode(Buffer.from(buffer), "iso-8859-1"))
@@ -47,47 +53,58 @@ export const getFeeds = async (filter = null, api = false) => {
   );
 
   await Promise.all(promises).then(async (response) => {
-    const result = [].concat.apply([], response);
+    const result = ([] as any[]).concat.apply([], response);
     if (!result || !result.length) return [];
 
     console.log("Total products!: ", result.length);
-    result.forEach((product, key) => {
+    result.forEach((product: any, key: number) => {
       products.push({
         productKey: key,
-        shop: product?.forhandler?.[0] || null,
-        originalCategory: product?.kategorinavn?.[0],
+        shop: product?.forhandler?.[0] || "",
+        originalCategory: product?.kategorinavn?.[0] || null,
         category: handleCategory(product) || null,
         title: product?.produktnavn?.[0]
           ? decodeString(product?.produktnavn?.[0] || "")
-          : null,
-        price: product?.nypris?.[0] || null,
-        oldPrice: product?.glpris?.[0] || null,
+          : "",
+        price: product?.nypris?.[0] || "",
+        oldPrice: product?.glpris?.[0] || "",
+        // discount:
+        //   Number(product?.glpris?.[0]) - Number(product?.nypris?.[0]) || null,
         discount:
-          Number(product?.glpris?.[0]) - Number(product?.nypris?.[0]) || null,
-        url: product?.vareurl?.[0] || null,
-        image: product?.billedurl?.[0] || null,
+          (
+            (Number(product?.nypris?.[0]) / Number(product?.glpris?.[0])) *
+            100
+          ).toFixed() || null,
+        url: product?.vareurl?.[0] || "",
+        image: product?.billedurl?.[0] || "",
         brand: product?.brand?.[0] ? decodeString(product?.brand?.[0]) : null,
-        description: formatDescription(product?.beskrivelse?.[0]) || null,
-        id: product?.produktid?.[0] || null,
-        inStock: product?.lagerantal?.[0] || null, // (in_stock / "backorder")
-        keywords: product?.produktnavn?.[0]?.split(" ") || null,
-        sku: product?.ean?.[0] || null,
+        description: formatDescription(product?.beskrivelse?.[0]) || "",
+        id: product?.produktid?.[0] || "",
+        inStock: product?.lagerantal?.[0] || "",
+        keywords: product?.produktnavn?.[0]?.split(" ") || [],
+        sku: product?.ean?.[0] || "",
         path: beautifyUrl(product?.produktnavn?.[0]),
       });
     });
   });
 
   const filteredBadProducts = products.filter(
-    (product) => !badProducts.includes(product.path)
+    (product) => !badProducts.includes(product.path || "")
   );
+
+  const sitemapPath = "public/sitemap.xml";
+  fs.readFile(sitemapPath, (noSitemap, data) => {
+    if (noSitemap) {
+      generateSitemap(filteredBadProducts);
+      console.log("Sitemap.xml created!");
+    }
+  });
 
   const productsByFilter = filter
     ? handleFilter(filteredBadProducts, filter)
     : filteredBadProducts;
 
-  // const trimmedByDifferentSize = combineSimilarProducts(productsByFilter);
-
-  const uniqueCombinations = new Set();
+  const uniqueCombinations = new Set<string>();
 
   const productsToReturn = productsByFilter.filter((product) => {
     const combination = `${product.category}-${product.path}`;
@@ -101,13 +118,11 @@ export const getFeeds = async (filter = null, api = false) => {
   return productsToReturn;
 };
 
-export const handleFilter = (products, filter) => {
-  let filterProducts = [...products];
+export const handleFilter = (products: Product[], filter: any): Product[] => {
+  let filterProducts: Product[] = [...products];
   const { category, title, shop, others, brands } = filter;
 
   filterProducts = filterProducts.filter((product) => {
-    // Filter by category
-
     if (category && product.category === category) return product;
 
     if (

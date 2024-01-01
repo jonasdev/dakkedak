@@ -2,21 +2,22 @@ import { Url } from "next/dist/shared/lib/router/router";
 
 export type Product = {
   productKey: number | string;
-  shop?: string;
-  category?: string;
+  shop: string;
+  category?: string | null;
+  originalCategory?: string | null;
   title: string;
   price: string;
-  oldPrice?: string;
-  discount?: number;
+  oldPrice?: string | null;
+  discount?: number | null;
   url: string;
-  description?: string;
+  description: string;
   image: string;
-  brand?: string;
-  id?: string;
-  inStock?: string;
-  keywords?: string[];
-  sku?: string;
-  path?: string;
+  brand?: string | null;
+  id: string;
+  inStock: string;
+  keywords?: string[] | null;
+  sku?: string | null;
+  path: string;
 };
 
 export type HighlightedCategory = {

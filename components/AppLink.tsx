@@ -20,7 +20,7 @@ export default function AppLink({
     <Link
       href={href}
       onClick={onClickAction}
-      className="group font-semibold transition duration-300 text-sm lg:text-xs"
+      className="group font-semibold transition duration-300 text-sm lg:text-xs inline-block w-fit"
     >
       <div
         className={classNames(

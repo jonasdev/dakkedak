@@ -11,10 +11,15 @@ import {
 } from "@tabler/icons-react";
 import { ICategoryList } from "./Navbar";
 import CategoryAccordion from "./CategoryAccordion";
+import Link from "next/link";
 
 type Props = {
   categoryLists: Array<ICategoryList>;
 };
+
+function SideMenuAppLink() {
+  return;
+}
 
 export default function SideMenu({ categoryLists }: Props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +50,7 @@ export default function SideMenu({ categoryLists }: Props) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex h-full max-h-[90%] overflow-y-scroll w-full flex-col items-start z-40 space-y-12 text-3xl text-white">
+        <div className="flex h-full overflow-y-scroll sm:overflow-hidden pt-16 pb-10 w-full flex-col items-start z-40 space-y-12 text-3xl text-white">
           <div className="w-full space-y-2">
             {categoryLists.map((list) => (
               <CategoryAccordion
@@ -56,45 +61,42 @@ export default function SideMenu({ categoryLists }: Props) {
                 key={list.title}
               />
             ))}
-          </div>
-          <div className="p-4">
-            <AppLink
-              href="/brands"
-              icon={
-                <span className="relative inline-block">
-                  <IconTag />
-                </span>
-              }
-              text="Mærker"
-              onClickAction={toggleSidebar}
-            />
-            <AppLink
-              href="/partnere"
-              icon={
-                <span className="relative inline-block">
-                  <IconHeartHandshake />
-                </span>
-              }
-              text="Partnere"
-              onClickAction={toggleSidebar}
-            />
-            <AppLink
-              href="/tjekliste"
-              icon={
-                <span className="relative inline-block">
-                  <IconListCheck />
-                </span>
-              }
-              text="Tjekliste"
-              onClickAction={toggleSidebar}
-            />
-            <AppLink
-              href="/favoritter"
-              icon={<IconHeart />}
-              text="Favoritter"
-              mode="light"
-              onClickAction={toggleSidebar}
-            />
+            <div className="px-4">
+              <div className="space-y-6 border-t pt-6">
+                <Link
+                  href="/favoritter"
+                  className="text-lg flex items-center"
+                  onClick={toggleSidebar}
+                >
+                  <IconHeart className="mr-2" />
+                  Favoritter
+                </Link>
+                <Link
+                  href="/brands"
+                  className="text-lg flex items-center"
+                  onClick={toggleSidebar}
+                >
+                  <IconTag className="mr-2" />
+                  Mærker
+                </Link>
+                <Link
+                  href="/partnere"
+                  className="text-lg flex items-center"
+                  onClick={toggleSidebar}
+                >
+                  <IconHeartHandshake className="mr-2" />
+                  Partnere
+                </Link>
+                <Link
+                  href="/tjekliste"
+                  className="text-lg flex items-center"
+                  onClick={toggleSidebar}
+                >
+                  <IconListCheck className="mr-2" />
+                  Tjekliste
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

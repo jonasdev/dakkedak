@@ -3,19 +3,19 @@ import { Product } from "@/components/Product";
 import { getFeeds } from "@/utils/getFeeds";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data = {
-  feed: any;
+type ProductFeed = {
+  products: any;
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ProductFeed>
 ) {
   const feed = await getFeeds(null, true);
 
   const queryString = (req.query.query as string).toLowerCase();
 
-  if (queryString.length <= 2) return res.status(200).json({ feed: [] });
+  if (queryString.length <= 2) return res.status(200).json({ products: [] });
 
   const filteredProducts = (feed as Product[]).filter(
     (product) =>
@@ -25,5 +25,5 @@ export default async function handler(
       product.shop?.toLowerCase()?.includes(queryString)
   );
 
-  res.status(200).json({ feed: filteredProducts });
+  res.status(200).json({ products: filteredProducts });
 }

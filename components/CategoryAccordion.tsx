@@ -96,18 +96,17 @@ export default function CategoryAccordion({
                   {key}
                 </strong>
                 {Object.values(categoriesSorted).map((category) => (
-                  <li key={category.name}>
+                  <li key={category.name} className="w-full">
                     <Link
                       href={`/${category.slug}`}
                       className={classNames(
                         isActive
                           ? "pointer-events-auto"
                           : "pointer-events-none",
-                        "text-base flex items-center justify-between"
+                        "text-base flex items-center justify-between py-1.5"
                       )}
                     >
                       <span onClick={onPageChange}>{category.name}</span>
-                      <IconTriangleFilled className="rotate-90" size={8} />
                     </Link>
                   </li>
                 ))}

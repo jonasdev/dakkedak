@@ -18,8 +18,17 @@ type Props = {
 export default function ProductDetails({ product, relatedProducts }: Props) {
   console.log("CURRENT PRODUCT: ", product);
 
-  const { image, brand, oldPrice, price, title, url, description, inStock } =
-    product;
+  const {
+    brand,
+    description,
+    discount,
+    image,
+    inStock,
+    oldPrice,
+    price,
+    title,
+    url,
+  } = product;
 
   const renderStock = () => {
     if (inStock) {
@@ -74,9 +83,9 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
                     {brand}
                   </span>
                 )}
-                {price && oldPrice && price !== oldPrice && (
+                {price && oldPrice && price !== oldPrice && discount && (
                   <span className="ml-2 whitespace-nowrap w-fit bg-white text-primary border-primary border px-3 py-1.5 text-xs font-medium capitalize">
-                    På tilbud
+                    -{100 - discount}%
                   </span>
                 )}
               </div>

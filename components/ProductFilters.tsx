@@ -112,16 +112,16 @@ export default function ProductFilters({
           <IconSearch className="text-gray-600 col-span-1" />
         </span>
       </div>
-      <div className="w-full lg:w-fit">
+      <div className="w-full lg:w-fit max-w-lg">
         <select
           id="sort"
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-            setSortOption(event.target.value)
+            setSortOption(event.target.value as SortingOption)
           }
-          className="w-full flex rounded-lg border-gray-300 sm:text-sm py-2 px-3 leading-tight focus:outline-none"
+          className="w-full flex rounded-lg border-gray-300 sm:text-sm py-2 px-3 leading-tight focus:outline-none border-r-8 border-r-transparent"
         >
           {Object.entries(sortingOptions).map(([label, option], index) => (
-            <option key={index} value={option} className="hover:bg-primary">
+            <option key={index} value={option} className="">
               {label}
             </option>
           ))}

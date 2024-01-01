@@ -52,7 +52,7 @@ export default function Searchbar() {
       fetchDataFromAPI(searchQuery)?.then((data: ApiResponse) => {
         console.log(data);
 
-        setSearchResults(data.feed);
+        setSearchResults(data.products);
       });
     } else {
       setSearchResults([]);
@@ -60,7 +60,7 @@ export default function Searchbar() {
   }, [searchQuery]);
 
   return (
-    <div className="lg:w-[550px]">
+    <div className="lg:w-96 xl:w-[550px]">
       <div className="relative border border-black rounded-lg min-w-full">
         <label htmlFor="Search" className="sr-only">
           Search

@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { Product } from "@/components/Product";
 import ProductList from "@/components/ProductList";
 import { categories } from "@/config/categories";
+import Head from "next/head";
 
 interface ICategoryPage {
   category: {
@@ -13,7 +14,20 @@ interface ICategoryPage {
 }
 
 export default function CategoryPage({ category, products }: ICategoryPage) {
-  return <ProductList products={products} title={category.name} />;
+  const lowerCasedCategoryName = category?.name?.toLowerCase() || "";
+  return (
+    <>
+      <Head>
+        <title>{category.name} - Babyhaj</title>
+        <meta
+          name="description"
+          content={`Se det brede udvalg af ${lowerCasedCategoryName} og find det helt rigtige til netop dit barn.`}
+        />
+      </Head>
+
+      <ProductList products={products} title={category.name} />
+    </>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

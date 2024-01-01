@@ -11,7 +11,7 @@ export const highlightesCategories: HighlightedCategory[] = [
   {
     name: "Sutter",
     href: "/sutter",
-    categorySet: "Spisetid og pleje",
+    categorySet: "Pleje",
     img: "/highlightedCategories/sut.png",
     size: "sm",
   },
@@ -19,14 +19,14 @@ export const highlightesCategories: HighlightedCategory[] = [
   {
     name: "Højstole",
     href: "/hoejstole",
-    categorySet: "Børneværelset",
+    categorySet: "Spisetid",
     img: "/highlightedCategories/hoejstol.jpg",
     size: "lg",
   },
   {
     name: "Puslepuder",
     href: "/puslepuder-og-hynder",
-    categorySet: "Spisetid og pleje",
+    categorySet: "Pleje",
     img: "/highlightedCategories/puslepude.jpg",
     size: "lg",
   },
@@ -40,7 +40,7 @@ export const highlightesCategories: HighlightedCategory[] = [
   {
     name: "Uroer",
     href: "/uroer",
-    categorySet: "Legetid",
+    categorySet: "Børneværelset",
     img: "/highlightedCategories/uroer.jpg",
     size: "sm",
   },
@@ -48,7 +48,7 @@ export const highlightesCategories: HighlightedCategory[] = [
     name: "Bodyer",
     href: "/bodyer",
     categorySet: "Tøj og sko",
-    img: "/highlightedCategories/bodysuit.jpg",
+    img: "/highlightedCategories/bodyer.jpg",
     size: "sm",
   },
   {

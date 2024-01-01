@@ -3,11 +3,13 @@ import AppLink from "./AppLink";
 import Image from "next/image";
 import { Url } from "next/dist/shared/lib/router/router";
 import {
+  IconAddressBook,
   IconChecklist,
   IconCookie,
   IconHeart,
   IconHeartHandshake,
   IconListCheck,
+  IconMapCode,
   IconMessage2,
   IconPrismOff,
   IconTag,
@@ -49,12 +51,12 @@ export default function Footer() {
           <Image alt="hdr-logo" src="/logo.svg" height={125} width={250} />
         </div>
         <div className="flex justify-center">
-          <div className="grid grid-cols-2 gap-x-20 lg:gap-x-40 border-t border-gray-100 pt-8 lg:pt-12">
+          <div className="grid grid-cols-3 gap-x-10 lg:gap-x-40 border-t border-gray-100 pt-8 lg:pt-12">
             <FooterList
               title="Babyhaj"
               links={[
                 {
-                  href: "/",
+                  href: "/om",
                   text: "Om os",
                   icon: <IconUserCircle size={16} />,
                 },
@@ -68,11 +70,6 @@ export default function Footer() {
                   text: "Mærker",
                   icon: <IconTag size={16} />,
                 },
-                {
-                  href: "/cookies",
-                  text: "Cookies",
-                  icon: <IconCookie size={16} />,
-                },
               ]}
             />
 
@@ -85,19 +82,34 @@ export default function Footer() {
                   icon: <IconHeart size={16} />,
                 },
                 {
-                  href: "/tjeliste",
+                  href: "/tjekliste",
                   text: "Tjekliste",
                   icon: <IconListCheck size={16} />,
-                },
-                {
-                  href: "/faqs",
-                  text: "FAQs",
-                  icon: <IconMessage2 size={16} />,
                 },
                 {
                   href: "/blog",
                   text: "Blog",
                   icon: <IconTextCaption size={16} />,
+                },
+                {
+                  href: `mailto:${["bvoelund", "@", "hotmail.com"].join("")}`,
+                  text: "Kontakt",
+                  icon: <IconAddressBook size={16} />,
+                },
+              ]}
+            />
+            <FooterList
+              title="Teknisk"
+              links={[
+                {
+                  href: "/cookies",
+                  text: "Cookies",
+                  icon: <IconCookie size={16} />,
+                },
+                {
+                  href: "/sitemap.xml",
+                  text: "Sitemap",
+                  icon: <IconMapCode size={16} />,
                 },
               ]}
             />

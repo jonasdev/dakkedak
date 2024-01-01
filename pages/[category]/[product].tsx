@@ -1,5 +1,6 @@
 import ProductDetails from "@/components/ProductDetails";
 import { categories } from "@/config/categories";
+import { Product } from "@/types/types";
 import { getFeeds } from "@/utils/getFeeds";
 import getRelatedProducts from "@/utils/getRelatedProducts";
 import { InferGetStaticPropsType } from "next";
@@ -9,14 +10,20 @@ import React from "react";
 export default function ProductPage({
   product,
   relatedProducts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: {
+  product: Product;
+  relatedProducts: Product[];
+}) {
+  const lowerCasedCategoryName = product.category?.toLowerCase() || "";
   return (
     <>
       <Head>
         <title>{product.title}</title>
         <meta
           name="description"
-          content={`Find den helt rigtige slyngevugge til dit barn. Det kunne f.eks. være en ${product.title} fra ${product.shop}.`}
+          content={`Find den helt rigtige ${lowerCasedCategoryName} til dit barn. Det kunne f.eks. være en ${
+            product.title
+          } fra ${product.brand || product.shop}.`}
         />
       </Head>
 

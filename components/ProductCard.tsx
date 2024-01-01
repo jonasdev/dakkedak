@@ -14,17 +14,16 @@ export type ProductCardProps = {
 export default function ProductCard({ product }: ProductCardProps) {
   const {
     brand,
+    category,
+    discount,
+    image,
+    inStock,
+    oldPrice,
+    price,
+    path,
+    shop,
     title,
     url,
-    price,
-    oldPrice,
-    image,
-    productKey,
-    category,
-    id,
-    shop,
-    path,
-    inStock,
   } = product;
 
   const [imgSrc, setImgSrc] = useState(image);
@@ -67,9 +66,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {brand || shop}
               </span>
             )}
-            {price && oldPrice && price !== oldPrice && (
+            {price && oldPrice && price !== oldPrice && discount && (
               <span className="ml-2 whitespace-nowrap w-fit bg-white text-primary border-primary border px-3 py-1.5 text-xs font-medium">
-                Nedsat
+                -{100 - discount}%
               </span>
             )}
           </span>

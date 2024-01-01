@@ -31,7 +31,7 @@ export default function PartnerCard({ partner }: Props) {
       </div>
 
       <div className="mt-6 flex justify-center gap-4 sm:gap-6">
-        <Button href={href} text="Gå til forhandler" newTab />
+        <Button href={href} text="Besøg forhandler" newTab />
       </div>
     </div>
   );
