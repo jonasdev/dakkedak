@@ -31,11 +31,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <article className="group relative flex flex-col justify-between overflow-hidden rounded-lg shadow-xl col-span-1">
       <div className="absolute end-4 flex gap-x-3 top-4 z-20">
-        <ChecklistButton
+        {/* <ChecklistButton
           product={product}
           category={category || ""}
           size="sm"
-        />
+        /> */}
         <FavoriteButton product={product} category={category || ""} size="sm" />
       </div>
       {/* <div className="absolute start-4 top-4 z-20">
@@ -54,6 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           src={image}
           alt={`product-${title}`}
           className="min-h-[256px] h-64 w-full object-contain transition duration-500 group-hover:scale-105 sm:h-72 sm:min-h-[288px] bg-white"
+          loading="lazy"
           // onError={() => setImgSrc(<IconPhoto />)}
         />
       </Link>

@@ -1,4 +1,3 @@
-import { categories } from "@/config/categories";
 import { Product } from "@/types/types";
 import fs from "fs";
 
@@ -6,8 +5,6 @@ export const generateSitemap = async (products: Product[] = []) => {
   const pages = [...products]
     .map((product) => {
       const { category, path } = product;
-      console.log(category);
-      console.log(path);
 
       if (!category || !path) return null;
 
@@ -15,6 +12,7 @@ export const generateSitemap = async (products: Product[] = []) => {
     })
     .filter((e) => e !== null);
 
+  //@ts-ignore
   const routes = [...new Set(pages)];
 
   const rootUrl =

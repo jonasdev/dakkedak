@@ -1,8 +1,8 @@
 "use client";
+import { Product } from "@/types/types";
 import { IconCheck, IconListCheck } from "@tabler/icons-react";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { Product } from "./Product";
 
 interface Props {
   product: Product;

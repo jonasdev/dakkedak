@@ -1,5 +1,4 @@
 import { beautifyUrl } from "@/utils/beautifyUrl";
-import Link from "next/link";
 import { useRef } from "react";
 import AppLink from "./AppLink";
 
@@ -8,28 +7,10 @@ type Props = {
 };
 
 export default function BrandsList({ brands }: Props) {
-  const uniqueBrands: string[] = brands.reduce(
-    (unique: string[], brand: string) => {
-      if (brand !== undefined) {
-        const lowercaseBrand = brand.toLowerCase();
-        const isDuplicate = unique.some(
-          (existingBrand) => existingBrand.toLowerCase() === lowercaseBrand
-        );
-        if (!isDuplicate) {
-          unique.push(brand);
-        }
-      }
-      return unique;
-    },
-    []
-  );
-
   // Sort unique brands alphabetically
-  const sortedBrands: string[] = uniqueBrands.sort((a: string, b: string) =>
-    a.localeCompare(b)
-  );
 
-  const brandsByLetter: { [key: string]: string[] } = sortedBrands.reduce(
+  // Sort brands by letter
+  const brandsByLetter: { [key: string]: string[] } = brands.reduce(
     (acc: { [key: string]: string[] }, brand: string) => {
       const firstLetter = brand.charAt(0).toUpperCase();
       if (!acc[firstLetter]) {
@@ -71,7 +52,6 @@ export default function BrandsList({ brands }: Props) {
         <div className="flex h-full flex-row lg:flex-col justify-between">
           <div className="flex absolute right-0 top-5 sm:static justify-center order-last lg:order-first mr-2 lg:mr-0 h-fit">
             <div className="bg-primary text-white text-sm lg:text-lg p-2 rounded mb-10 w-fit">
-              {/* Navbar to scroll to each letter section */}
               <ul
                 className="list-none flex flex-col px-4 space-y-2 lg:space-y-0 items-center lg:flex-row p-0 lg:space-x-4"
                 ref={navRef}
@@ -96,12 +76,6 @@ export default function BrandsList({ brands }: Props) {
                     const beautyfiedBrand = beautifyUrl(brand);
                     return (
                       <li key={index} className="mb-3">
-                        {/* <Link
-                        href={`/brands/${beautyfiedBrand}`}
-                        className="underline underline-offset-4 decoration-dotted"
-                      >
-                        {brand}
-                      </Link> */}
                         <AppLink
                           href={`/brands/${beautyfiedBrand}`}
                           text={brand}

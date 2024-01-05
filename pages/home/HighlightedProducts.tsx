@@ -1,7 +1,7 @@
 import ProductCarousel from "@/components/ProductCarousel";
 import ProductCard from "@/components/ProductCard";
-import { Product } from "@/components/Product";
 import React from "react";
+import { Product } from "@/types/types";
 
 type HighlightedProduct = {
   product: Product;
@@ -93,7 +93,7 @@ const highlightedProducts: Array<HighlightedProduct> = [
       shop: "Junama",
       category: "autostole",
       title: "Autostol, S-class lyseblå",
-      price: undefined,
+      price: null,
       oldPrice: "1999.00",
       discount: undefined,
       url: "https://www.partner-ads.com/dk/klikbanner.php?bannerid=105813&partnerid=50033&htmlurl=https://junama.dk/da/autostole/133-autostol-s-class-lyserod.html",
@@ -105,6 +105,7 @@ const highlightedProducts: Array<HighlightedProduct> = [
       keywords: ["Autostol,", "S-class", "lyseblå"],
       sku: undefined,
       path: "autostol-s-class-lyseblå",
+      description: "",
     },
   },
 ];
@@ -123,7 +124,7 @@ export default function HighlightedProducts() {
           )}
         />
       </div>
-      <div className="hidden lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4">
+      <div className="hidden lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4 min-h-[530px]">
         {highlightedProducts?.map((highlightedProduct) => (
           <ProductCard
             product={highlightedProduct.product}

@@ -255,6 +255,12 @@ export const udstyrCategories: Category[] = [
 
 export const moeblerCategories: Category[] = [
   {
+    slug: "hoejstole",
+    name: "Højstole og tilbehør",
+    regex:
+      "Hoejstole|Tripp|Højstole|Stokke Steps|Stokke Tripp Trapp|Stokke Clikk|Højstole og tilbehør",
+  },
+  {
     slug: "skraastol",
     name: "Skråstole",
     regex: "Skråstol|skraastol|skråstol|Bouncer|Vippestol",
@@ -328,10 +334,15 @@ export const sovetidCategories: Category[] = [
     regex: "Vugge|Slyngevugge|Vuggemotor|Tilbehør til slyngevugge",
   },
   {
+    slug: "sengehimmel",
+    name: "Sengehimmel",
+    regex: "Sengehimmel",
+  },
+  {
     slug: "sengerand",
     name: "Sengerand",
     regex:
-      "For babies | for babies|Sengerand|Sengerandsslange|Stokke Sleepi|Sengerende",
+      "For babies | for babies|Sengerand|Sengerandsslange|Sengerende|Sengelomme",
   },
   {
     slug: "sengetoej",
@@ -340,20 +351,10 @@ export const sovetidCategories: Category[] = [
       "Babysengetøj|Juniorsengetøj|Dynebetræk|Sengetøj|Sengesæt|Sengesæt og lagner",
   },
   {
-    slug: "sengehimmel",
-    name: "Sengehimmel",
-    regex: "Sengehimmel",
-  },
-  {
-    slug: "sengelomme",
-    name: "Sengelomme",
-    regex: "Sengelomme",
-  },
-  {
     slug: "senge",
     name: "Senge",
     regex:
-      "Kombi-og junior senge|Babyseng|Babysenge|Leander Babysenge|Barneseng|Børneseng|Juniorseng|Boerneseng|Tremmeseng|Voksenseng|Rejsesenge|Sengeudstyr",
+      "Stokke Sleepi|Kombi-og junior senge|Babyseng|Babysenge|Leander Babysenge|Barneseng|Børneseng|Juniorseng|Boerneseng|Tremmeseng|Voksenseng|Rejsesenge|Sengeudstyr",
   },
   {
     slug: "dyner-og-puder",
@@ -374,18 +375,12 @@ export const sovetidCategories: Category[] = [
 ];
 
 export const boernevaerelsetCategories: Category[] = [
-  ...sovetidCategories,
   ...moeblerCategories,
+  ...sovetidCategories,
   ...indretningCategories,
 ];
 
 export const spisetidServiceCategories: Category[] = [
-  {
-    slug: "hoejstole",
-    name: "Højstole og tilbehør",
-    regex:
-      "Hoejstole|Tripp|Højstole|Stokke Steps|Stokke Tripp Trapp|Stokke Clikk|Højstole og tilbehør",
-  },
   {
     slug: "bestik",
     name: "Bestik",
@@ -699,24 +694,11 @@ export const barselOgAmningCategories: Category[] = [
     name: "Brystpumper",
     regex: "Brystpumpe|Mælkebeholder|O-ringe|Ventiler|Tilbehør til brystpumpe",
   },
-];
-
-export const gaverCategories: Category[] = [
   {
-    slug: "gaveposer",
-    name: "Gaveposer",
-    regex: "Giftbag",
-  },
-  {
-    slug: "gaveaesker",
-    name: "Gaveæsker",
+    slug: "gaver",
+    name: "Gaver",
     regex:
-      "Gift Set|Gift Bundle|Babybox|Cuddle up box|Dress me up box|Snuggle up box|Swaddle up box|Sweet dream box",
-  },
-  {
-    slug: "ravsmykker",
-    name: "Ravsmykker",
-    regex: "Barselsgaver|Rav",
+      "Giftbag|Gift Set|Gift Bundle|Babybox|Cuddle up box|Dress me up box|Snuggle up box|Swaddle up box|Sweet dream box|Barselsgaver|Rav",
   },
 ];
 
@@ -728,7 +710,6 @@ export const categories: Category[] = [
   ...toejOgSkoCategories,
   ...udstyrCategories,
   ...legetoejCategories,
-  ...gaverCategories,
 
   {
     slug: "diverse",
@@ -776,8 +757,4 @@ export const legetoejCategorySet: CategorySet = {
 
 export const barselOgVentetidCategoriesSet: CategorySet = {
   "Barsel og amning": { ...barselOgAmningCategories },
-};
-
-export const gaverCategoriesSet: CategorySet = {
-  Gaver: { ...gaverCategories },
 };

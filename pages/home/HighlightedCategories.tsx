@@ -10,7 +10,7 @@ export default function HighlightedCategories() {
 
       <div className="w-full grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 hidden lg:grid">
         {highlightesCategories.map((category) => (
-          <HighlightedCategoryCard {...category} />
+          <HighlightedCategoryCard key={category.name} {...category} />
         ))}
       </div>
       <div className="w-full lg:hidden">

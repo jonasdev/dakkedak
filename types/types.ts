@@ -6,7 +6,7 @@ export type Product = {
   category?: string | null;
   originalCategory?: string | null;
   title: string;
-  price: string;
+  price?: string | null;
   oldPrice?: string | null;
   discount?: number | null;
   url: string;
@@ -26,4 +26,15 @@ export type HighlightedCategory = {
   img: string;
   size: "sm" | "lg";
   href: string | Url;
+};
+
+export type BlogPost = {
+  title: string;
+  date: string;
+  href: Url;
+  img: string;
+  content: {
+    subtitle: string;
+    text: string;
+  }[];
 };

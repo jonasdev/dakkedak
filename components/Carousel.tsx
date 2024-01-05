@@ -2,8 +2,6 @@
 
 import classNames from "classnames";
 import { useState } from "react";
-import ProductCard from "./ProductCard";
-import { Product } from "./Product";
 import { HighlightedCategory } from "@/types/types";
 import HighlightedCategoryCard from "./HighlightedCategoryCard";
 

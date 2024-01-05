@@ -1,15 +1,27 @@
 import { getFeeds } from "@/utils/getFeeds";
 import { GetStaticProps } from "next";
 import BrandsList from "@/components/BrandsList";
-import { ProductCardProps } from "@/components/ProductCard";
-import { Product } from "@/components/Product";
+import Head from "next/head";
 
 interface IBrandsPage {
   brands: string[];
 }
 
 export default function BrandsPage({ brands }: IBrandsPage) {
-  return <BrandsList brands={brands} />;
+  return (
+    <>
+      <Head>
+        <title>Brands og mærker - Babyhaj</title>
+        <meta
+          name="description"
+          content={
+            "Udforsk de mange brands og mærker for produkter som du kan finde her på siden."
+          }
+        />
+      </Head>
+      <BrandsList brands={brands} />
+    </>
+  );
 }
 
 export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
@@ -21,32 +33,23 @@ export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
     };
   }
 
-  const productsBrands: string[] = (products as Product[])
-    .map((product) => product.brand)
-    .filter(
-      (brand) => typeof brand === "string" && brand.length > 0
-    ) as string[];
-
-  const uniqueBrands: string[] = products.reduce(
-    (unique: string[], product: Product) => {
-      if (product.brand) {
-        const primaryBrand = product.brand.split(",")[0].trim(); // Get the primary brand name
-        const lowercaseBrand = primaryBrand.toLowerCase();
-        const isDuplicate = unique.some(
-          (existingBrand) => existingBrand.toLowerCase() === lowercaseBrand
-        );
-        if (!isDuplicate) {
-          unique.push(primaryBrand);
-        }
+  const uniqueBrandsMap: Map<string, string> = new Map();
+  products.forEach((product) => {
+    if (product.brand) {
+      const brandLowerCase = product.brand.toLowerCase();
+      if (!uniqueBrandsMap.has(brandLowerCase)) {
+        uniqueBrandsMap.set(brandLowerCase, product.brand);
       }
-      return unique;
-    },
-    []
+    }
+  });
+
+  const sortedBrands: string[] = Array.from(uniqueBrandsMap.values()).sort(
+    (a: string, b: string) => a.localeCompare(b)
   );
 
   return {
     props: {
-      brands: uniqueBrands,
+      brands: sortedBrands,
     },
   };
 };

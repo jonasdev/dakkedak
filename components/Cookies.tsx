@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import CookieConsent from "react-cookie-consent";
 
@@ -37,16 +39,21 @@ export default function Cookies() {
       >
         🍪 Hjemmesiden anvender cookies til at huske dine indstillinger og
         statistik. Denne information deles med tredjepart.
-        <a
+        <Link
           href="/cookies"
           className="font-semibold underline underline-offset-2 text-primary-dark inline-block ml-1"
         >
           Læs mere
-        </a>{" "}
-        <a href="https://www.minecookies.org" target="_blank" className="">
-          {" "}
-          <img src="/cookies.png" className="w-5 h-auto inline-block ml-1" />
-        </a>
+        </Link>{" "}
+        <Link href="https://www.minecookies.org" target="_blank" className="">
+          <Image
+            alt="cookie-triangle"
+            height={5}
+            width={5}
+            src="/cookies.png"
+            className="w-5 h-auto inline-block ml-1"
+          />
+        </Link>
       </CookieConsent>
     </div>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useMemo } from "react";
 import CategoryLink, { CategoryLinkProps } from "./CategoryLink";
 import { ICategoryList } from "./Navbar";
+import CategoryListItem from "./CategoryListItem";
 
 export type CategorySubList = {
   subtitle: string;
@@ -62,59 +63,7 @@ export default function CategoryList({
         {Object.entries(categorySet).map(([key, cats]) => {
           if (!cats) return null;
 
-          const categoriesSorted = useMemo(() => {
-            const sortedCategories = Object.values(cats)
-              .slice()
-              .sort((a, b) => {
-                const nameA = a.name.toUpperCase();
-                const nameB = b.name.toUpperCase();
-
-                if (nameA.includes("Andet") && !nameB.includes("Andet")) {
-                  return 1; // 'Andet' containing name should be placed at the end
-                } else if (
-                  !nameA.includes("Andet") &&
-                  nameB.includes("Andet")
-                ) {
-                  return -1; // 'Andet' containing name should come after other names
-                } else {
-                  // For names not containing 'Andet', sort alphabetically
-                  if (nameA < nameB) {
-                    return -1;
-                  }
-                  if (nameA > nameB) {
-                    return 1;
-                  }
-                  return 0;
-                }
-              });
-
-            // Move 'Andet' containing entries to the end
-            const andetEntries = sortedCategories.filter((category) =>
-              category.name.toUpperCase().includes("ANDET")
-            );
-
-            const nonAndetEntries = sortedCategories.filter(
-              (category) => !category.name.toUpperCase().includes("ANDET")
-            );
-
-            return [...nonAndetEntries, ...andetEntries];
-          }, []);
-
-          return (
-            <div className="p-2" key={key}>
-              <strong className="block p-2 text-xs font-bold uppercase text-primary-dark">
-                {key}
-              </strong>
-
-              {Object.values(categoriesSorted).map((category) => (
-                <CategoryLink
-                  href={category.slug}
-                  text={category.name}
-                  key={category.name}
-                />
-              ))}
-            </div>
-          );
+          return <CategoryListItem categories={cats} index={key} key={key} />;
         })}
       </div>
     </div>

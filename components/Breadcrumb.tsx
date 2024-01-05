@@ -31,7 +31,7 @@ export default function Breadcrumb() {
 
           const isActive = paths === href;
           return (
-            <li className="flex items-center">
+            <li key={itemLink} className="flex items-center">
               <span
                 className={`block transition hover:text-gray-700 ${
                   isActive ? "font-bold" : ""

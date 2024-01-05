@@ -22,7 +22,7 @@ export default function Home() {
         <About />
         <HighlightedCategories />
         <FeatureHighlight />
-        <Blog />
+        {/* <Blog /> */}
       </div>
     </>
   );

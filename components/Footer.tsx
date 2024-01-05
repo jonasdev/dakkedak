@@ -36,7 +36,12 @@ function FooterList({ links, title }: FooterLinkProps) {
 
       <div className="mt-6 space-y-3 flex flex-col text-sm text-start">
         {links.map(({ href, text, icon }) => (
-          <AppLink href={href} text={text} icon={icon} />
+          <AppLink
+            key={text.trim().toLowerCase()}
+            href={href}
+            text={text}
+            icon={icon}
+          />
         ))}
       </div>
     </div>
@@ -92,7 +97,9 @@ export default function Footer() {
                   icon: <IconTextCaption size={16} />,
                 },
                 {
-                  href: `mailto:${["bvoelund", "@", "hotmail.com"].join("")}`,
+                  href: `mailto:${["bvoelund", ".dev", "@", "gmail.com"].join(
+                    ""
+                  )}`,
                   text: "Kontakt",
                   icon: <IconAddressBook size={16} />,
                 },

@@ -1,11 +1,12 @@
 import { IconArrowRight, IconSearch, IconX } from "@tabler/icons-react";
-import { Product } from "./Product";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import ProductStock from "./ProductStock";
+import { Product } from "@/types/types";
+import Image from "next/image";
 
 interface ApiResponse {
-  products: Product[]; // Modify this according to the structure of your API response
+  products: Product[];
 }
 
 function fetchDataFromAPI(query: string): Promise<ApiResponse> {
@@ -18,19 +19,6 @@ function fetchDataFromAPI(query: string): Promise<ApiResponse> {
     });
 }
 
-// Debounce function implementation
-function debounce<T extends (...args: any[]) => any>(func: T, delay: number) {
-  let timeoutId: NodeJS.Timeout;
-
-  return function (this: any, ...args: Parameters<T>) {
-    clearTimeout(timeoutId);
-
-    timeoutId = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
-  } as (...args: Parameters<T>) => ReturnType<T>;
-}
-
 export default function Searchbar() {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -41,17 +29,7 @@ export default function Searchbar() {
 
   useEffect(() => {
     if (searchQuery.trim().length > 2) {
-      // WITH DEBOUNCE
-      // const debouncedFetchData = debounce(fetchDataFromAPI, 500); // Adjust debounce delay as needed
-
-      // debouncedFetchData(searchQuery)?.then((data: ApiResponse) => {
-      //   setSearchResults(data.feed);
-      // });
-
-      // WITHOUT DEBOUNCE
       fetchDataFromAPI(searchQuery)?.then((data: ApiResponse) => {
-        console.log(data);
-
         setSearchResults(data.products);
       });
     } else {
@@ -89,8 +67,6 @@ export default function Searchbar() {
         </span>
       </div>
       <div className="relative">
-        {/* <div className="">Search Query: {searchQuery}</div>
-        <div className="">Search Results: {searchResults.length}</div> */}
         <div className="bg-white absolute max-h-80 overflow-y-scroll overflow-x-hidden shadow-lg z-50 scrollbar scrollbar-thumb-primary-dark scrollbar-rounded scrollbar-track-gray-100">
           {searchResults?.map((product) => (
             <div onClick={() => setSearchQuery("")} key={product.id}>
@@ -106,7 +82,7 @@ export default function Searchbar() {
 function SearchResultItem(product: Product) {
   if (!product) return null;
 
-  const { image, price, title, url, inStock } = product;
+  const { image, price, oldPrice, title, url, inStock } = product;
 
   return (
     <Link
@@ -114,13 +90,13 @@ function SearchResultItem(product: Product) {
       href={`/${product.category}/${product.path}`}
     >
       <div className="flex items-center col-span-1">
-        <img src={image} className="h-auto" />
+        <Image alt={product.id} src={image} className="h-auto" />
       </div>
 
       <div className="col-span-5 flex flex-col items-start justify-center">
         <span className="truncate w-full font-semibold">{title}</span>
         <span className="text-sm mb-2">
-          {price} <span className="text-xs">DKK</span>
+          {price || oldPrice} <span className="text-xs">DKK</span>
         </span>
         <ProductStock size="sm" inStock={inStock} />
       </div>

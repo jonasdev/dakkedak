@@ -5,10 +5,10 @@ import formatDescription from "./formatDescription";
 import decodeString from "./decodeString";
 import { beautifyUrl } from "./beautifyUrl";
 import { partnerFeeds } from "@/config/partners";
-import combineSimilarProducts from "./combineSimilarProducts";
 import { Product } from "@/types/types";
 import fs from "fs";
 import { generateSitemap } from "./generateSitemap";
+import { handleDiscount } from "./handleDiscount";
 
 const badProducts: string[] = [
   "test-vare-1",
@@ -20,6 +20,27 @@ const badProducts: string[] = [
   "juleindpakning-og-kort",
 ];
 
+type FeedProduct = {
+  produkt: {
+    forhandler?: string[];
+    kategorinavn?: string[];
+    produktnavn?: string[];
+    nypris?: string[];
+    glpris?: string[];
+    vareurl?: string[];
+    billedurl?: string[];
+    brand?: string[];
+    beskrivelse?: string[];
+    produktid?: string[];
+    lagerantal?: string[];
+    ean?: string[];
+  };
+};
+
+type Feed = {
+  produkter: FeedProduct[];
+};
+
 export const getFeeds = async (
   filter: any = null,
   api: boolean = false
@@ -29,14 +50,14 @@ export const getFeeds = async (
     return products;
   }
 
-  const promises: Promise<any>[] = partnerFeeds.map((partner) =>
+  const promises: Promise<FeedProduct>[] = partnerFeeds.map((partner) =>
     fetch(partner)
       .then((response) => response.arrayBuffer())
       .then((buffer) => iconv.decode(Buffer.from(buffer), "iso-8859-1"))
       .then((res) => {
         if (res?.match("Feed findes ikke")) return [];
 
-        let feed = null;
+        let feed: Feed | null = null;
         xml2js.parseString(res, (err, all) => {
           if (err) {
             console.log(err);
@@ -46,8 +67,10 @@ export const getFeeds = async (
           feed = all;
         });
 
+        //@ts-ignore
         if (!feed || !feed?.produkter) return [];
 
+        //@ts-ignore
         return feed.produkter.produkt;
       })
   );
@@ -56,7 +79,6 @@ export const getFeeds = async (
     const result = ([] as any[]).concat.apply([], response);
     if (!result || !result.length) return [];
 
-    console.log("Total products!: ", result.length);
     result.forEach((product: any, key: number) => {
       products.push({
         productKey: key,
@@ -70,11 +92,10 @@ export const getFeeds = async (
         oldPrice: product?.glpris?.[0] || "",
         // discount:
         //   Number(product?.glpris?.[0]) - Number(product?.nypris?.[0]) || null,
-        discount:
-          (
-            (Number(product?.nypris?.[0]) / Number(product?.glpris?.[0])) *
-            100
-          ).toFixed() || null,
+        discount: handleDiscount(
+          Number(product?.nypris?.[0]),
+          Number(product?.glpris?.[0])
+        ),
         url: product?.vareurl?.[0] || "",
         image: product?.billedurl?.[0] || "",
         brand: product?.brand?.[0] ? decodeString(product?.brand?.[0]) : null,

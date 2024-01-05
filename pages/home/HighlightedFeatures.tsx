@@ -1,9 +1,7 @@
 import {
   IconHeart,
   IconListCheck,
-  IconMoodBoy,
   IconMoodHappy,
-  IconMoodKid,
   IconMoodTongue,
 } from "@tabler/icons-react";
 import classNames from "classnames";
@@ -72,7 +70,7 @@ export default function HighlightedFeatures() {
       <FeatureDescription
         description="Hvis du finder et produkt du godt kan lide, kan du tilføje den til
               din favoritliste. Så kan du nemt finde det igen næste gang du
-              besøger siden. Der er skam ingen grund til at lege blæksprutte."
+              besøger siden."
         icon={<IconHeart size={80} />}
         title="Gem dine favorit produkter"
         link="/favoritter"
@@ -80,8 +78,7 @@ export default function HighlightedFeatures() {
       />
       <FeatureDescription
         description="Har du brug for at få planlagt alle køb til din baby? Brug vores smarte tjekliste
-                 funktion hvor du nemt kan organisere dine indkøb. Du kan gruppere dine køb, så det er nemt og overskueligt.
-                 Når den er klar, kan du eksportere den til PDF format."
+                 funktion hvor du nemt kan organisere dine indkøb."
         icon={<IconListCheck size={80} />}
         title="Lav din egen tjekliste - Kommer snart!"
         link="/tjekliste"

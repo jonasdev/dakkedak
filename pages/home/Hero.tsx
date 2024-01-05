@@ -12,7 +12,7 @@ export default function Hero() {
             <div className="relative flex justify-center items-center w-60 h-60 overflow-hidden rounded-full sm:h-[550px] sm:w-[550px] lg:w-full lg:h-full">
               <Image
                 alt="hdr-logo"
-                src="/shark3.svg"
+                src="/sharkBigSmile.svg"
                 layout="fill"
                 objectFit="contain"
                 className="z-10 w-full h-full object-contain"

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ProductCard from "./ProductCard";
-import { Product } from "./Product";
 import { IconMoodCry } from "@tabler/icons-react";
 import ProductFilters from "./ProductFilters";
+import { Product } from "@/types/types";
 
 type Props = {
   products: Product[] | null;
@@ -10,11 +10,11 @@ type Props = {
 };
 
 export default function ProductList({ products, title }: Props) {
-  if (!products) return null;
-
   const [filteredProducts, setFilteredProducts] = useState<Array<Product>>(
     products || []
   );
+
+  if (!products) return null;
 
   return (
     <section className="w-full flex flex-col lg:w-10/12 pt-10 min-h-[70vh] pb-12">
@@ -42,7 +42,6 @@ export default function ProductList({ products, title }: Props) {
               <IconMoodCry />
             </div>
           )}
-          <div className="grid lg:grid-cols-3 2xl:grid-cols-4 grid-cols-1 gap-8"></div>
         </div>
       </div>
     </section>

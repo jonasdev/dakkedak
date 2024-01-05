@@ -1,5 +1,6 @@
 import { HighlightedCategory } from "@/types/types";
 import classNames from "classnames";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 

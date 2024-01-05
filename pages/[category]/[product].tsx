@@ -3,7 +3,7 @@ import { categories } from "@/config/categories";
 import { Product } from "@/types/types";
 import { getFeeds } from "@/utils/getFeeds";
 import getRelatedProducts from "@/utils/getRelatedProducts";
-import { InferGetStaticPropsType } from "next";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
 
@@ -18,7 +18,7 @@ export default function ProductPage({
   return (
     <>
       <Head>
-        <title>{product.title}</title>
+        <title>{product.title} - Babyhaj</title>
         <meta
           name="description"
           content={`Find den helt rigtige ${lowerCasedCategoryName} til dit barn. Det kunne f.eks. være en ${
@@ -48,7 +48,12 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+interface Params {
+  category: string;
+  product: string;
+}
+
+export const getStaticProps = async ({ params }: { params: Params }) => {
   if (!params) {
     return {
       notFound: true,

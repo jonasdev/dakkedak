@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Product } from "./Product";
 import { IconSearch, IconX } from "@tabler/icons-react";
+import { Product } from "@/types/types";
 
 type SortingOption =
   | ""
@@ -78,7 +78,7 @@ export default function ProductFilters({
     }
 
     setFilteredProducts(updatedProducts);
-  }, [searchTerm, sortOption, allProducts]);
+  }, [searchTerm, sortOption, allProducts, setFilteredProducts]);
 
   return (
     <div className="flex lg:flex-row flex-col-reverse gap-y-4 lg:gap-y-0 lg:justify-between w-full items-center mb-6">

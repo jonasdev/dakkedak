@@ -1,8 +1,8 @@
 import { useMemo, useRef } from "react";
 import { ICategoryList } from "./Navbar";
-import { IconChevronDown, IconTriangleFilled } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import classNames from "classnames";
-import Link from "next/link";
+import CategoryAccordionItem from "./CategoryAccordionItem";
 
 type Props = {
   categoryList: ICategoryList;
@@ -52,65 +52,14 @@ export default function CategoryAccordion({
           {Object.entries(categorySet).map(([key, cats]) => {
             if (!cats || cats.length === 0) return null;
 
-            const categoriesSorted = useMemo(() => {
-              const sortedCategories = Object.values(cats)
-                .slice()
-                .sort((a, b) => {
-                  const nameA = a.name.toUpperCase();
-                  const nameB = b.name.toUpperCase();
-
-                  if (nameA.includes("Andet") && !nameB.includes("Andet")) {
-                    return 1; // 'Andet' containing name should be placed at the end
-                  } else if (
-                    !nameA.includes("Andet") &&
-                    nameB.includes("Andet")
-                  ) {
-                    return -1; // 'Andet' containing name should come after other names
-                  } else {
-                    // For names not containing 'Andet', sort alphabetically
-                    if (nameA < nameB) {
-                      return -1;
-                    }
-                    if (nameA > nameB) {
-                      return 1;
-                    }
-                    return 0;
-                  }
-                });
-
-              // Move 'Andet' containing entries to the end
-              const andetEntries = sortedCategories.filter((category) =>
-                category.name.toUpperCase().includes("ANDET")
-              );
-
-              const nonAndetEntries = sortedCategories.filter(
-                (category) => !category.name.toUpperCase().includes("ANDET")
-              );
-
-              return [...nonAndetEntries, ...andetEntries];
-            }, []);
-
             return (
-              <ul className="space-y-4" key={key}>
-                <strong className="block border-b border-white pb-1 border-opacity-40 text-base font-semibold">
-                  {key}
-                </strong>
-                {Object.values(categoriesSorted).map((category) => (
-                  <li key={category.name} className="w-full">
-                    <Link
-                      href={`/${category.slug}`}
-                      className={classNames(
-                        isActive
-                          ? "pointer-events-auto"
-                          : "pointer-events-none",
-                        "text-base flex items-center justify-between py-1.5"
-                      )}
-                    >
-                      <span onClick={onPageChange}>{category.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <CategoryAccordionItem
+                categories={cats}
+                isActive={isActive}
+                key={key}
+                index={key}
+                onPageChange={onPageChange}
+              />
             );
           })}
         </div>

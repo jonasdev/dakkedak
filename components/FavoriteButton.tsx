@@ -1,9 +1,8 @@
 "use client";
+import { Product } from "@/types/types";
 import { IconHeart } from "@tabler/icons-react";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-// import useSound from "use-sound";
-import { Product } from "./Product";
 
 interface Props {
   product: Product;
@@ -19,8 +18,6 @@ export interface FavoriteItem {
 
 export default function FavoriteButton({ product, category, size }: Props) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  // const [play] = useSound("/bubble.mp3");
-
   // Check if the item is in localStorage on initial render
   useEffect(() => {
     const favorites = localStorage.getItem("favorites");
@@ -67,7 +64,6 @@ export default function FavoriteButton({ product, category, size }: Props) {
   return (
     <button
       onClick={() => {
-        // play();
         toggleFavorite();
       }}
       className={classNames(

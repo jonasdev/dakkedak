@@ -1,9 +1,9 @@
 import { getFeeds } from "@/utils/getFeeds";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { Product } from "@/components/Product";
 import ProductList from "@/components/ProductList";
 import { categories } from "@/config/categories";
 import Head from "next/head";
+import { Product } from "@/types/types";
 
 interface ICategoryPage {
   category: {

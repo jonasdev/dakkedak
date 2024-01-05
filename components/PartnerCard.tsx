@@ -1,6 +1,7 @@
 import { Partner } from "@/config/partners";
 import React from "react";
 import Button from "./Button";
+import Image from "next/image";
 
 type Props = {
   partner: Partner;
@@ -20,7 +21,7 @@ export default function PartnerCard({ partner }: Props) {
         </div>
 
         <div className="">
-          <img alt={name} src={image} className="h-14 object-contain w-28" />
+          <Image alt={name} src={image} className="h-14 object-contain w-28" />
         </div>
       </div>
 

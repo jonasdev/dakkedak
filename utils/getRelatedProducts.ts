@@ -1,4 +1,4 @@
-import { Product } from "@/components/Product";
+import { Product } from "@/types/types";
 
 const count = 4;
 

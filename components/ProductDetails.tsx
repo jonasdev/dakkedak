@@ -1,6 +1,5 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import { Product } from "./Product";
 import FavoriteButton from "./FavoriteButton";
 import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
@@ -9,6 +8,8 @@ import Breadcrumb from "./Breadcrumb";
 import { IconCircleCheck, IconCircleX, IconClock } from "@tabler/icons-react";
 import decodeString from "@/utils/decodeString";
 import ProductStock from "./ProductStock";
+import { Product } from "@/types/types";
+import Image from "next/image";
 
 type Props = {
   product: Product;
@@ -16,8 +17,6 @@ type Props = {
 };
 
 export default function ProductDetails({ product, relatedProducts }: Props) {
-  console.log("CURRENT PRODUCT: ", product);
-
   const {
     brand,
     description,
@@ -30,38 +29,9 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
     url,
   } = product;
 
-  const renderStock = () => {
-    if (inStock) {
-      if (["in_stock", "in stock"].includes(inStock))
-        return (
-          <span className="flex items-center gap-x-1">
-            <IconCircleCheck className="text-green-500" />{" "}
-            <span className="font-medium">På lager</span>
-          </span>
-        );
-      if (["out_of_stock", "out_of_stock"].includes(inStock)) {
-        return (
-          <span className="flex items-center gap-x-1">
-            <IconCircleX className="text-red-500" />{" "}
-            <span className="font-medium">Udsolgt</span>
-          </span>
-        );
-      }
-      if (["back_order", "in backorder", "backorder"].includes(inStock)) {
-        return (
-          <span className="flex items-center gap-x-1">
-            <IconClock className="text-yellow-500" />{" "}
-            <span className="font-medium">Kan bestilles</span>
-          </span>
-        );
-      }
-    }
-  };
-
   const handleDescription = () => {
     if (!description) return "Ingen beskrivelse tilgængelig";
     const decodedString = decodeString(description || "");
-    // const stringList = decodedString.split("\n");
     return decodedString;
   };
 
@@ -71,7 +41,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
         <Breadcrumb />
         <div className="px-3 pb-12 lg:py-20">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <img
+            <Image
               alt="product-details-img"
               className="lg:w-1/2 w-full object-cover object-center rounded"
               src={image}
@@ -116,8 +86,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
                   <Button text="Gå til forhandler" href={url as Url} />
                   <FavoriteButton
                     product={product}
-                    // TODO: FIX ME
-                    category=""
+                    category={product.category || ""}
                     size="lg"
                   />
                 </div>

@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
-import { Product } from "./Product";
+import { Product } from "@/types/types";
 
 type Props = {
   products: Product[];
