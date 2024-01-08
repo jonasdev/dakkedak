@@ -9,6 +9,7 @@ import { Product } from "@/types/types";
 import fs from "fs";
 import { generateSitemap } from "./generateSitemap";
 import { handleDiscount } from "./handleDiscount";
+import { setProducts } from "@/context/ProductContext";
 
 const badProducts: string[] = [
   "test-vare-1",
@@ -41,13 +42,52 @@ type Feed = {
   produkter: FeedProduct[];
 };
 
+type Filter = {
+  category?: string;
+  title?: string;
+  shop?: string;
+  brands?: string;
+  others?: string;
+};
+
+export const cachedProducts: any = {};
+
+const handleProducts = (
+  filter: Filter | null,
+  filteredBadProducts: Product[]
+) => {
+  const productsByFilter = filter
+    ? handleFilter(filteredBadProducts, filter)
+    : filteredBadProducts;
+
+  const uniqueCombinations = new Set<string>();
+
+  const productsToReturn = productsByFilter.filter((pdt: Product) => {
+    const { category: pdtCategory, path } = pdt;
+    if (!pdtCategory) return false;
+
+    const combination = `${pdtCategory}-${path}`;
+    if (!uniqueCombinations.has(combination)) {
+      uniqueCombinations.add(combination);
+      return true;
+    }
+    return false;
+  });
+
+  setProducts(productsToReturn);
+
+  return productsToReturn;
+};
+
+export const allProducts: Product[] = [];
+
 export const getFeeds = async (
-  filter: any = null,
-  api: boolean = false
+  filter: Filter | null = null
 ): Promise<Product[]> => {
-  let products: Product[] = [];
-  if (api && products.length) {
-    return products;
+  if (filter && cachedProducts.products) {
+    console.log("Went here");
+
+    return handleProducts(filter, cachedProducts.products);
   }
 
   const promises: Promise<FeedProduct>[] = partnerFeeds.map((partner) =>
@@ -75,6 +115,7 @@ export const getFeeds = async (
       })
   );
 
+  const products: any = [];
   await Promise.all(promises).then(async (response) => {
     const result = ([] as any[]).concat.apply([], response);
     if (!result || !result.length) return [];
@@ -110,8 +151,10 @@ export const getFeeds = async (
   });
 
   const filteredBadProducts = products.filter(
-    (product) => !badProducts.includes(product.path || "")
+    (product: any) => !badProducts.includes(product.path || "")
   );
+
+  cachedProducts.products = filteredBadProducts;
 
   const sitemapPath = "public/sitemap.xml";
   fs.readFile(sitemapPath, (noSitemap, data) => {
@@ -121,22 +164,7 @@ export const getFeeds = async (
     }
   });
 
-  const productsByFilter = filter
-    ? handleFilter(filteredBadProducts, filter)
-    : filteredBadProducts;
-
-  const uniqueCombinations = new Set<string>();
-
-  const productsToReturn = productsByFilter.filter((product) => {
-    const combination = `${product.category}-${product.path}`;
-    if (!uniqueCombinations.has(combination)) {
-      uniqueCombinations.add(combination);
-      return true;
-    }
-    return false;
-  });
-
-  return productsToReturn;
+  return handleProducts(filter, filteredBadProducts);
 };
 
 export const handleFilter = (products: Product[], filter: any): Product[] => {

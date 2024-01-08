@@ -1,9 +1,9 @@
 import { IconArrowRight, IconSearch, IconX } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import ProductStock from "./ProductStock";
 import { Product } from "@/types/types";
-import Image from "next/image";
+import { useProductsContext } from "@/context/ProductContext";
 
 interface ApiResponse {
   products: Product[];
@@ -22,6 +22,33 @@ function fetchDataFromAPI(query: string): Promise<ApiResponse> {
 export default function Searchbar() {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    },
+    [setShowSuggestions]
+  );
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
+  const handleSearchFocus = () => {
+    setShowSuggestions(true);
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -37,8 +64,11 @@ export default function Searchbar() {
     }
   }, [searchQuery]);
 
+  const { products } = useProductsContext();
+  console.log("products: ", products);
+
   return (
-    <div className="lg:w-96 xl:w-[550px]">
+    <div className="lg:w-96 xl:w-[550px]" ref={searchRef}>
       <div className="relative border border-black rounded-lg min-w-full">
         <label htmlFor="Search" className="sr-only">
           Search
@@ -49,6 +79,7 @@ export default function Searchbar() {
           autoComplete="off"
           placeholder="Søg..."
           value={searchQuery}
+          onFocus={handleSearchFocus}
           onChange={(e) => handleInputChange(e)}
           className="w-full rounded-lg border-gray-200 py-2.5 pe-60 px-3 shadow-sm sm:text-sm focus:rounded-none transition-all duration-300 ease-out"
         />
@@ -67,13 +98,15 @@ export default function Searchbar() {
         </span>
       </div>
       <div className="relative">
-        <div className="bg-white absolute max-h-80 overflow-y-scroll overflow-x-hidden shadow-lg z-50 scrollbar scrollbar-thumb-primary-dark scrollbar-rounded scrollbar-track-gray-100">
-          {searchResults?.map((product) => (
-            <div onClick={() => setSearchQuery("")} key={product.id}>
-              <SearchResultItem {...product} />
-            </div>
-          ))}
-        </div>
+        {showSuggestions && (
+          <div className="bg-white absolute max-h-80 overflow-y-scroll overflow-x-hidden shadow-lg z-50 scrollbar scrollbar-thumb-primary-dark scrollbar-rounded scrollbar-track-transparent">
+            {searchResults?.map((product) => (
+              <div onClick={() => setSearchQuery("")} key={product.id}>
+                <SearchResultItem {...product} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -90,7 +123,7 @@ function SearchResultItem(product: Product) {
       href={`/${product.category}/${product.path}`}
     >
       <div className="flex items-center col-span-1">
-        <Image alt={product.id} src={image} className="h-auto" />
+        <img alt={product.id} src={image} className="h-auto" />
       </div>
 
       <div className="col-span-5 flex flex-col items-start justify-center">

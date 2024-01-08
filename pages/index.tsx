@@ -5,6 +5,7 @@ import Blog from "./home/Blog";
 import HighlightedCategories from "./home/HighlightedCategories";
 import Head from "next/head";
 import FeatureHighlight from "./home/HighlightedFeatures";
+import { ProductsProvider } from "@/context/ProductContext";
 
 export default function Home() {
   return (
@@ -16,14 +17,16 @@ export default function Home() {
           content="Babyhaj tilbyder ét samlet sted hvor du kan finde alt til dit barn. Udforsk de mange produkter og gør dig baby-klar!"
         />
       </Head>
-      <div className="flex flex-col items-center space-y-24 w-full">
-        <Hero />
-        <HighlightedProducts />
-        <About />
-        <HighlightedCategories />
-        <FeatureHighlight />
-        {/* <Blog /> */}
-      </div>
+      <ProductsProvider>
+        <div className="flex flex-col items-center space-y-24 w-full">
+          <Hero />
+          <HighlightedProducts />
+          <About />
+          <HighlightedCategories />
+          <FeatureHighlight />
+          {/* <Blog /> */}
+        </div>
+      </ProductsProvider>
     </>
   );
 }
