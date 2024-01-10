@@ -67,7 +67,7 @@ export default function FavoriteButton({ product, category, size }: Props) {
         toggleFavorite();
       }}
       className={classNames(
-        "flex group/favoriteBtn justify-center items-center rounded-full bg-white p-2 ring-opacity-60 text-slate-900 transition duration-200 hover:bg-neutral-100 shadow-lg"
+        "h-fit flex group/favoriteBtn justify-center items-center rounded-full bg-white p-2 ring-opacity-60 text-slate-900 transition duration-200 hover:bg-neutral-100 shadow-lg"
       )}
     >
       <IconHeart

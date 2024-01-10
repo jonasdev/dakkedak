@@ -30,7 +30,7 @@ export default function ChecklistPage() {
       </Head>
       <section className="w-full h-full flex flex-col items-center">
         <h1 className="text-3xl lg:text-6xl font-semibold text-center">
-          Tjekliste
+          Tjekliste - Kommer snart
         </h1>
         <div className="mt-16 flex justify-center">
           {checklist.length ? (
@@ -42,12 +42,12 @@ export default function ChecklistPage() {
           ) : (
             <div className="flex flex-col items-center text-center space-y-8 px-3">
               <p className="font-medium">
-                Du har ikke nogle favorit produkter endnu.
+                Du har ikke nogle produkter op din tjekliste endnu.
               </p>
               <p className="font-medium flex">
                 Klik på
                 <IconListCheck className="mx-1" /> ikonet på et produkt, for at
-                tilføje en favorit.
+                tilføje et.
               </p>
               <p className="font-medium break-words flex">
                 <span className="mr-1">

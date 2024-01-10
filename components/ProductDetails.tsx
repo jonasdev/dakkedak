@@ -28,6 +28,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
     title,
     url,
   } = product;
+  console.log("PRoduct: ", product);
 
   const handleDescription = () => {
     if (!description) return "Ingen beskrivelse tilgængelig";
@@ -41,7 +42,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
         <Breadcrumb />
         <div className="px-3 pb-12 lg:py-20">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <Image
+            <img
               alt="product-details-img"
               className="lg:w-1/2 w-full object-cover object-center rounded"
               src={image}

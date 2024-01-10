@@ -9,17 +9,7 @@ import { Product } from "@/types/types";
 import fs from "fs";
 import { generateSitemap } from "./generateSitemap";
 import { handleDiscount } from "./handleDiscount";
-import { setProducts } from "@/context/ProductContext";
-
-const badProducts: string[] = [
-  "test-vare-1",
-  "test-vare-2",
-  "test-vare-3",
-  "kort",
-  "alm-indpakning-og-kort",
-  "ekstra-køb-af-porto",
-  "juleindpakning-og-kort",
-];
+import { badProducts } from "@/config/badProducts";
 
 type FeedProduct = {
   produkt: {
@@ -73,8 +63,6 @@ const handleProducts = (
     }
     return false;
   });
-
-  setProducts(productsToReturn);
 
   return productsToReturn;
 };

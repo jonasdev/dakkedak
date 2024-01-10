@@ -44,7 +44,9 @@ export default function ProductStock({ inStock, size = "lg" }: Props) {
         </span>
       );
     }
-    if (["back_order", "in backorder", "backorder"].includes(inStock)) {
+    if (
+      ["back_order", "in backorder", "backorder", "on demand"].includes(inStock)
+    ) {
       return (
         <span className="flex items-center gap-x-1">
           <IconClock

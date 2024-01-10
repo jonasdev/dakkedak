@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import ProductStock from "./ProductStock";
 import { Product } from "@/types/types";
-import { useProductsContext } from "@/context/ProductContext";
 
 interface ApiResponse {
   products: Product[];
@@ -54,18 +53,16 @@ export default function Searchbar() {
     setSearchQuery(event.target.value);
   };
 
-  useEffect(() => {
-    if (searchQuery.trim().length > 2) {
-      fetchDataFromAPI(searchQuery)?.then((data: ApiResponse) => {
-        setSearchResults(data.products);
-      });
-    } else {
-      setSearchResults([]);
-    }
-  }, [searchQuery]);
-
-  const { products } = useProductsContext();
-  console.log("products: ", products);
+  // useEffect(() => {
+  //   if (searchQuery.trim().length > 2) {
+  //     const filter = window.products.filter((product) =>
+  //       product.title.toLowerCase().match(searchQuery.toLowerCase())
+  //     );
+  //     setSearchResults(filter);
+  //   } else {
+  //     setSearchResults([]);
+  //   }
+  // }, [searchQuery]);
 
   return (
     <div className="lg:w-96 xl:w-[550px]" ref={searchRef}>
