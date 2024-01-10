@@ -11,7 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ProductFeed>
 ) {
-  const feed = await getFeeds(null, true);
+  const feed = await getFeeds(null);
 
   const queryString = (req.query.query as string).toLowerCase();
 

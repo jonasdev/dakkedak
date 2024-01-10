@@ -28,7 +28,6 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
     title,
     url,
   } = product;
-  console.log("PRoduct: ", product);
 
   const handleDescription = () => {
     if (!description) return "Ingen beskrivelse tilgængelig";
