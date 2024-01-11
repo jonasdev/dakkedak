@@ -27,7 +27,7 @@ export const tilBilenCategories: Category[] = [
 
 export const vogneCategories: Category[] = [
   {
-    slug: "Barnevognskaeder",
+    slug: "barnevognskaeder",
     name: "Barnevognskæder",
     regex: "Barnevognskæde|Barnevognsophæng",
   },
@@ -43,18 +43,6 @@ export const vogneCategories: Category[] = [
     regex: "Kombivogn",
   },
   {
-    slug: "lifte",
-    name: "Lifte",
-    regex:
-      "Lift|Carrier|Liftmadras|Liftcover|PÅ TUR > Lifte > Tilbehør til vogne > Nordic Lux|PÅ TUR > Tilbehør til vogne > Joolz Hub+",
-  },
-  {
-    slug: "babynest",
-    name: "Babynest",
-    regex:
-      "Babynest|Cover til babynest|Kantpude|lagen til babynest|lagen til juniornest|Tilbehør til babynest",
-  },
-  {
     slug: "tilbehoer-til-vogne",
     name: "Tilbehør til vogne",
     regex:
@@ -67,8 +55,24 @@ export const vogneCategories: Category[] = [
   },
 ];
 
+export const paaTurAndetCategories: Category[] = [
+  {
+    slug: "lifte",
+    name: "Lifte",
+    regex:
+      "Lift|Carrier|Liftmadras|Liftcover|PÅ TUR > Lifte > Tilbehør til vogne > Nordic Lux|PÅ TUR > Tilbehør til vogne > Joolz Hub+",
+  },
+  {
+    slug: "babynest",
+    name: "Babynest",
+    regex:
+      "Babynest|Cover til babynest|Kantpude|lagen til babynest|lagen til juniornest|Tilbehør til babynest",
+  },
+];
+
 export const paaTurCategories: Category[] = [
   ...tilBilenCategories,
+  ...paaTurAndetCategories,
   ...vogneCategories,
 ];
 
@@ -723,6 +727,7 @@ export type CategorySet = Record<string, Category[]>;
 export const paaTurCategorySet: CategorySet = {
   "Vogne og tilbehør": { ...vogneCategories },
   "Til bilturen": { ...tilBilenCategories },
+  Andet: { ...paaTurAndetCategories },
 };
 
 export const paaFartenCategorySet: CategorySet = {};
@@ -730,7 +735,7 @@ export const paaFartenCategorySet: CategorySet = {};
 export const toejOgSkoCategorySet: CategorySet = {
   Tøj: { ...babyOgBoerneToejCategories },
   Fodtøj: { ...fodtoejCategories },
-  Diverse: { ...toejAccessoriesCategories },
+  Andet: { ...toejAccessoriesCategories },
 };
 
 export const boernevaerelsetCategorySet: CategorySet = {

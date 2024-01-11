@@ -14,7 +14,7 @@ export default function BlogCard({ blogPost }: Props) {
 
   return (
     <Link
-      className="group relative overflow-hidden rounded-lg shadow-xl transition hover:shadow-lg"
+      className="group relative h-96 overflow-hidden rounded-lg shadow-xl transition hover:shadow-lg"
       href={`blog/${href}`}
     >
       <Image
@@ -25,8 +25,8 @@ export default function BlogCard({ blogPost }: Props) {
         className="absolute inset-0 h-full w-full object-cover transition-opacity group-hover:opacity-90"
       />
 
-      <div className="absolute inset-0 rounded-xl bg-black/30" />
-      <div className="relative pt-32 sm:pt-48 lg:pt-64">
+      <div className="absolute inset-0 rounded-xl bg-black/40" />
+      <div className="absolute right-0 bottom-0 w-fit">
         <div className="p-4 sm:p-6">
           <time className="block text-xs text-white/90">{date}</time>
 

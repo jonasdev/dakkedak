@@ -5,11 +5,9 @@ import Button from "./Button";
 import { Url } from "next/dist/shared/lib/router/router";
 import ProductCarousel from "./ProductCarousel";
 import Breadcrumb from "./Breadcrumb";
-import { IconCircleCheck, IconCircleX, IconClock } from "@tabler/icons-react";
 import decodeString from "@/utils/decodeString";
 import ProductStock from "./ProductStock";
 import { Product } from "@/types/types";
-import Image from "next/image";
 
 type Props = {
   product: Product;
@@ -28,6 +26,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
     title,
     url,
   } = product;
+  console.log(product);
 
   const handleDescription = () => {
     if (!description) return "Ingen beskrivelse tilgængelig";
@@ -38,7 +37,7 @@ export default function ProductDetails({ product, relatedProducts }: Props) {
   return (
     <section className="overflow-hidden">
       <div className="container p-6 mx-auto bg-white rounded-2xl shadow-lg z-10">
-        <Breadcrumb />
+        <Breadcrumb product={product} />
         <div className="px-3 pb-12 lg:py-20">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img

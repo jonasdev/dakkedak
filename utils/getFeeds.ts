@@ -155,7 +155,10 @@ export const getFeeds = async (
   return handleProducts(filter, filteredBadProducts);
 };
 
-export const handleFilter = (products: Product[], filter: any): Product[] => {
+export const handleFilter = (
+  products: Product[],
+  filter: Filter
+): Product[] => {
   let filterProducts: Product[] = [...products];
   const { category, title, shop, others, brands } = filter;
 

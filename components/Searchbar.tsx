@@ -3,22 +3,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import ProductStock from "./ProductStock";
 import { Product } from "@/types/types";
-
-interface ApiResponse {
-  products: Product[];
-}
-
-function fetchDataFromAPI(query: string): Promise<ApiResponse> {
-  return fetch(`/api/feed?query=${query}`)
-    .then((res) => res.json())
-    .then((data: ApiResponse) => data)
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      return {} as ApiResponse;
-    });
-}
+import { useProductsContext } from "@/context/ProductsContext";
 
 export default function Searchbar() {
+  const { products } = useProductsContext();
+  console.log("products: ", products);
+
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
@@ -53,16 +43,16 @@ export default function Searchbar() {
     setSearchQuery(event.target.value);
   };
 
-  // useEffect(() => {
-  //   if (searchQuery.trim().length > 2) {
-  //     const filter = window.products.filter((product) =>
-  //       product.title.toLowerCase().match(searchQuery.toLowerCase())
-  //     );
-  //     setSearchResults(filter);
-  //   } else {
-  //     setSearchResults([]);
-  //   }
-  // }, [searchQuery]);
+  useEffect(() => {
+    if (searchQuery.trim().length > 2) {
+      const filter = products.filter((product) =>
+        product.title.toLowerCase().match(searchQuery.toLowerCase())
+      );
+      setSearchResults(filter);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchQuery]);
 
   return (
     <div className="lg:w-96 xl:w-[550px]" ref={searchRef}>

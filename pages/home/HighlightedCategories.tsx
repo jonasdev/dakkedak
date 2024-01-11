@@ -1,4 +1,4 @@
-import HighlightedCategoryCarousel from "@/components/Carousel";
+import HighlightedCategoryCarousel from "@/components/HighlightedCategoryCarousel";
 import HighlightedCategoryCard from "@/components/HighlightedCategoryCard";
 import { highlightesCategories } from "@/config/highlightedCategories";
 import React from "react";
