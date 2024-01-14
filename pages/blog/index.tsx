@@ -19,6 +19,20 @@ export default function BlogPage() {
         <h1 className="text-3xl lg:text-6xl font-semibold text-center mb-8">
           Blog
         </h1>
+        <div className="flex justify-center w-full">
+          <div className="flex text-start flex-col w-11/12 md:w-5/6 xl:w-1/2 space-y-4 mb-8">
+            <p>
+              Lad dig inspirere eller læs om erfaringer i en af de mulige
+              blogopslag nedenfor. Opslagene handler om alting baby. Ved forslag
+              til fremtidige blogopslag, så skrive endelig til os ved at bruge
+              Kontakt funtionen, nederst på siden.
+            </p>
+            <p>
+              Vi håber at du vil finde noget af læsestoffet nyttigt, og at det
+              om muligt kan hjælpe dig med at blive klar på projekt baby!
+            </p>
+          </div>
+        </div>
 
         <div className="flex flex-col items-center w-full p-6">
           <div className="w-5/6 grid sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 grid-cols-1 gap-8">

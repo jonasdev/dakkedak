@@ -15,7 +15,6 @@ import {
 } from "@tabler/icons-react";
 import AppLink from "./AppLink";
 import SideMenu from "./SideMenu";
-import Searchbar from "./Searchbar";
 import CategoryList from "./CategoryList";
 import {
   CategorySet,
@@ -27,6 +26,7 @@ import {
   toejOgSkoCategorySet,
   udstyrCategoriesSet,
 } from "@/config/categories";
+import Searchbar from "./Searchbar";
 
 export interface ICategoryList {
   title: string;

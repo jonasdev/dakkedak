@@ -1,19 +1,47 @@
 import { IconArrowRight, IconSearch, IconX } from "@tabler/icons-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import Link from "next/link";
-import ProductStock from "./ProductStock";
 import { Product } from "@/types/types";
-import { useProductsContext } from "@/context/ProductsContext";
+import ProductStock from "./ProductStock";
 
 export default function Searchbar() {
-  const { products } = useProductsContext();
-  console.log("products: ", products);
-
+  const [data, setData] = useState<Product[] | undefined>();
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 
   const searchRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // @ts-ignore
+        const { products } = await import("@/config/products.js");
+        setData((products as Product[]) || undefined);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim().length > 1 && data && data?.length > 0) {
+      const filteredProducts = data?.filter((product) =>
+        product.title.toLowerCase().match(searchQuery.toLowerCase())
+      );
+      if (filteredProducts) {
+        if (filteredProducts.length > 0) {
+          setSearchResults(filteredProducts);
+        } else {
+          setSearchResults([]);
+        }
+      }
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchQuery, data]);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
@@ -42,17 +70,6 @@ export default function Searchbar() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
-
-  useEffect(() => {
-    if (searchQuery.trim().length > 2) {
-      const filter = products.filter((product) =>
-        product.title.toLowerCase().match(searchQuery.toLowerCase())
-      );
-      setSearchResults(filter);
-    } else {
-      setSearchResults([]);
-    }
-  }, [searchQuery]);
 
   return (
     <div className="lg:w-96 xl:w-[550px]" ref={searchRef}>
@@ -86,9 +103,12 @@ export default function Searchbar() {
       </div>
       <div className="relative">
         {showSuggestions && (
-          <div className="bg-white absolute max-h-80 overflow-y-scroll overflow-x-hidden shadow-lg z-50 scrollbar scrollbar-thumb-primary-dark scrollbar-rounded scrollbar-track-transparent">
-            {searchResults?.map((product) => (
-              <div onClick={() => setSearchQuery("")} key={product.id}>
+          <div className="bg-white absolute max-h-80 overflow-y-scroll overflow-x-hidden shadow-lg z-50 rounded-b-lg top-0.5">
+            {searchResults?.map((product: Product) => (
+              <div
+                onClick={() => setSearchQuery("")}
+                key={`${product.path}-${product.id}`}
+              >
                 <SearchResultItem {...product} />
               </div>
             ))}

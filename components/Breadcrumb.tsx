@@ -10,12 +10,13 @@ type Props = {
 };
 
 export default function Breadcrumb({ product }: Props) {
-  if (!product) return null;
-  const { title, category } = product || {};
+  const paths = usePathname();
 
+  if (!product) return null;
+
+  const { title, category } = product || {};
   if (!title && !category) return null;
 
-  const paths = usePathname();
   const pathNames = paths.split("/").filter((path) => path);
   if (pathNames.length === 0) return null;
 

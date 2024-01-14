@@ -30,14 +30,29 @@ const variousReplaceMap: { [key: string]: string } = {
 export default function decodeString(string: string): string {
   let stringToReturn = string;
 
-  if (htmlEntityPattern.test(string)) {
-    return string.replace(htmlEntityPattern, (entity) => {
-      return htmlEntities[entity] || entity;
-    });
+  try {
+    if (htmlEntityPattern.test(string)) {
+      return string.replace(htmlEntityPattern, (entity) => {
+        return htmlEntities[entity] || entity;
+      });
+    }
+  } catch (error) {
+    console.error("Error decoding URL component:", error);
+    // Handle the error as needed, e.g., fallback to a default value or show an error message.
   }
 
-  if (urlEncodingPattern.test(string))
-    stringToReturn = decodeURIComponent(stringToReturn);
+  // Match any content within square brackets
+  const genericBracketContentPattern = /\[[^\]]+\]/g;
+  stringToReturn = stringToReturn.replace(genericBracketContentPattern, "");
+
+  try {
+    if (urlEncodingPattern.test(stringToReturn)) {
+      stringToReturn = decodeURIComponent(stringToReturn);
+    }
+  } catch (error) {
+    console.error("Error decoding URL component:", error);
+    // Handle the error as needed, e.g., fallback to a default value or show an error message.
+  }
 
   const regex = new RegExp(Object.keys(variousReplaceMap).join("|"), "g");
   stringToReturn = stringToReturn.replace(

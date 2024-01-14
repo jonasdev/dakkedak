@@ -18,14 +18,14 @@ export default function AboutPage() {
         <h1 className="text-3xl lg:text-6xl font-semibold text-center mb-10">
           Om os
         </h1>
-        {/* <div className="flex justify-center w-full my-10">
+        <div className="flex justify-center w-full my-10">
           <Image
             alt="hdr-logo"
             src="/sharkBigSmile.svg"
             height={200}
             width={300}
           />
-        </div> */}
+        </div>
 
         <div className="flex flex-col place-items-center">
           <h2 className="font-semibold mb-2 text-xl">Velkommen til Babyhaj</h2>
@@ -38,19 +38,19 @@ export default function AboutPage() {
               baby.
             </p>
             <p className="mb-3">
-              Vores platform er skabt med omtanke og omhu, idet vi håndplukker
-              pålidelige on interessant partnere, for at sikre kvalitet,
-              sikkerhed og pålidelighed. Uanset om du leder efter nuttet tøj, en
+              Platformen er skabt med omtanke og omhu, idet vi håndplukker
+              pålidelige og interessant partnere, for at sikre kvalitet,
+              sikkerhed og pålidelighed. Uanset om du leder efter fint tøj, en
               ny barnevogn, legetøj i massevis eller produkter til forplejning,
-              er vores udvalg skræddersyet til at opfylde dine behov og din
-              babys krav.
+              dækker vores udvalg dine behov og din babys krav.
             </p>
             <p className="mb-5">
               Vores mission er at gøre indkøbs- og klargørelsesoplevesen så
               overkommelig som muligt. Du kan eksempelvis gemme produkter som
-              Favoritter, så du nemt kan finde dem igen. Du kan også danne din
+              Favoritter, så du nemt kan finde dem igen.
+              {/* Du kan også danne din
               egen indkøbsliste med produkter fra siden, så du kan danne dig et
-              overblik, og markere dine køb undervejs.
+              overblik, og markere dine køb undervejs. */}
             </p>
             <p className="font-medium">
               Tak for at vælge os til at være en del af din rejse som forælder!

@@ -13,8 +13,9 @@ export default function Hero() {
               <Image
                 alt="hdr-logo"
                 src="/sharkBigSmile.svg"
-                layout="fill"
-                objectFit="contain"
+                width={0}
+                height={0}
+                sizes="100vw"
                 className="z-10 w-full h-full object-contain"
               />
             </div>

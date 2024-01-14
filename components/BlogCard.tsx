@@ -20,8 +20,9 @@ export default function BlogCard({ blogPost }: Props) {
       <Image
         alt={title.trim().toLowerCase()}
         src={img}
-        layout="fill"
-        objectFit="cover"
+        width={0}
+        height={0}
+        sizes="100vw"
         className="absolute inset-0 h-full w-full object-cover transition-opacity group-hover:opacity-90"
       />
 

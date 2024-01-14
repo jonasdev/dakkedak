@@ -46,6 +46,20 @@ const handleProducts = (
   filter: Filter | null,
   filteredBadProducts: Product[]
 ) => {
+  const productsPath = "config/products.js";
+  fs.readFile(productsPath, (noProducts, data) => {
+    if (noProducts) {
+      const content = `export const products = ${JSON.stringify(
+        filteredBadProducts,
+        null,
+        2
+      )}`;
+      console.log("Products created!");
+
+      fs.writeFileSync(productsPath, content, "utf-8");
+    }
+  });
+
   const productsByFilter = filter
     ? handleFilter(filteredBadProducts, filter)
     : filteredBadProducts;
@@ -73,8 +87,6 @@ export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
   if (filter && cachedProducts.products) {
-    console.log("Went here");
-
     return handleProducts(filter, cachedProducts.products);
   }
 
