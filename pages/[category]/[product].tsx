@@ -3,6 +3,7 @@ import { categories } from "@/config/categories";
 import { setProducts } from "@/context/ProductsContext";
 import { Product } from "@/types/types";
 import { getFeeds } from "@/utils/getFeeds";
+import { getFeedsJs } from "@/utils/getFeedsJs";
 import getRelatedProducts from "@/utils/getRelatedProducts";
 import Head from "next/head";
 import React from "react";
@@ -33,9 +34,9 @@ export default function ProductPage({
 }
 
 export const getStaticPaths = async () => {
-  const data = await getFeeds();
+  const data = await getFeedsJs();
 
-  const paths = data?.map((product) => ({
+  const paths = data?.map((product: Product) => ({
     params: {
       category: product.category || "",
       product: product.path || "",
@@ -69,7 +70,7 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
     };
   }
 
-  const products = await getFeeds({
+  const products = await getFeedsJs({
     category: currentCategory.slug,
   });
 
@@ -79,7 +80,9 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
     };
   }
 
-  const [currentProduct] = products.filter((pro) => product === pro.path);
+  const [currentProduct] = products.filter(
+    (pro: Product) => product === pro.path
+  );
 
   if (!currentProduct) {
     return {

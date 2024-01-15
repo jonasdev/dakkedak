@@ -2,6 +2,8 @@ import { getFeeds } from "@/utils/getFeeds";
 import { GetStaticProps } from "next";
 import BrandsList from "@/components/BrandsList";
 import Head from "next/head";
+import { getFeedsJs } from "@/utils/getFeedsJs";
+import { Product } from "@/types/types";
 
 interface IBrandsPage {
   brands: string[];
@@ -25,7 +27,7 @@ export default function BrandsPage({ brands }: IBrandsPage) {
 }
 
 export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
-  const products = await getFeeds();
+  const products = await getFeedsJs();
 
   if (!products) {
     return {
@@ -34,7 +36,7 @@ export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
   }
 
   const uniqueBrandsMap: Map<string, string> = new Map();
-  products.forEach((product) => {
+  products.forEach((product: Product) => {
     if (product.brand) {
       const brandLowerCase = product.brand.toLowerCase();
       if (!uniqueBrandsMap.has(brandLowerCase)) {
