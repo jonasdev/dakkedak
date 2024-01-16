@@ -30,7 +30,7 @@ export default function CategoryPage({ category, products }: ICategoryPage) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const paths = categories.map((category) => ({
     params: { category: category.slug.toString() },
   }));
@@ -41,9 +41,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
-  params,
-}) => {
+interface Params {
+  category: string;
+}
+
+export const getStaticProps = async ({ params }: { params: Params }) => {
   const { category } = params || {};
   const currentCategory = categories.find((cat) => cat.slug === category);
 

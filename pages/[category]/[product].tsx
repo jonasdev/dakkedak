@@ -1,6 +1,5 @@
 import ProductDetails from "@/components/ProductDetails";
 import { categories } from "@/config/categories";
-import { setProducts } from "@/context/ProductsContext";
 import { Product } from "@/types/types";
 import { getFeeds } from "@/utils/getFeeds";
 import getRelatedProducts from "@/utils/getRelatedProducts";
