@@ -2,7 +2,6 @@ import ProductList from "@/components/ProductList";
 import { Product } from "@/types/types";
 import { beautifyUrl, revertBeautifyUrl } from "@/utils/beautifyUrl";
 import { getFeeds } from "@/utils/getFeeds";
-import { getFeedsJs } from "@/utils/getFeedsJs";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import React from "react";
@@ -29,7 +28,7 @@ export default function BrandPage({ products }: Props) {
 }
 
 export const getStaticPaths = async () => {
-  const products = await getFeedsJs();
+  const products = await getFeeds();
 
   if (!products) {
     return {
@@ -69,7 +68,7 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
 
   const { brand } = params;
 
-  const products = await getFeedsJs({ brands: brand });
+  const products = await getFeeds({ brands: brand });
 
   if (!products) {
     return {

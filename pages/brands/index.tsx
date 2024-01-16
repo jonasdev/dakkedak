@@ -2,7 +2,6 @@ import { getFeeds } from "@/utils/getFeeds";
 import { GetStaticProps } from "next";
 import BrandsList from "@/components/BrandsList";
 import Head from "next/head";
-import { getFeedsJs } from "@/utils/getFeedsJs";
 import { Product } from "@/types/types";
 
 interface IBrandsPage {
@@ -27,7 +26,7 @@ export default function BrandsPage({ brands }: IBrandsPage) {
 }
 
 export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
-  const products = await getFeedsJs();
+  const products = await getFeeds();
 
   if (!products) {
     return {

@@ -4,7 +4,6 @@ import ProductList from "@/components/ProductList";
 import { categories } from "@/config/categories";
 import Head from "next/head";
 import { Product } from "@/types/types";
-import { getFeedsJs } from "@/utils/getFeedsJs";
 
 interface ICategoryPage {
   category: {
@@ -54,7 +53,7 @@ export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
     };
   }
 
-  const products = await getFeedsJs({
+  const products = await getFeeds({
     category: currentCategory.slug,
   });
 
