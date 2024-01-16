@@ -68,8 +68,8 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
 
   return {
     props: {
-      category: currentCategory,
-      products: products,
+      category: currentCategory || null,
+      products: products || [],
     },
   };
 };
