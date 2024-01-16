@@ -6,7 +6,7 @@ import { Product } from "@/types/types";
 
 type Props = {
   products: Product[] | null;
-  title: string;
+  title: string | null;
 };
 
 export default function ProductList({ products, title }: Props) {

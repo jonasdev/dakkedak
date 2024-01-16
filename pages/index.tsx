@@ -1,9 +1,9 @@
-import About from "@/components/About";
-import Blog from "@/components/Blog";
-import Hero from "@/components/Hero";
-import HighlightedCategories from "@/components/HighlightedCategories";
-import HighlightedFeatures from "@/components/HighlightedFeatures";
-import HighlightedProducts from "@/components/HighlightedProducts";
+import About from "@/pages/home/About";
+import Blog from "@/pages/home/Blog";
+import Hero from "@/pages/home/Hero";
+import HighlightedCategories from "@/pages/home/HighlightedCategories";
+import HighlightedFeatures from "@/pages/home/HighlightedFeatures";
+import HighlightedProducts from "@/pages/home/HighlightedProducts";
 import Head from "next/head";
 
 export default function Home() {

@@ -3,20 +3,20 @@ import { Url } from "next/dist/shared/lib/router/router";
 export type Product = {
   productKey: number | string;
   shop: string;
-  category?: string | null;
-  originalCategory?: string | null;
+  category: string | null;
+  originalCategory: string | null;
   title: string;
-  price?: string | null;
-  oldPrice?: string | null;
-  discount?: number | null;
+  price: string | null;
+  oldPrice: string | null;
+  discount: number | null;
   url: string;
   description: string;
   image: string;
-  brand?: string | null;
+  brand: string | null;
   id: string;
   inStock: string;
-  keywords?: string[] | null;
-  sku?: string | null;
+  keywords: string[] | null;
+  sku: string | null;
   path: string;
 };
 

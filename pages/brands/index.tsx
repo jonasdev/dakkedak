@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
 
   return {
     props: {
-      brands: sortedBrands,
+      brands: sortedBrands || [],
     },
   };
 };
