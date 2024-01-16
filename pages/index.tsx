@@ -1,10 +1,10 @@
-import Hero from "@/pages/home/Hero";
-import HighlightedProducts from "./home/HighlightedProducts";
-import About from "./home/About";
-import Blog from "./home/Blog";
-import HighlightedCategories from "./home/HighlightedCategories";
+import About from "@/components/About";
+import Blog from "@/components/Blog";
+import Hero from "@/components/Hero";
+import HighlightedCategories from "@/components/HighlightedCategories";
+import HighlightedFeatures from "@/components/HighlightedFeatures";
+import HighlightedProducts from "@/components/HighlightedProducts";
 import Head from "next/head";
-import FeatureHighlight from "./home/HighlightedFeatures";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
         <HighlightedProducts />
         <About />
         <HighlightedCategories />
-        <FeatureHighlight />
+        <HighlightedFeatures />
         <Blog />
       </div>
     </>
