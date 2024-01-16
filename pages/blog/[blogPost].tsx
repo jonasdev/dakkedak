@@ -47,7 +47,7 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
     };
   }
 
-  const { blogPost } = params!;
+  const { blogPost } = params || {};
 
   if (!blogPost) {
     return {

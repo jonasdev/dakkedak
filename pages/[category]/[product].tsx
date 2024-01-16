@@ -60,7 +60,7 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
     };
   }
 
-  const { product, category } = params!;
+  const { product, category } = params || {};
   const currentCategory = categories.find((cat) => cat.slug === category);
 
   if (!currentCategory) {

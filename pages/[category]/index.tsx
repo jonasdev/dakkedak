@@ -44,7 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<ICategoryPage> = async ({
   params,
 }) => {
-  const { category } = params!;
+  const { category } = params || {};
   const currentCategory = categories.find((cat) => cat.slug === category);
 
   if (!currentCategory) {
