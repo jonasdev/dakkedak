@@ -15,17 +15,19 @@ interface ICategoryPage {
 
 export default function CategoryPage({ category, products }: ICategoryPage) {
   const lowerCasedCategoryName = category?.name?.toLowerCase() || "";
+  console.log("category: ", category);
+
   return (
     <>
       <Head>
-        <title>{category.name} - Babyhaj</title>
+        <title>{category?.name} - Babyhaj</title>
         <meta
           name="description"
           content={`Se det brede udvalg af ${lowerCasedCategoryName} og find det helt rigtige til netop dit barn.`}
         />
       </Head>
 
-      <ProductList products={products} title={category.name} />
+      <ProductList products={products} title={category?.name} />
     </>
   );
 }
