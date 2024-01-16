@@ -84,13 +84,9 @@ const handleProducts = (
 export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
-  console.log("getFeeds!");
-
   if (filter && cachedProducts.products) {
     return handleProducts(filter, cachedProducts.products);
   }
-
-  console.log("Made it past cachedProducts!");
 
   const promises: Promise<FeedProduct>[] = partnerFeeds.map((partner) =>
     fetch(partner)

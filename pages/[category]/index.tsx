@@ -35,8 +35,6 @@ export const getStaticPaths = async () => {
     params: { category: category.slug.toString() },
   }));
 
-  console.log("Made it past getStaticPaths");
-
   return {
     paths,
     fallback: false,
@@ -49,22 +47,16 @@ interface Params {
 
 export const getStaticProps = async ({ params }: { params: Params }) => {
   const { category } = params || {};
-  console.log("category: ", category);
   const currentCategory = categories.find((cat) => cat.slug === category);
-  console.log("currentCategory: ", currentCategory);
   if (!currentCategory) {
     return {
       notFound: true,
     };
   }
 
-  console.log("Made it past currentCategory");
-
   const products = await getFeeds({
     category: currentCategory.slug,
   });
-
-  console.log("Made it past products: ", products?.length);
 
   return {
     props: {
