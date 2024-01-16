@@ -34,7 +34,7 @@ export default function CategoryPage({ category, products }: ICategoryPage) {
 
 export const getStaticPaths = async () => {
   const paths = categories.map((category) => ({
-    params: { category: category.slug.toString() },
+    params: { category: category.slug },
   }));
 
   return {
