@@ -25,7 +25,7 @@ import { ReactNode } from "react";
 export const partnerFeeds = [
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=102750&feedid=3055", // BIBS
   // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=55902&feedid=976", // Milker
-  "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=58100&feedid=1059", // ByHappyMe
+  // "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=58100&feedid=1059", // ByHappyMe
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=73271&feedid=1604", // SagaCopenhagen
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=91977&feedid=2415", // Kraes
   "https://www.partner-ads.com/dk/feed_udlaes.php?partnerid=50033&bannerid=104520&feedid=3182", // Lillenordic

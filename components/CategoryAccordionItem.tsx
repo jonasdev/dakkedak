@@ -57,12 +57,12 @@ export default function CategoryAccordionItem({
         {index}
       </strong>
       {Object.values(categoriesSorted).map((category) => (
-        <li key={category.name} className="w-full">
+        <li key={category.name} className="w-full active:bg-primary">
           <Link
             href={`/${category.slug}`}
             className={classNames(
               isActive ? "pointer-events-auto" : "pointer-events-none",
-              "text-base flex items-center justify-between py-1.5"
+              "text-base flex items-center justify-between py-1.5 w-full"
             )}
           >
             <span onClick={onPageChange}>{category.name}</span>
