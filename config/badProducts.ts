@@ -1,4 +1,5 @@
 export const badProducts: string[] = [
+  "",
   "test-vare-1",
   "test-vare-2",
   "test-vare-3",

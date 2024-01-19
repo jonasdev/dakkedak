@@ -152,6 +152,8 @@ export const getFeeds = async (
     (product: any) => !badProducts.includes(product.path || "")
   );
 
+  console.log(filteredBadProducts.length);
+
   cachedProducts.products = filteredBadProducts;
 
   const sitemapPath = "public/sitemap.xml";

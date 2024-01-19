@@ -20,15 +20,13 @@ export default function PartnerCard({ partner }: Props) {
           <h3 className="text-lg font-bold text-gray-900 sm:text-xl">{name}</h3>
         </div>
 
-        <div className="">
-          <Image
-            alt={name}
-            src={image}
-            width={112}
-            height={56}
-            className="h-14 object-contain w-28"
-          />
-        </div>
+        <Image
+          alt={name}
+          src={image}
+          width={112}
+          height={56}
+          className="h-14 object-contain w-28"
+        />
       </div>
 
       <div className="">

@@ -14,7 +14,6 @@ interface ICategoryPage {
 
 export default function CategoryPage({ category, products }: ICategoryPage) {
   const lowerCasedCategoryName = category?.name?.toLowerCase() || "";
-  console.log("category: ", category);
 
   return (
     <>

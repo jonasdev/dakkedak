@@ -71,7 +71,7 @@ export default function Footer() {
                   icon: <IconHeartHandshake size={16} />,
                 },
                 {
-                  href: "/maerker",
+                  href: "/brands",
                   text: "Mærker",
                   icon: <IconTag size={16} />,
                 },
