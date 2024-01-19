@@ -5,9 +5,14 @@ import CategoryLink from "./CategoryLink";
 type Props = {
   categories: Category[];
   index: string;
+  onSelect: () => void;
 };
 
-export default function CategoryListItem({ categories, index }: Props) {
+export default function CategoryListItem({
+  categories,
+  index,
+  onSelect,
+}: Props) {
   const categoriesSorted = useMemo(() => {
     const sortedCategories = Object.values(categories)
       .slice()
@@ -44,7 +49,7 @@ export default function CategoryListItem({ categories, index }: Props) {
   }, [categories]);
 
   return (
-    <div className="p-2">
+    <div className="p-2" onClick={onSelect}>
       <strong className="block p-2 text-xs font-bold uppercase text-primary-dark">
         {index}
       </strong>

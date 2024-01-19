@@ -50,7 +50,7 @@ export default function SideMenu({ categoryLists }: Props) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex h-full overflow-y-scroll sm:overflow-hidden pt-16 pb-10 w-full flex-col items-start z-40 space-y-12 text-3xl text-white">
+        <div className="flex h-full overflow-y-scroll sm:overflow-hidden pt-16 pb-40 w-full flex-col items-start z-40 space-y-12 text-3xl text-white">
           <div className="w-full space-y-2">
             {categoryLists.map((list) => (
               <CategoryAccordion

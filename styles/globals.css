@@ -21,7 +21,7 @@ section {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  @apply bg-white rounded-br-lg;
+  @apply lg:bg-white lg:rounded-br-lg;
 }
 
 /* Handle */

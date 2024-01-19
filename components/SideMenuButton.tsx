@@ -15,7 +15,7 @@ export default function SideMenuButton({ toggled, setToggled }: Props) {
       <div
         className={classNames(
           toggled ? "ring-1" : "ring-0",
-          "relative flex h-10 w-10 transform items-center justify-center overflow-hidden rounded-full outline-none ring-transparent ring-opacity-30 transition-all duration-200 hover:ring-8 hover:ring-gray-300"
+          "relative flex h-10 w-10 transform items-center justify-center overflow-hidden rounded-full outline-none ring-transparent ring-opacity-30 transition-all duration-200"
         )}
       >
         <div className="flex h-[20px] w-[20px] origin-center transform flex-col justify-between overflow-hidden transition-all duration-300">
