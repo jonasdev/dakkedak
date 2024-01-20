@@ -12,11 +12,10 @@ interface Props {
 
 export interface FavoriteItem {
   product: Product;
-  productCategory: string;
   productKey: string;
 }
 
-export default function FavoriteButton({ product, category, size }: Props) {
+export default function FavoriteButton({ product, size }: Props) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   // Check if the item is in localStorage on initial render
   useEffect(() => {
@@ -41,7 +40,6 @@ export default function FavoriteButton({ product, category, size }: Props) {
       } else {
         favoriteItems.push({
           product: product,
-          productCategory: category,
           productKey: product.path || "",
         });
       }
@@ -51,7 +49,6 @@ export default function FavoriteButton({ product, category, size }: Props) {
       const favoriteItems: FavoriteItem[] = [
         {
           product: product,
-          productCategory: category,
           productKey: product.path || "",
         },
       ];

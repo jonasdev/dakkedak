@@ -32,9 +32,9 @@ export default function ChecklistPage() {
         <h1 className="text-3xl lg:text-6xl font-semibold text-center">
           Tjekliste - Kommer snart
         </h1>
-        <div className="mt-16 flex justify-center">
+        <div className="flex flex-col w-full p-6">
           {checklist.length ? (
-            <div className="lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4 grid-cols-1 gap-8">
               {checklist.map((item) => (
                 <ProductCard product={item.product} key={item.productKey} />
               ))}

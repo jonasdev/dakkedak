@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IconHeart, IconMoodSmile } from "@tabler/icons-react";
 import { FavoriteItem } from "@/components/FavoriteButton";
 import Head from "next/head";
+import { Product } from "@/types/types";
 
 export default function FavoritesPage() {
   const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
@@ -28,13 +29,14 @@ export default function FavoritesPage() {
           }
         />
       </Head>
-      <section className="w-full h-full flex flex-col items-center">
+      <section className="w-full h-full flex flex-col items-center overflow-x-hidden">
         <h1 className="text-3xl lg:text-6xl font-semibold text-center">
           Favoritter
         </h1>
-        <div className="mt-16 flex justify-center">
+
+        <div className="flex flex-col w-full p-6">
           {favoriteItems.length ? (
-            <div className="lg:w-5/6 lg:grid lg:gap-8 lg:grid-cols-2 xl:grid-cols-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4 grid-cols-1 gap-8">
               {favoriteItems.map((item) => (
                 <ProductCard product={item.product} key={item.productKey} />
               ))}

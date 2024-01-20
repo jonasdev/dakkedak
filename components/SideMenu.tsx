@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { ReactNode } from "react";
 import AppLink from "./AppLink";
 import {
+  IconDots,
   IconHeart,
   IconHeartHandshake,
   IconListCheck,
@@ -61,6 +62,14 @@ export default function SideMenu({ categoryLists }: Props) {
                 key={list.title}
               />
             ))}
+            <Link
+              href="/diverse"
+              className="text-lg flex items-center px-4 mb-4"
+              onClick={toggleSidebar}
+            >
+              <IconDots className="mr-2" />
+              Diverse
+            </Link>
             <div className="px-4">
               <div className="space-y-6 border-t pt-6">
                 <Link

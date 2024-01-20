@@ -1,4 +1,4 @@
-import { IconChevronDown, IconCircleCheckFilled } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import classNames from "classnames";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SortingOption } from "./ProductFilters";
@@ -74,7 +74,10 @@ export default function ProductSort({ sortOption, setSortOption }: Props) {
       >
         {Object.entries(sortingOptions).map(([label, option], index) => (
           <li
-            className="relative cursor-default select-none py-2 pl-3 pr-6 rounded-lg hover:bg-primary hover:bg-opacity-30"
+            className={classNames(
+              sortOption === option ? "bg-secondary" : "",
+              "relative cursor-default select-none py-2 pl-3 pr-6 rounded-lg hover:bg-primary hover:bg-opacity-30"
+            )}
             id="listbox-option-0"
             key={index}
           >
@@ -84,12 +87,6 @@ export default function ProductSort({ sortOption, setSortOption }: Props) {
             >
               <span className="font-medium ml-3 block truncate">{label}</span>
             </div>
-
-            {sortOption === option ? (
-              <span className="text-primary-dark absolute inset-y-0 right-0 flex items-center pr-4">
-                <IconCircleCheckFilled />
-              </span>
-            ) : null}
           </li>
         ))}
       </ul>
