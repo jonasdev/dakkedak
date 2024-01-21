@@ -50,15 +50,14 @@ const handleProducts = (
     ? handleFilter(filteredBadProducts, filter)
     : filteredBadProducts;
 
-  console.log(productsByFilter.length);
-
   const uniqueCombinations = new Set<string>();
 
   const productsToReturn = productsByFilter.filter((pdt: Product) => {
-    const { category: pdtCategory, path } = pdt;
-    if (!pdtCategory) return false;
+    const { category, path } = pdt;
 
-    const combination = `${pdtCategory}-${path}`;
+    if (!category) return false;
+
+    const combination = `${category}-${path}`;
     if (!uniqueCombinations.has(combination)) {
       uniqueCombinations.add(combination);
       return true;
@@ -67,7 +66,7 @@ const handleProducts = (
     return false;
   });
 
-  return productsByFilter;
+  return productsToReturn;
 };
 
 const fetchData = async () => {
@@ -86,13 +85,11 @@ const fetchData = async () => {
 export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
-  // if (filter && cachedProducts.products) {
-  //   return handleProducts(filter, cachedProducts.products);
-  // }
+  if (filter && cachedProducts.products) {
+    return handleProducts(filter, cachedProducts.products);
+  }
 
   const products: Product[] = await fetchData();
-  console.log(products.length);
-
   // console.log(products);
 
   const filteredBadProducts = products?.filter(
@@ -104,17 +101,18 @@ export const getFeeds = async (
   const updatedArray = filteredBadProducts.map((obj) => ({
     ...obj,
     category: handleCategory(obj),
+    path: beautifyUrl(obj.title),
   }));
 
   cachedProducts.products = updatedArray;
 
-  // const sitemapPath = "public/sitemap.xml";
-  // fs.readFile(sitemapPath, (noSitemap, data) => {
-  //   if (noSitemap) {
-  //     generateSitemap(filteredBadProducts);
-  //     console.log("Sitemap.xml created!");
-  //   }
-  // });
+  const sitemapPath = "public/sitemap.xml";
+  fs.readFile(sitemapPath, (noSitemap, data) => {
+    if (noSitemap) {
+      generateSitemap(updatedArray);
+      console.log("Sitemap.xml created!");
+    }
+  });
 
   console.log("updatedArray.length: ", updatedArray.length);
 
