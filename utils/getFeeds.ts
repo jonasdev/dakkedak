@@ -46,23 +46,11 @@ const handleProducts = (
   filter: Filter | null,
   filteredBadProducts: Product[]
 ) => {
-  const productsPath = "config/products.js";
-  fs.readFile(productsPath, (noProducts, data) => {
-    if (noProducts) {
-      const content = `export const products = ${JSON.stringify(
-        filteredBadProducts,
-        null,
-        2
-      )}`;
-      console.log("Products created!");
-
-      fs.writeFileSync(productsPath, content, "utf-8");
-    }
-  });
-
   const productsByFilter = filter
     ? handleFilter(filteredBadProducts, filter)
     : filteredBadProducts;
+
+  console.log(productsByFilter.length);
 
   const uniqueCombinations = new Set<string>();
 
@@ -75,96 +63,62 @@ const handleProducts = (
       uniqueCombinations.add(combination);
       return true;
     }
+
     return false;
   });
 
-  return productsToReturn;
+  return productsByFilter;
+};
+
+const fetchData = async () => {
+  try {
+    const response = await fetch(
+      "https://static8-api.herokuapp.com/babyhaj?fbclid=IwAR1MVan21-5E-EXH5ACberO_ke0ubDkwbQ2c-7cvI1WzQoLSZj89wTjFD-A"
+    );
+    const result = await response.json();
+    return result.products;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Rethrow the error to handle it elsewhere if needed
+  }
 };
 
 export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
-  if (filter && cachedProducts.products) {
-    return handleProducts(filter, cachedProducts.products);
-  }
+  // if (filter && cachedProducts.products) {
+  //   return handleProducts(filter, cachedProducts.products);
+  // }
 
-  const promises: Promise<FeedProduct>[] = partnerFeeds.map((partner) =>
-    fetch(partner)
-      .then((response) => response.arrayBuffer())
-      .then((buffer) => iconv.decode(Buffer.from(buffer), "iso-8859-1"))
-      .then((res) => {
-        if (res?.match("Feed findes ikke")) return [];
+  const products: Product[] = await fetchData();
+  console.log(products.length);
 
-        let feed: Feed | null = null;
-        xml2js.parseString(res, (err, all) => {
-          if (err) {
-            console.log(err);
-            return;
-          }
+  // console.log(products);
 
-          feed = all;
-        });
-
-        //@ts-ignore
-        if (!feed || !feed?.produkter) return [];
-
-        //@ts-ignore
-        return feed.produkter.produkt;
-      })
-  );
-
-  const products: any = [];
-  await Promise.all(promises).then(async (response) => {
-    const result = ([] as any[]).concat.apply([], response);
-    if (!result || !result.length) return [];
-
-    result.forEach((product: any, key: number) => {
-      products.push({
-        productKey: key,
-        shop: product?.forhandler?.[0] || "",
-        originalCategory: product?.kategorinavn?.[0] || null,
-        category: handleCategory(product) || null,
-        title: product?.produktnavn?.[0]
-          ? decodeString(product?.produktnavn?.[0] || "")
-          : "",
-        price: product?.nypris?.[0] || "",
-        oldPrice: product?.glpris?.[0] || "",
-        // discount:
-        //   Number(product?.glpris?.[0]) - Number(product?.nypris?.[0]) || null,
-        discount: handleDiscount(
-          Number(product?.nypris?.[0]),
-          Number(product?.glpris?.[0])
-        ),
-        url: product?.vareurl?.[0] || "",
-        image: product?.billedurl?.[0] || "",
-        brand: product?.brand?.[0] ? decodeString(product?.brand?.[0]) : null,
-        description: formatDescription(product?.beskrivelse?.[0]) || "",
-        id: product?.produktid?.[0] || "",
-        inStock: product?.lagerantal?.[0] || "",
-        keywords: product?.produktnavn?.[0]?.split(" ") || [],
-        sku: product?.ean?.[0] || "",
-        path: beautifyUrl(product?.produktnavn?.[0]),
-      });
-    });
-  });
-
-  const filteredBadProducts = products.filter(
+  const filteredBadProducts = products?.filter(
     (product: any) => !badProducts.includes(product.path || "")
   );
 
-  console.log(filteredBadProducts.length);
+  console.log("filteredBadProducts: ", filteredBadProducts.length);
 
-  cachedProducts.products = filteredBadProducts;
+  const updatedArray = filteredBadProducts.map((obj) => ({
+    ...obj,
+    category: handleCategory(obj),
+  }));
 
-  const sitemapPath = "public/sitemap.xml";
-  fs.readFile(sitemapPath, (noSitemap, data) => {
-    if (noSitemap) {
-      generateSitemap(filteredBadProducts);
-      console.log("Sitemap.xml created!");
-    }
-  });
+  cachedProducts.products = updatedArray;
 
-  return handleProducts(filter, filteredBadProducts);
+  // const sitemapPath = "public/sitemap.xml";
+  // fs.readFile(sitemapPath, (noSitemap, data) => {
+  //   if (noSitemap) {
+  //     generateSitemap(filteredBadProducts);
+  //     console.log("Sitemap.xml created!");
+  //   }
+  // });
+
+  console.log("updatedArray.length: ", updatedArray.length);
+
+  return handleProducts(filter, updatedArray);
 };
 
 export const handleFilter = (
