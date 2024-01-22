@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
 
   const uniqueBrandsMap: Map<string, string> = new Map();
   products.forEach((product: Product) => {
-    if (product.brand) {
+    if (product?.brand) {
       const brandLowerCase = product.brand.toLowerCase();
       if (!uniqueBrandsMap.has(brandLowerCase)) {
         uniqueBrandsMap.set(brandLowerCase, product.brand);

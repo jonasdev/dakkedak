@@ -22,7 +22,7 @@ export default function ProductPage({
           name="description"
           content={`Find den helt rigtige ${lowerCasedCategoryName} til dit barn. Det kunne f.eks. være en ${
             product.title
-          } fra ${product.brand || product.shop}.`}
+          } fra ${product?.brand || product.shop}.`}
         />
       </Head>
 

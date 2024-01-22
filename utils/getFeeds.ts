@@ -102,15 +102,15 @@ export const getFeeds = async (
     path: beautifyUrl(obj.title),
   }));
 
+  const productsToReturn = handleProducts(filter, updatedArray);
+
   const sitemapPath = "public/sitemap.xml";
   fs.readFile(sitemapPath, (noSitemap, data) => {
     if (noSitemap) {
-      generateSitemap(updatedArray);
+      generateSitemap(productsToReturn);
       console.log("Sitemap.xml created!");
     }
   });
-
-  const productsToReturn = handleProducts(filter, updatedArray);
 
   cachedProducts.products = productsToReturn;
 
