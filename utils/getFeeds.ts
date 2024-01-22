@@ -70,7 +70,7 @@ export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
   if (cachedProducts.products) {
-    return handleProducts(filter, cachedProducts.products);
+    return cachedProducts.products;
   }
 
   const products: Product[] = await fetchData();
