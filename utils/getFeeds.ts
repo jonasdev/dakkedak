@@ -70,8 +70,7 @@ export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
   if (cachedProducts.products && cachedProducts.products?.length > 0) {
-    console.log("cachedProducts: ", cachedProducts.length);
-    console.log("cachedProducts 2 : ", Object.keys(cachedProducts).length);
+    console.log("cachedProducts: ", cachedProducts.products?.length);
     return handleProducts(filter, cachedProducts.products);
   }
 
