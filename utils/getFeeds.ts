@@ -110,7 +110,7 @@ export const getFeeds = async (
     }
   });
 
-  const productsToReturn = handleProducts(filter, cachedProducts.products);
+  const productsToReturn = handleProducts(filter, updatedArray);
 
   cachedProducts.products = productsToReturn;
 
