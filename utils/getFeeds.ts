@@ -71,17 +71,18 @@ export const getFeeds = async (
 ): Promise<Product[]> => {
   if (cachedProducts.products && Object.keys(cachedProducts).length > 0) {
     console.log("cachedProducts: ", cachedProducts.length);
-    console.log("cachedProducts 2 : ", Object.keys(cachedProducts).length > 0);
+    console.log("cachedProducts 2 : ", Object.keys(cachedProducts).length);
     return handleProducts(filter, cachedProducts.products);
   }
 
   const products: Product[] = await fetchData();
-  // console.log(products);
+  console.log("products: ", products.length);
 
   const filteredBadProducts = products?.filter(
     (product: any) =>
       !badProducts.map((badProduct) => badProduct === product.path)
   );
+  console.log("filteredBadProducts: ", filteredBadProducts.length);
 
   const updatedArray = filteredBadProducts.map((obj) => ({
     ...obj,
