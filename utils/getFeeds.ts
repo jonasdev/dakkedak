@@ -50,23 +50,7 @@ const handleProducts = (
     ? handleFilter(filteredBadProducts, filter)
     : filteredBadProducts;
 
-  const uniqueCombinations = new Set<string>();
-
-  const productsToReturn = productsByFilter.filter((pdt: Product) => {
-    const { category, path } = pdt;
-
-    if (!category) return false;
-
-    const combination = `${category}-${path}`;
-    if (!uniqueCombinations.has(combination)) {
-      uniqueCombinations.add(combination);
-      return true;
-    }
-
-    return false;
-  });
-
-  return productsToReturn;
+  return productsByFilter;
 };
 
 const fetchData = async () => {
@@ -93,7 +77,8 @@ export const getFeeds = async (
   // console.log(products);
 
   const filteredBadProducts = products?.filter(
-    (product: any) => !badProducts.includes(product.path || "")
+    (product: any) =>
+      !badProducts.map((badProduct) => badProduct === product.path)
   );
 
   const updatedArray = filteredBadProducts.map((obj) => ({
@@ -112,9 +97,25 @@ export const getFeeds = async (
     }
   });
 
-  cachedProducts.products = productsToReturn;
+  const uniqueCombinations = new Set<string>();
 
-  return productsToReturn;
+  const uniqueProducts = productsToReturn.filter((pdt: Product) => {
+    const { category, path } = pdt;
+
+    if (!category) return false;
+
+    const combination = `${category}-${path}`;
+    if (!uniqueCombinations.has(combination)) {
+      uniqueCombinations.add(combination);
+      return true;
+    }
+
+    return false;
+  });
+
+  cachedProducts.products = uniqueProducts;
+
+  return uniqueProducts;
 };
 
 export const handleFilter = (
