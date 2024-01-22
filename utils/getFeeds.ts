@@ -69,7 +69,7 @@ const fetchData = async () => {
 export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
-  if (cachedProducts.products) {
+  if (cachedProducts.products && Object.keys(cachedProducts).length > 0) {
     return cachedProducts.products;
   }
 
