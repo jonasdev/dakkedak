@@ -129,7 +129,7 @@ export const handleFilter = (
 
     if (
       brands &&
-      beautifyUrl(product.brand || product.shop || "")
+      beautifyUrl(product?.brand || product?.shop || "")
         ?.toLowerCase()
         .match(brands.toLowerCase())
     )

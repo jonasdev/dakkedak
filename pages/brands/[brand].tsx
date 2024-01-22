@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function BrandPage({ products }: Props) {
-  const brand = products[0].brand || products[0].shop;
+  const brand = products[0]?.brand || products[0]?.shop;
 
   return (
     <>
@@ -37,7 +37,7 @@ export const getStaticPaths = async () => {
   }
 
   const brands: string[] = products
-    .map((product: Product) => product.brand)
+    .map((product: Product) => product?.brand)
     .filter(
       (brand: string | undefined | null) =>
         brand !== undefined && brand !== null && brand !== ""
