@@ -69,57 +69,57 @@ const fetchData = async () => {
 export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
-  if (cachedProducts.products && cachedProducts.products?.length > 0) {
+  if (cachedProducts.products) {
     console.log("cachedProducts: ", cachedProducts.products?.length);
     return handleProducts(filter, cachedProducts.products);
+  } else {
+    const products: Product[] = await fetchData();
+    console.log("products: ", products.length);
+
+    const filteredBadProducts = products?.filter(
+      (product: any) => !badProducts.includes(product.path || "")
+    );
+    console.log("filteredBadProducts: ", filteredBadProducts.length);
+
+    const updatedArray = filteredBadProducts.map((obj) => ({
+      ...obj,
+      category: handleCategory(obj),
+      path: beautifyUrl(obj.title),
+    }));
+
+    console.log("updatedArray: ", updatedArray.length);
+
+    const uniqueCombinations = new Set<string>();
+
+    const uniqueProducts = updatedArray.filter((pdt: Product) => {
+      const { category, path } = pdt;
+
+      if (!category) return false;
+
+      const combination = `${category}-${path}`;
+      if (!uniqueCombinations.has(combination)) {
+        uniqueCombinations.add(combination);
+        return true;
+      }
+
+      return false;
+    });
+
+    cachedProducts.products = uniqueProducts;
+
+    const sitemapPath = "public/sitemap.xml";
+    fs.readFile(sitemapPath, (noSitemap, data) => {
+      if (noSitemap) {
+        generateSitemap(uniqueProducts);
+        console.log("Sitemap.xml created!");
+      }
+    });
+
+    const productsToReturn = handleProducts(filter, uniqueProducts);
+    console.log("uniqueProducts", uniqueProducts.length);
+
+    return productsToReturn;
   }
-
-  const products: Product[] = await fetchData();
-  console.log("products: ", products.length);
-
-  const filteredBadProducts = products?.filter(
-    (product: any) => !badProducts.includes(product.path || "")
-  );
-  console.log("filteredBadProducts: ", filteredBadProducts.length);
-
-  const updatedArray = filteredBadProducts.map((obj) => ({
-    ...obj,
-    category: handleCategory(obj),
-    path: beautifyUrl(obj.title),
-  }));
-
-  console.log("updatedArray: ", updatedArray.length);
-
-  const uniqueCombinations = new Set<string>();
-
-  const uniqueProducts = updatedArray.filter((pdt: Product) => {
-    const { category, path } = pdt;
-
-    if (!category) return false;
-
-    const combination = `${category}-${path}`;
-    if (!uniqueCombinations.has(combination)) {
-      uniqueCombinations.add(combination);
-      return true;
-    }
-
-    return false;
-  });
-
-  cachedProducts.products = uniqueProducts;
-
-  const sitemapPath = "public/sitemap.xml";
-  fs.readFile(sitemapPath, (noSitemap, data) => {
-    if (noSitemap) {
-      generateSitemap(uniqueProducts);
-      console.log("Sitemap.xml created!");
-    }
-  });
-
-  const productsToReturn = handleProducts(filter, uniqueProducts);
-  console.log("uniqueProducts", uniqueProducts.length);
-
-  return productsToReturn;
 };
 
 export const handleFilter = (
