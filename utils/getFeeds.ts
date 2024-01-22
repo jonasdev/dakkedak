@@ -102,7 +102,7 @@ export const getFeeds = async (
     path: beautifyUrl(obj.title),
   }));
 
-  cachedProducts.products = updatedArray.slice(0, 10000);
+  cachedProducts.products = updatedArray;
 
   const sitemapPath = "public/sitemap.xml";
   fs.readFile(sitemapPath, (noSitemap, data) => {
