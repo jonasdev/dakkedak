@@ -69,7 +69,7 @@ const fetchData = async () => {
 export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
-  if (cachedProducts.products && Object.keys(cachedProducts).length > 0) {
+  if (cachedProducts.products && cachedProducts.products?.length > 0) {
     console.log("cachedProducts: ", cachedProducts.length);
     console.log("cachedProducts 2 : ", Object.keys(cachedProducts).length);
     return handleProducts(filter, cachedProducts.products);
@@ -120,7 +120,7 @@ export const getFeeds = async (
   const productsToReturn = handleProducts(filter, uniqueProducts);
   console.log("uniqueProducts", uniqueProducts.length);
 
-  return uniqueProducts;
+  return productsToReturn;
 };
 
 export const handleFilter = (
