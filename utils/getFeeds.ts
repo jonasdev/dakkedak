@@ -71,6 +71,7 @@ export const getFeeds = async (
 ): Promise<Product[]> => {
   if (cachedProducts.products && Object.keys(cachedProducts).length > 0) {
     console.log("cachedProducts: ", cachedProducts.length);
+    console.log("cachedProducts 2 : ", Object.keys(cachedProducts).length > 0);
     return handleProducts(filter, cachedProducts.products);
   }
 
@@ -87,6 +88,8 @@ export const getFeeds = async (
     category: handleCategory(obj),
     path: beautifyUrl(obj.title),
   }));
+
+  console.log("updatedArray: ", updatedArray.length);
 
   const uniqueCombinations = new Set<string>();
 
