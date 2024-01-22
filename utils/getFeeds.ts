@@ -70,7 +70,7 @@ export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
   if (cachedProducts.products && Object.keys(cachedProducts).length > 0) {
-    return cachedProducts.products;
+    return handleProducts(filter, cachedProducts.products);
   }
 
   const products: Product[] = await fetchData();
@@ -105,17 +105,17 @@ export const getFeeds = async (
 
   cachedProducts.products = uniqueProducts;
 
-  const productsToReturn = handleProducts(filter, updatedArray);
-
   const sitemapPath = "public/sitemap.xml";
   fs.readFile(sitemapPath, (noSitemap, data) => {
     if (noSitemap) {
-      generateSitemap(productsToReturn);
+      generateSitemap(uniqueProducts);
       console.log("Sitemap.xml created!");
     }
   });
 
-  return uniqueProducts;
+  const productsToReturn = handleProducts(filter, uniqueProducts);
+
+  return productsToReturn;
 };
 
 export const handleFilter = (
