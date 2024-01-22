@@ -112,7 +112,7 @@ export const getFeeds = async (
     }
   });
 
-  return handleProducts(filter, updatedArray);
+  return handleProducts(filter, cachedProducts.products);
 };
 
 export const handleFilter = (
