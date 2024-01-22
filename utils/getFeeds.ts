@@ -85,7 +85,7 @@ const fetchData = async () => {
 export const getFeeds = async (
   filter: Filter | null = null
 ): Promise<Product[]> => {
-  if (filter && cachedProducts.products) {
+  if (cachedProducts.products) {
     return handleProducts(filter, cachedProducts.products);
   }
 
@@ -95,8 +95,6 @@ export const getFeeds = async (
   const filteredBadProducts = products?.filter(
     (product: any) => !badProducts.includes(product.path || "")
   );
-
-  console.log("filteredBadProducts: ", filteredBadProducts.length);
 
   const updatedArray = filteredBadProducts.map((obj) => ({
     ...obj,
@@ -113,8 +111,6 @@ export const getFeeds = async (
       console.log("Sitemap.xml created!");
     }
   });
-
-  console.log("updatedArray.length: ", updatedArray.length);
 
   return handleProducts(filter, updatedArray);
 };
