@@ -79,8 +79,7 @@ export const getFeeds = async (
   console.log("products: ", products.length);
 
   const filteredBadProducts = products?.filter(
-    (product: any) =>
-      !badProducts.map((badProduct) => badProduct === product.path)
+    (product: any) => !badProducts.includes(product.path || "")
   );
   console.log("filteredBadProducts: ", filteredBadProducts.length);
 
