@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   output: "export",
-  // staticPageGenerationTimeout: 1000,
+  staticPageGenerationTimeout: 1000,
   images: { unoptimized: true },
-  // experimental: {
-  //   largePageDataBytes: 128 * 100000,
-  // },
+  experimental: {
+    largePageDataBytes: 128 * 100000,
+  },
 };
 
 module.exports = nextConfig;
