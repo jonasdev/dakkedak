@@ -73,49 +73,54 @@ export const getFeeds = async (
   if (cachedProducts.products && cachedProducts.products.length > 0) {
     return handleProducts(filter, cachedProducts.products);
   } else {
-    const products: Product[] = await fetchData();
+    try {
+      const products: Product[] = await fetchData();
 
-    console.log('Products fired!', products.length);
+      console.log('products ::', products.length);
 
-    const filteredBadProducts = products?.filter(
-      (product: any) => !badProducts.includes(product.path || "")
-    );
+      const filteredBadProducts = products?.filter(
+        (product: any) => !badProducts.includes(product.path || "")
+      );
 
-    const updatedArray = filteredBadProducts.map((obj) => ({
-      ...obj,
-      category: handleCategory(obj),
-      path: beautifyUrl(obj.title),
-    }));
+      const updatedArray = filteredBadProducts.map((obj) => ({
+        ...obj,
+        category: handleCategory(obj),
+        path: beautifyUrl(obj.title),
+      }));
 
-    const uniqueCombinations = new Set<string>();
+      const uniqueCombinations = new Set<string>();
 
-    const uniqueProducts = updatedArray.filter((pdt: Product) => {
-      const { category, path } = pdt;
+      const uniqueProducts = updatedArray.filter((pdt: Product) => {
+        const { category, path } = pdt;
 
-      if (!category) return false;
+        if (!category) return false;
 
-      const combination = `${category}-${path}`;
-      if (!uniqueCombinations.has(combination)) {
-        uniqueCombinations.add(combination);
-        return true;
-      }
+        const combination = `${category}-${path}`;
+        if (!uniqueCombinations.has(combination)) {
+          uniqueCombinations.add(combination);
+          return true;
+        }
 
-      return false;
-    });
+        return false;
+      });
 
-    cachedProducts.products = uniqueProducts;
+      cachedProducts.products = uniqueProducts;
 
-    const sitemapPath = "public/sitemap.xml";
-    fs.readFile(sitemapPath, (noSitemap, data) => {
-      if (noSitemap) {
-        generateSitemap(uniqueProducts);
-        console.log("Sitemap.xml created!");
-      }
-    });
+      const sitemapPath = "public/sitemap.xml";
+      fs.readFile(sitemapPath, (noSitemap, data) => {
+        if (noSitemap) {
+          generateSitemap(uniqueProducts);
+          console.log("Sitemap.xml created!");
+        }
+      });
 
-    const productsToReturn = handleProducts(filter, uniqueProducts);
+      const productsToReturn = handleProducts(filter, uniqueProducts);
 
-    return productsToReturn;
+      return productsToReturn;
+    } catch (error) {
+      console.error("Error fetching and processing data:", error);
+      throw error;
+    }
   }
 };
 
