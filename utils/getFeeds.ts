@@ -74,20 +74,16 @@ export const getFeeds = async (
     return handleProducts(filter, cachedProducts.products);
   } else {
     const products: Product[] = await fetchData();
-    console.log("products: ", products.length);
 
     const filteredBadProducts = products?.filter(
       (product: any) => !badProducts.includes(product.path || "")
     );
-    console.log("filteredBadProducts: ", filteredBadProducts.length);
 
     const updatedArray = filteredBadProducts.map((obj) => ({
       ...obj,
       category: handleCategory(obj),
       path: beautifyUrl(obj.title),
     }));
-
-    console.log("updatedArray: ", updatedArray.length);
 
     const uniqueCombinations = new Set<string>();
 
@@ -116,7 +112,6 @@ export const getFeeds = async (
     });
 
     const productsToReturn = handleProducts(filter, uniqueProducts);
-    console.log("uniqueProducts", uniqueProducts.length);
 
     return productsToReturn;
   }
