@@ -57,7 +57,7 @@ const handleProducts = (
 const fetchData = async () => {
   try {
     const response = await fetch(
-      "https://static8-api.herokuapp.com/babyhaj?fbclid=IwAR1MVan21-5E-EXH5ACberO_ke0ubDkwbQ2c-7cvI1WzQoLSZj89wTjFD-A"
+      "https://static8-api.herokuapp.com/babyhaj"
     );
     const result = await response.json();
     return result.products;
