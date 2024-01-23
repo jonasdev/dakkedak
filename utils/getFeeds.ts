@@ -1,3 +1,4 @@
+// @ts-ignore
 import iconv from "iconv-lite";
 import xml2js from "xml2js";
 import { handleCategory } from "./handleCategory";
@@ -40,7 +41,7 @@ type Filter = {
   others?: string;
 };
 
-export const cachedProducts: any = {};
+const cachedProducts: any = {};
 
 const handleProducts = (
   filter: Filter | null,

@@ -11,7 +11,7 @@ export default function BlogPostPage({ blogPost }: { blogPost: BlogPost }) {
   return (
     <>
       <Head>
-        <title>{blogPost.title} - Babyhaj</title>
+        <title>Babyhaj</title>
         <meta
           name="description"
           content={`Find hjælp og inspiration ved at læse vores blogopslag. For eksempel kan du læse dette opslag: '${blogPost.title}'.`}

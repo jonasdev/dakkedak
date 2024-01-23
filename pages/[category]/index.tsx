@@ -18,10 +18,10 @@ export default function CategoryPage({ category, products }: ICategoryPage) {
   return (
     <>
       <Head>
-        <title>{category?.name} - Babyhaj</title>
+        <title>Babyhaj</title>
         <meta
           name="description"
-          content={`Se det brede udvalg af ${lowerCasedCategoryName} og find det helt rigtige til netop dit barn.`}
+          content={`Se det brede udvalg hos babyhaj og find det helt rigtige til netop dit barn.`}
         />
       </Head>
 

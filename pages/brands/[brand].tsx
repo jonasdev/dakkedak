@@ -16,7 +16,7 @@ export default function BrandPage({ products }: Props) {
   return (
     <>
       <Head>
-        <title>{brand} - Babyhaj</title>
+        <title>Babyhaj</title>
         <meta
           name="description"
           content={`Udforsk produkter fra mærket ${brand} og find lige det du mangler til dit barn.`}

@@ -17,13 +17,8 @@ export default function ProductPage({
   return (
     <>
       <Head>
-        <title>{product.title} - Babyhaj</title>
-        <meta
-          name="description"
-          content={`Find den helt rigtige ${lowerCasedCategoryName} til dit barn. Det kunne f.eks. være en ${
-            product.title
-          } fra ${product?.brand || product.shop}.`}
-        />
+        <title>Title - Babyhaj</title>
+        <meta name="description" content={`Find den helt rigtige`} />
       </Head>
 
       <ProductDetails product={product} relatedProducts={relatedProducts} />
