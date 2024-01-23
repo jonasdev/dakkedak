@@ -67,27 +67,27 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
 
   // console.log("Output ::", output.length);
 
-  // const products = await getFeeds({
-  //   category: currentCategory.slug,
-  // });
+  const products = await getFeeds({
+    category: currentCategory.slug,
+  });
 
-  // if (!products) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
+  if (!products) {
+    return {
+      notFound: true,
+    };
+  }
 
-  // const [currentProduct] = products.filter(
-  //   (pro: Product) => product === pro.path
-  // );
+  const [currentProduct] = products.filter(
+    (pro: Product) => product === pro.path
+  );
 
-  // if (!currentProduct) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
+  if (!currentProduct) {
+    return {
+      notFound: true,
+    };
+  }
 
-  // const relatedProducts = getRelatedProducts(products, currentProduct);
+  const relatedProducts = getRelatedProducts(products, currentProduct);
 
   return {
     props: { product: {} },

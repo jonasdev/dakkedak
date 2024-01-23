@@ -11,6 +11,7 @@ import fs from "fs";
 import { generateSitemap } from "./generateSitemap";
 import { handleDiscount } from "./handleDiscount";
 import { badProducts } from "@/config/badProducts";
+import { output } from "./output";
 
 type FeedProduct = {
   produkt: {
@@ -54,18 +55,16 @@ const handleProducts = (
   return productsByFilter;
 };
 
-const fetchData = async () => {
-  try {
-    const response = await fetch(
-      "https://static8-api.herokuapp.com/babyhaj"
-    );
-    const result = await response.json();
-    return result.products;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error; // Rethrow the error to handle it elsewhere if needed
-  }
-};
+// const fetchData = async () => {
+//   try {
+//     const response = await fetch("https://static8-api.herokuapp.com/babyhaj");
+//     const result = await response.json();
+//     return result.products;
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     throw error; // Rethrow the error to handle it elsewhere if needed
+//   }
+// };
 
 export const getFeeds = async (
   filter: Filter | null = null
@@ -74,7 +73,7 @@ export const getFeeds = async (
     return handleProducts(filter, cachedProducts.products);
   } else {
     try {
-      const products: Product[] = await fetchData();
+      const products: Product[] = output;
 
       const filteredBadProducts = products?.filter(
         (product: any) => !badProducts.includes(product.path || "")

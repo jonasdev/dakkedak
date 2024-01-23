@@ -2,7 +2,6 @@ import BlogPostDetails from "@/components/BlogPostDetails";
 import { blogPosts } from "@/config/blogPosts";
 import { categories } from "@/config/categories";
 import { BlogPost } from "@/types/types";
-import { getFeeds } from "@/utils/getFeeds";
 import getRelatedProducts from "@/utils/getRelatedProducts";
 import Head from "next/head";
 import React from "react";
