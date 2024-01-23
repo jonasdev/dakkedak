@@ -76,8 +76,6 @@ export const getFeeds = async (
     try {
       const products: Product[] = await fetchData();
 
-      console.log('products ::', products.length);
-
       const filteredBadProducts = products?.filter(
         (product: any) => !badProducts.includes(product.path || "")
       );
