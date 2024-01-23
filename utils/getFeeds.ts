@@ -11,7 +11,6 @@ import fs from "fs";
 import { generateSitemap } from "./generateSitemap";
 import { handleDiscount } from "./handleDiscount";
 import { badProducts } from "@/config/badProducts";
-import { output } from "./output";
 
 type FeedProduct = {
   produkt: {
@@ -55,62 +54,71 @@ const handleProducts = (
   return productsByFilter;
 };
 
-// const fetchData = async () => {
-//   try {
-//     const response = await fetch("https://static8-api.herokuapp.com/babyhaj");
-//     const result = await response.json();
-//     return result.products;
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     throw error; // Rethrow the error to handle it elsewhere if needed
-//   }
-// };
+const fetchData = async () => {
+  try {
+    const response = await fetch(
+      "https://static8-api.herokuapp.com/babyhaj"
+    );
+    const result = await response.json();
+    return result.products;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Rethrow the error to handle it elsewhere if needed
+  }
+};
 
-export const getFeeds = (filter: Filter | null = null): Product[] => {
+export const getFeeds = async (
+  filter: Filter | null = null
+): Promise<Product[]> => {
   if (cachedProducts.products && cachedProducts.products.length > 0) {
     return handleProducts(filter, cachedProducts.products);
   } else {
-    const products: Product[] = output;
+    try {
+      const products: Product[] = await fetchData();
 
-    const filteredBadProducts = products?.filter(
-      (product: any) => !badProducts.includes(product.path || "")
-    );
+      const filteredBadProducts = products?.filter(
+        (product: any) => !badProducts.includes(product.path || "")
+      );
 
-    const updatedArray = filteredBadProducts.map((obj) => ({
-      ...obj,
-      category: handleCategory(obj),
-      path: beautifyUrl(obj.title),
-    }));
+      const updatedArray = filteredBadProducts.map((obj) => ({
+        ...obj,
+        category: handleCategory(obj),
+        path: beautifyUrl(obj.title),
+      }));
 
-    const uniqueCombinations = new Set<string>();
+      const uniqueCombinations = new Set<string>();
 
-    const uniqueProducts = updatedArray.filter((pdt: Product) => {
-      const { category, path } = pdt;
+      const uniqueProducts = updatedArray.filter((pdt: Product) => {
+        const { category, path } = pdt;
 
-      if (!category) return false;
+        if (!category) return false;
 
-      const combination = `${category}-${path}`;
-      if (!uniqueCombinations.has(combination)) {
-        uniqueCombinations.add(combination);
-        return true;
-      }
+        const combination = `${category}-${path}`;
+        if (!uniqueCombinations.has(combination)) {
+          uniqueCombinations.add(combination);
+          return true;
+        }
 
-      return false;
-    });
+        return false;
+      });
 
-    cachedProducts.products = uniqueProducts;
+      cachedProducts.products = uniqueProducts;
 
-    // const sitemapPath = "public/sitemap.xml";
-    // fs.readFile(sitemapPath, (noSitemap, data) => {
-    //   if (noSitemap) {
-    //     generateSitemap(uniqueProducts);
-    //     console.log("Sitemap.xml created!");
-    //   }
-    // });
+      const sitemapPath = "public/sitemap.xml";
+      fs.readFile(sitemapPath, (noSitemap, data) => {
+        if (noSitemap) {
+          generateSitemap(uniqueProducts);
+          console.log("Sitemap.xml created!");
+        }
+      });
 
-    const productsToReturn = handleProducts(filter, uniqueProducts);
+      const productsToReturn = handleProducts(filter, uniqueProducts);
 
-    return productsToReturn;
+      return productsToReturn;
+    } catch (error) {
+      console.error("Error fetching and processing data:", error);
+      throw error;
+    }
   }
 };
 
