@@ -68,7 +68,7 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
 
   const { brand } = params;
 
-  const products = await getFeeds({ brands: brand });
+  const products = getFeeds({ brands: brand });
 
   if (!products) {
     return {
