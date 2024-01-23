@@ -37,3 +37,4 @@ next-env.d.ts
 #data
 /public/sitemap.xml
 /config/products.js
+/utils/products.js

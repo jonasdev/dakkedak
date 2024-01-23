@@ -1,8 +1,10 @@
+// @ts-ignore
 import ProductDetails from "@/components/ProductDetails";
 import { categories } from "@/config/categories";
 import { Product } from "@/types/types";
 import { getFeeds } from "@/utils/getFeeds";
 import getRelatedProducts from "@/utils/getRelatedProducts";
+import { output } from "@/utils/output";
 import Head from "next/head";
 import React from "react";
 
@@ -63,29 +65,31 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
     };
   }
 
-  const products = await getFeeds({
-    category: currentCategory.slug,
-  });
+  // console.log("Output ::", output.length);
 
-  if (!products) {
-    return {
-      notFound: true,
-    };
-  }
+  // const products = await getFeeds({
+  //   category: currentCategory.slug,
+  // });
 
-  const [currentProduct] = products.filter(
-    (pro: Product) => product === pro.path
-  );
+  // if (!products) {
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
 
-  if (!currentProduct) {
-    return {
-      notFound: true,
-    };
-  }
+  // const [currentProduct] = products.filter(
+  //   (pro: Product) => product === pro.path
+  // );
 
-  const relatedProducts = getRelatedProducts(products, currentProduct);
+  // if (!currentProduct) {
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
+
+  // const relatedProducts = getRelatedProducts(products, currentProduct);
 
   return {
-    props: { product: { ...currentProduct }, relatedProducts: relatedProducts },
+    props: { product: {} },
   };
 };

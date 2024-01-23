@@ -7,14 +7,14 @@ async function generateProducts() {
     // console.log("Result ::", result.products);
 
     // Convert the array of objects to a JSON string
-    const jsonString = `export const product = ${JSON.stringify(
+    const jsonString = `export const output = ${JSON.stringify(
       result.products,
       null,
       2
     )};`;
 
     // Specify the file path where you want to save the JSON data
-    const filePath = "utils/output.js";
+    const filePath = "utils/products.js";
 
     const fs = (await import("fs")).default;
     // Write the JSON string to the file
@@ -34,16 +34,7 @@ async function generateProducts() {
 // Check if this script is the main module
 if (require.main === module) {
   // If so, execute the generateProducts function
-  generateProducts()
-    .then((products) => {
-      // Handle the products
-      console.log("Products:", products);
-    })
-    .catch((error) => {
-      // Handle the error
-      console.error("Error:", error);
-      process.exit(1); // Terminate the process with an error code
-    });
+  generateProducts();
 }
 
 module.exports = generateProducts;
