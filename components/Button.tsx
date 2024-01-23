@@ -22,7 +22,7 @@ export default function Button({
 
   return (
     <Link
-      href={href}
+      href={href ?? ""}
       target={newTab ? "_blank" : "_self"}
       className={classNames(
         type === "primary"

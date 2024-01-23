@@ -17,7 +17,7 @@ export default function HighlightedCategoryCard({
         size === "lg" ? "lg:col-span-2 col-span-1" : "col-span-1",
         "group relative h-80 w-full cursor-pointer rounded-xl"
       )}
-      href={href}
+      href={href ?? ""}
     >
       <img
         alt={`category-card-${name}`}

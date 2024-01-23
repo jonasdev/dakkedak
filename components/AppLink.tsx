@@ -18,7 +18,7 @@ export default function AppLink({
 }: AppLinkProps) {
   return (
     <Link
-      href={href}
+      href={href ?? ""}
       onClick={onClickAction}
       className="group font-semibold transition duration-300 text-sm lg:text-xs inline-block w-fit"
     >

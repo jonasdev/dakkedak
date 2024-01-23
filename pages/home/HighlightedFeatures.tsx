@@ -39,7 +39,7 @@ function FeatureDescription({
           </h2>
           <span className="mb-4">{description}</span>
           <Link
-            href={link}
+            href={link ?? ""}
             className="underline mb-6 lg:mb-0 underline-offset-4 font-semibold lg:hover:text-gray-600 active:text-gray-600 text-center lg:text-start"
           >
             {linkText}

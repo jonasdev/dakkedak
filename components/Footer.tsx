@@ -38,7 +38,7 @@ function FooterList({ links, title }: FooterLinkProps) {
         {links.map(({ href, text, icon }) => (
           <AppLink
             key={text.trim().toLowerCase()}
-            href={href}
+            href={href ?? ""}
             text={text}
             icon={icon}
           />
