@@ -90,6 +90,6 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
   const relatedProducts = getRelatedProducts(products, currentProduct);
 
   return {
-    props: { product: {} },
+    props: { product: { ...currentProduct }, relatedProducts: relatedProducts },
   };
 };
