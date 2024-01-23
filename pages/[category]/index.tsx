@@ -54,7 +54,7 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
     };
   }
 
-  const products = await getFeeds({
+  const products = getFeeds({
     category: currentCategory.slug,
   });
 

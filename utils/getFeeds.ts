@@ -66,9 +66,7 @@ const handleProducts = (
 //   }
 // };
 
-export const getFeeds = async (
-  filter: Filter | null = null
-): Promise<Product[]> => {
+export const getFeeds = (filter: Filter | null = null): Product[] => {
   if (cachedProducts.products && cachedProducts.products.length > 0) {
     return handleProducts(filter, cachedProducts.products);
   } else {
@@ -102,13 +100,13 @@ export const getFeeds = async (
 
     cachedProducts.products = uniqueProducts;
 
-    const sitemapPath = "public/sitemap.xml";
-    fs.readFile(sitemapPath, (noSitemap, data) => {
-      if (noSitemap) {
-        generateSitemap(uniqueProducts);
-        console.log("Sitemap.xml created!");
-      }
-    });
+    // const sitemapPath = "public/sitemap.xml";
+    // fs.readFile(sitemapPath, (noSitemap, data) => {
+    //   if (noSitemap) {
+    //     generateSitemap(uniqueProducts);
+    //     console.log("Sitemap.xml created!");
+    //   }
+    // });
 
     const productsToReturn = handleProducts(filter, uniqueProducts);
 

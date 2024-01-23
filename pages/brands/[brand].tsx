@@ -28,7 +28,7 @@ export default function BrandPage({ products }: Props) {
 }
 
 export const getStaticPaths = async () => {
-  const products = await getFeeds();
+  const products = getFeeds();
 
   if (!products) {
     return {

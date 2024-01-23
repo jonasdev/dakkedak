@@ -29,7 +29,7 @@ export default function ProductPage({
 }
 
 export const getStaticPaths = async () => {
-  const data = await getFeeds();
+  const data = getFeeds();
 
   const paths = data?.map((product: Product) => ({
     params: {
@@ -67,7 +67,7 @@ export const getStaticProps = async ({ params }: { params: Params }) => {
 
   // console.log("Output ::", output.length);
 
-  const products = await getFeeds({
+  const products = getFeeds({
     category: currentCategory.slug,
   });
 

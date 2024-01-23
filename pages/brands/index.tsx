@@ -25,8 +25,8 @@ export default function BrandsPage({ brands }: IBrandsPage) {
   );
 }
 
-export const getStaticProps: GetStaticProps<IBrandsPage> = async () => {
-  const products = await getFeeds();
+export const getStaticProps: GetStaticProps<IBrandsPage> =  async() => {
+  const products = getFeeds();
 
   if (!products) {
     return {
